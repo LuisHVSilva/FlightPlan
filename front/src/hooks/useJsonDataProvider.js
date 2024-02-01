@@ -11,7 +11,7 @@ const useJsonDataProvider = () => {
         } catch (error) {
             console.error('Erro ao ler o arquivo:', error);
         }
-    }
+    }    
 
     return {getData};
 }
