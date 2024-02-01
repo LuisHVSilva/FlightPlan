@@ -1,21 +1,85 @@
-import fitz
-import BrasilInformation from "../"
+"""
+ICAO -> 94
+Lista de auxilio-radio à navegação -> 99
+Conversão de medidas -> 106
+Estação meteorologica -> 155
+Classificação dos aerodromos -> 257
+DCT -> 326
+Regras planejamento de voo -> 328
+Rotas ATS convencionais (aerovias) -> 542 - 593
+Rotas de navegação de area RNAV (aerovias) -> 597 - 1709
+Uso dos auxilios-radio à navegação aerea -> 1730
+Pontos significativos -> 1747
+Espaços aereos condicionados -> 1816
+Cartas de rotas -> 1888
+Aeródromos e heliportos -> 1903
+"""
 
-file = './data/rotaer_completo.pdf'
-new_json_file = './data/rotaer_completo.json'
+from Brasil.brasil_information_roater import BrasilROTAER as Rotaer
+from Brasil.brasil_information_airac import BrasilAirac as Airac
+from Brasil.JsonUtils import JsonUtils
+
+rotaer_file = './data/rotaer_completo.pdf'
+new_json_rotaer_file = './data/rotaer_completo.json'
+
+airac_file = './data/AIRAC-Brasil.pdf'
+
+new_json_atc_file = './data/atc-Brasil.json'
+atc_first_page = 542
+atc_last_page = 593
 
 
-# Abre o arquivo PDF em modo de leitura binária
-with fitz.open(file) as pdf_document:
-    number_of_pages = pdf_document.page_count
-    airport_information = []
+def add_class_in_object(obj, clss):
+    for key in obj:
+        for value in obj[key]:
+            icao = next(iter(value))
+            if icao in clss:
+                value[icao]["airspace_class"] = clss[icao]
 
-    for i in range(number_of_pages):
-        pagina = pdf_document[i - 1]
-        text = pagina.get_text()
-        text_list = text.split("D-AMDT")
+    return obj
 
-        airport_information.append(extract_information(text_list))
 
-    airport_information_dictionary = create_dictionary(airport_information)
-    criar_arquivo_json(airport_information_dictionary, new_json_file)
+"""
+    Creating the basic object of all brazilian airports based on "rotaer_completo.pdf":
+        - state, 
+        - ICAO, 
+        - Airport Name 
+        - City.
+    
+    This final python object (dictionary) will be the base to get all information to create the json. 
+"""
+
+brasil = Rotaer(rotaer_file)
+initial_information = brasil.extract_information_rotaer()
+brasil.array = initial_information
+dictionary = brasil.create_dictionary()
+
+# Getting class of any AIRAC brazilian airport information
+airac = Airac(airac_file)
+airport_class = airac.airport_class(pages="257-260")
+
+# Setting class in dictionary
+dictionary = add_class_in_object(dictionary, airport_class)
+JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
+
+"""
+    Creating the basic object of all brazilian ATC routes based on "AIRAC-Brasil.pdf"
+    The final python object (atc_routes) will give the information of how to connects the airports with ATC via with:
+        - first_coordinate
+        - second_coordinate
+        - track_mag
+        - rev_track_mag
+        - length
+        - upper_limit
+        - lower_limit"
+        - mea
+        - airspace_class  
+        
+    Those attributes are for each waypoint within a given route, starting and ending with airports citys.
+"""
+# Getting atc json
+airac = Airac(airac_file)
+# TODO-> Ver porque não ta pegando o ultimo de todos (floripa)
+atc_routes = airac.extract_atc_routes(atc_first_page, atc_last_page)
+JsonUtils(new_json_atc_file, atc_routes).create_json_file()
+
