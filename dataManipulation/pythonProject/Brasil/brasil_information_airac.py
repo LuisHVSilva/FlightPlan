@@ -2,24 +2,54 @@ import tabula
 import fitz
 
 
-def internal_attr_via(array):
-    atributos = ["first_coordinate", "second_coordinate", "track_mag", "rev_track_mag",
-                 "length", "upper_limit", "lower_limit", "mea", "airspace_class"]
-    internal_object = {}
-    array_size = len(array)
-
-    for i, atributo in enumerate(atributos):
-        if i < array_size and array[i] is not None and array[i] != "":
-            internal_object[atributo] = array[i]
-
-    return internal_object
-
-
 class BrasilAirac(object):
     def __init__(self, file):
         self.file = file
 
-    def airport_class(self, pages):
+        # CONSTANTS
+        self.__constants_atc_table_head = ["first_coordinate", "second_coordinate", "track_mag", "rev_track_mag",
+                                           "length", "upper_limit", "lower_limit", "MEA", "airspace_class",
+                                           "direction_of_cruising_levels_odd", "rnp_type", "RMK"]
+
+        self.__constants_rnav_table_head = ["first_coordinate", "second_coordinate", "track_mag", "rev_track_mag",
+                                            "length", "upper_limit", "lower_limit", "airspace_class",
+                                            "direction_of_cruising_levels_odd", "rnp_type", "RMK"]
+        self.__constant_header_separate = "ENR"
+        self.__constant_table_header_separate = "Even"
+        self.__constant_airway_breakpoint_note = "▲"
+        self.__internal_array_via_attr = []
+
+    @property
+    def __internal_array_via(self):
+        return self.__internal_array_via_attr
+
+    @__internal_array_via.setter
+    def __internal_array_via(self, value):
+        self.__internal_array_via_attr.clear()
+        self.__internal_array_via_attr = value
+
+    def __internal_attr_via(self, attributes):
+        internal_object = {}
+        array_size = len(self.__internal_array_via_attr)
+
+        if 'Classe/' in self.__internal_array_via_attr:
+            class_index = self.__internal_array_via_attr.index("Classe/")
+            if "Class" in self.__internal_array_via_attr[class_index + 1]:
+                self.__internal_array_via_attr[
+                    class_index] = (f"{self.__internal_array_via_attr[class_index]}"
+                                    f"{self.__internal_array_via_attr[class_index + 1]}")
+                self.__internal_array_via_attr.pop(class_index + 1)
+                array_size -= 1
+
+        for i, attribute in enumerate(attributes):
+            if (i < array_size
+                    and self.__internal_array_via_attr[i] is not None
+                    and self.__internal_array_via_attr[i] != ""):
+                internal_object[attribute] = self.__internal_array_via_attr[i]
+
+        return internal_object
+
+    def extract_airport_class(self, pages):
         df = tabula.read_pdf(self.file, pages=str(pages), multiple_tables=True)
         classification = "CLASS A"
         new_object = {}
@@ -37,63 +67,91 @@ class BrasilAirac(object):
 
         return new_object
 
-    def extract_atc_routes(self, first_page, last_page):
+    def extract_airway_routes(self, airway_type, first_page, last_page, number_columns):
         with fitz.open(self.file) as pdf_document:
+            first_page -= 1
+
+            if airway_type == "rnav":
+                objects_via_key = self.__constants_rnav_table_head
+
+            if airway_type == "atc":
+                objects_via_key = self.__constants_atc_table_head
+
             info = {}
-            icao_via = []
+            airway_tag_name = []
 
             new_object = {}
-            actual_via = None
+            actual_waypoint = None
 
-            for k in range(first_page - 1, last_page):
+            for k in range(first_page, last_page):
                 pagina = pdf_document[k]
                 text = pagina.get_text()
                 array = text.split("\n")
-                via = next((i.split(" ")[2].strip() for i in array if "ENR" in i), None)
 
-                if via != actual_via:
-                    actual_via = via
-                    new_object[via] = []
+                # Get the waypoint based on pdf header.
+                airway = next((i.split(" ")[2].strip() for i in array if self.__constant_header_separate in i),
+                              None).strip()
 
-                # Remover elementos vazios
-                array_without_black_spaces = [palavra.strip() for palavra in array if palavra.strip()]
-                array_first_index_separate = array_without_black_spaces.index("Even")
-                array_second_index_separate = array_without_black_spaces[array_first_index_separate:].index("6")
-                array_info = array_without_black_spaces[array_first_index_separate + array_second_index_separate + 2:]
+                if airway != actual_waypoint:
+                    actual_waypoint = airway
+                    new_object[airway] = []
+
+                array_without_black_spaces = [word.strip() for word in array if word.strip()]
+
+                # Pega o índice dentro do array baseado na ultima palavra do cabeçalho da tabela do pdf
+                array_first_index_separate = array_without_black_spaces.index(self.__constant_table_header_separate)
+
+                # Pega o índice da numeração das colunas que aparece na tabela do pdf
+                array_second_index_separate = array_without_black_spaces[array_first_index_separate:].index(
+                    str(number_columns)) + 1
+
+                # Array sem informações de cabeçalho
+                array_info = array_without_black_spaces[array_first_index_separate + array_second_index_separate:]
+
+                # Tira o nome da via se existir na lista
+                if array_info[0].strip() == airway:
+                    array_info.pop(0)
 
                 for i in array_info:
-                    if "▲" in i:
-                        icao_via_breakpoint = i.split("▲")[1].strip()
-                        icao_via.append(icao_via_breakpoint)
-                        new_object[via].append(icao_via_breakpoint)
-                    else:
-                        new_object[via].append(i)
+                    if self.__constant_airway_breakpoint_note in i:
+                        airway_tag_name.append(i)
 
-            for j in new_object:
-                info[j] = []
-                valores_encontrados = [valor for valor in new_object[j] if valor in icao_via]
+                    new_object[airway].append(i)
+
+            for obj in new_object:
+                info[obj] = []
+                valores_encontrados = []
+
+                for valor in new_object[obj]:
+                    if valor in airway_tag_name and valor not in valores_encontrados:
+                        valores_encontrados.append(valor)
+
                 index = 0
+
                 for i in range(len(valores_encontrados) - 1):
-                    start = new_object[j].index(valores_encontrados[i])
-                    end = new_object[j].index(valores_encontrados[i + 1])
-                    internal_array = new_object[j][start:end]
-                    if "/" in internal_array[1]:
-                        valores_encontrados[i] = f"{internal_array[0]} {internal_array[1]}"
-                        internal_array.pop(0)
+                    start = new_object[obj].index(valores_encontrados[i])
+                    end = new_object[obj].index(valores_encontrados[i + 1])
+                    self.__internal_array_via_attr = new_object[obj][start:end]
 
-                    internal_array.pop(0)
-                    internal_object = internal_attr_via(internal_array)
+                    if len(self.__internal_array_via_attr) > 0:
+                        if "/" in self.__internal_array_via_attr[1]:
+                            valores_encontrados[
+                                i] = f"{self.__internal_array_via_attr[0]} {self.__internal_array_via_attr[1]}"
+                            self.__internal_array_via_attr.pop(0)
 
-                    info[j].append({valores_encontrados[i]: internal_object})
+                        self.__internal_array_via_attr.pop(0)
+
+                    internal_object = self.__internal_attr_via(objects_via_key)
+                    info[obj].append({valores_encontrados[i]: internal_object})
 
                     index += 1
 
-                last_value_index = new_object[j].index(valores_encontrados[index])
-                last_value_key = new_object[j][last_value_index:][0]
-                internal_array = new_object[j][last_value_index:]
-                internal_array.pop(0)
+                last_value_index = new_object[obj].index(valores_encontrados[index])
+                last_value_key = new_object[obj][last_value_index:][0]
+                self.__internal_array_via_attr = new_object[obj][last_value_index:]
+                self.__internal_array_via_attr.pop(0)
 
-                internal_object = internal_attr_via(internal_array)
-                info[j].append({last_value_key: internal_object})
+                internal_object = self.__internal_attr_via(objects_via_key)
+                info[obj].append({last_value_key: internal_object})
 
-            return info
+        return info

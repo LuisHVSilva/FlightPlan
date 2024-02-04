@@ -19,14 +19,22 @@ from Brasil.brasil_information_roater import BrasilROTAER as Rotaer
 from Brasil.brasil_information_airac import BrasilAirac as Airac
 from Brasil.JsonUtils import JsonUtils
 
+# Rotaer
 rotaer_file = './data/rotaer_completo.pdf'
-new_json_rotaer_file = './data/rotaer_completo.json'
+new_json_rotaer_file = './json/rotaer_completo.json'
 
+# Airac
 airac_file = './data/AIRAC-Brasil.pdf'
 
-new_json_atc_file = './data/atc-Brasil.json'
+# ATC
+new_json_atc_file = './json/atc-Brasil.json'
 atc_first_page = 542
 atc_last_page = 593
+
+# RNAV
+new_json_rnav_file = './json/rnav-Brasil.json'
+rnav_first_page = 597
+rnav_last_page = 1709
 
 
 def add_class_in_object(obj, clss):
@@ -56,7 +64,7 @@ dictionary = brasil.create_dictionary()
 
 # Getting class of any AIRAC brazilian airport information
 airac = Airac(airac_file)
-airport_class = airac.airport_class(pages="257-260")
+airport_class = airac.extract_airport_class(pages="257-260")
 
 # Setting class in dictionary
 dictionary = add_class_in_object(dictionary, airport_class)
@@ -76,10 +84,13 @@ JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
         - airspace_class  
         
     Those attributes are for each waypoint within a given route, starting and ending with airports citys.
+    (Verdinho nos mapas de baixa altitude)
 """
-# Getting atc json
-airac = Airac(airac_file)
-# TODO-> Ver porque não ta pegando o ultimo de todos (floripa)
-atc_routes = airac.extract_atc_routes(atc_first_page, atc_last_page)
+# Getting ATC json
+atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
 JsonUtils(new_json_atc_file, atc_routes).create_json_file()
+
+# Getting RNAV json
+rnav_routes = airac.extract_airway_routes("rnav", rnav_first_page, rnav_last_page, 7)
+JsonUtils(new_json_rnav_file, rnav_routes).create_json_file()
 
