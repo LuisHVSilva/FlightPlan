@@ -1,13 +1,13 @@
 """
-ICAO -> 94
+ICAO -> 94 OK
 Lista de auxilio-radio à navegação -> 99
 Conversão de medidas -> 106
 Estação meteorologica -> 155
 Classificação dos aerodromos -> 257
 DCT -> 326
 Regras planejamento de voo -> 328
-Rotas ATS convencionais (aerovias) -> 542 - 593
-Rotas de navegação de area RNAV (aerovias) -> 597 - 1709
+Rotas ATS convencionais (aerovias) -> 542 - 593 OK
+Rotas de navegação de area RNAV (aerovias) -> 597 - 1709 OK
 Uso dos auxilios-radio à navegação aerea -> 1730
 Pontos significativos -> 1747
 Espaços aereos condicionados -> 1816
@@ -93,4 +93,5 @@ JsonUtils(new_json_atc_file, atc_routes).create_json_file()
 # Getting RNAV json
 rnav_routes = airac.extract_airway_routes("rnav", rnav_first_page, rnav_last_page, 7)
 JsonUtils(new_json_rnav_file, rnav_routes).create_json_file()
+
 
