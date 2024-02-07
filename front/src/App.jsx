@@ -1,15 +1,19 @@
-import Start from "./components/Start"
+import FlightPlan from "./components/FlightPlan"
 
 // Sass
 import './style/main.sass'
+
+// Context
+import { DisplayOptionProvider } from "./context/DisplayOptionContext"
 
 function App() {
 
   return (
     <>
-      <Start />
+      <DisplayOptionProvider>
+        <FlightPlan />
+      </DisplayOptionProvider>
     </>
-
   )
 }
 

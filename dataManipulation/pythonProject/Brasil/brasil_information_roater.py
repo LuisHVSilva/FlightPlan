@@ -48,13 +48,11 @@ class BrasilROTAER(object):
             temporary_string = ""
             for l in range(len(n_l)):
                 if l - 1 == 0:
-                    temporary_string = n_l[0]
+                    temporary_string = f" {n_l[0]} {n_l[1]} "
 
-                if l - 1 == 1 and ("(" in n_l[1] and ")" in n_l[1]):
-                    temporary_string += f" {n_l[1]}"
-
-                if l - 1 == 1 and "(" in n_l[0] and n_l[2][-1] == "W":
-                    temporary_string += f" {n_l[1]}"
+                if (l - 1 == 1 and ("(" in n_l[1] and ")" in n_l[1])
+                        or l - 1 == 1 and "(" in n_l[0] and n_l[2][-1] == "W"):
+                    temporary_string += f"{n_l[2]} "
 
             information.append(temporary_string)
 
@@ -74,9 +72,15 @@ class BrasilROTAER(object):
 
                     new_array = airport.split(",")[0].split(") /")
 
+                    coordinate_index = airport.replace(" ", "").index(",")
+                    coordinates = airport.replace(" ", "")[coordinate_index + 3:]
+
                     object_array = {new_array[0].split("(")[1].strip(): {
                         "airport_name": new_array[0].split("(")[0].strip(),
-                        "city": new_array[1].strip()}
+                        "city": new_array[1].strip(),
+                        "latitude": coordinates.split("/")[0],
+                        "longitude": coordinates.split("/")[1]
+                    }
                     }
 
                     dictionary[state].append(object_array)
@@ -96,3 +100,11 @@ class BrasilROTAER(object):
                 airport_information.append(self.__rotaer_page_information())
 
             return airport_information
+
+            """pagina = pdf_document[4 - 1]
+            text = pagina.get_text()
+            self.__text_list = text.split("D-AMDT")
+
+            airport_information.append(self.__rotaer_page_information())
+
+            return airport_information"""

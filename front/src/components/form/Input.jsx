@@ -1,7 +1,7 @@
 // React modules
 import React from 'react';
 
-const Input = ({ text, type, name, placeholder, value, defaultValue, handleOnChange, maxLength, minLength }) => {
+const Input = ({ text, type, name, placeholder, handleOnChange, search, searchButton, ...props }) => {
 
     return (
         <>
@@ -12,12 +12,15 @@ const Input = ({ text, type, name, placeholder, value, defaultValue, handleOnCha
                     id={name}
                     type={type}
                     placeholder={placeholder}
-                    defaultValue={defaultValue}
-                    value={value}
-                    maxLength={maxLength}
-                    minLength={minLength}
-                    onChange={handleOnChange}                                        
+                    onChange={handleOnChange}
+                    {...props}
                 />
+                
+                {search &&
+                    <div className="search-button" onClick={searchButton} id={name}>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                }
             </div>
         </>
     );

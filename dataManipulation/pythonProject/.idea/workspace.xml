@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49a6d3cd-9439-45ec-8cd7-edd90cec43de" name="Changes" comment="RNAV json">
+      <change afterPath="$PROJECT_DIR$/Utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Utils/cache/02bc557c99207d7845307b259e85f0a125b473f5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Utils/cache/69407911a10cac676f50156abe60264420ec7808.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Utils/cache/8b55902777ce6cce690d536c00398d55de34bbd4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Utils/cache/bf11b23c6d963787f823aeb7f9820edc626152d9.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/json/atc-Brasil.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/json/rnav-Brasil.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/json/rotaer_completo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitIgnore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitIgnore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brasil/JsonUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/JsonUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brasil/brasil_information_roater.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brasil/brasil_information_roater.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brasil_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/brasil_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/components/Start.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/components/form/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/form/Input.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/components/form/Select.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/form/Select.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/hooks/useJsonDataProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/hooks/useJsonDataProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/base/_base.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/base/_base.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/main.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_start.sass" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +62,12 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Python.Brasil.executor&quot;: &quot;Run&quot;,
+    &quot;Python.brasil_main (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.brasil_main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.longitude_latitude.executor&quot;: &quot;Run&quot;,
+    &quot;Python.longitude_latitude_utils.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.map_coordinates_utils (1).executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -50,12 +78,35 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lhvs1\OneDrive\Documentos\Programação\Projetos\FlightPlan\dataManipulation\pythonProject\Utils" />
       <recent name="C:\Users\lhvs1\OneDrive\Documentos\Programação\Projetos\FlightPlan\dataManipulation\pythonProject\Brasil" />
       <recent name="C:\Users\lhvs1\OneDrive\Documentos\Programação\Projetos\FlightPlan\dataManipulation\pythonProject\Brasils" />
       <recent name="C:\Users\lhvs1\OneDrive\Documentos\Programação\Projetos\FlightPlan\dataManipulation\pythonProject" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.brasil_main">
+  <component name="RunManager" selected="Python.brasil_main (1)">
+    <configuration name="brasil_main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brasil_main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="brasil_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject" />
       <option name="ENV_FILES" value="" />
@@ -100,8 +151,55 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="map_coordinates_utils (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Utils/map_coordinates_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="map_coordinates_utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\lhvs1\OneDrive\Documentos\Programação\Projetos\FlightPlan\dataManipulation\pythonProject\Utils\map_coordinates_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.brasil_main (1)" />
+        <item itemvalue="Python.map_coordinates_utils (1)" />
+        <item itemvalue="Python.map_coordinates_utils" />
         <item itemvalue="Python.brasil_main" />
       </list>
     </recent_temporary>

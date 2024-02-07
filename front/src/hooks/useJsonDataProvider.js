@@ -1,19 +1,16 @@
-import axios from 'axios';
-
 const useJsonDataProvider = () => {
-    async function getData(URL) {
-        try {            
-            const response = await axios.get(URL);
-            const data = response.data;
+    async function getJsonData(URL) {
+        try {
+            const response = await fetch(URL);
+            const data = await response.json();
             
             return data;
-
         } catch (error) {
-            console.error('Erro ao ler o arquivo:', error);
+            console.error('Error fetching JSON data:', error);
         }
-    }    
+    }
 
-    return {getData};
+    return { getJsonData };
 }
 
 export default useJsonDataProvider

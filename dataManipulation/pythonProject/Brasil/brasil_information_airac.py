@@ -7,11 +7,11 @@ class BrasilAirac(object):
         self.file = file
 
         # CONSTANTS
-        self.__constants_atc_table_head = ["first_coordinate", "second_coordinate", "track_mag", "rev_track_mag",
+        self.__constants_atc_table_head = ["latitude", "longitude", "track_mag", "rev_track_mag",
                                            "length", "upper_limit", "lower_limit", "MEA", "airspace_class",
                                            "direction_of_cruising_levels_odd", "rnp_type", "RMK"]
 
-        self.__constants_rnav_table_head = ["first_coordinate", "second_coordinate", "track_mag", "rev_track_mag",
+        self.__constants_rnav_table_head = ["latitude", "longitude", "track_mag", "rev_track_mag",
                                             "length", "upper_limit", "lower_limit", "airspace_class",
                                             "direction_of_cruising_levels_odd", "rnp_type", "RMK"]
         self.__constant_header_separate = "ENR"

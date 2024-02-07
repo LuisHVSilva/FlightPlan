@@ -17,7 +17,7 @@ Aeródromos e heliportos -> 1903
 
 from Brasil.brasil_information_roater import BrasilROTAER as Rotaer
 from Brasil.brasil_information_airac import BrasilAirac as Airac
-from Brasil.JsonUtils import JsonUtils
+from Utils.JsonUtils import JsonUtils
 
 # Rotaer
 rotaer_file = './data/rotaer_completo.pdf'
@@ -61,14 +61,17 @@ brasil = Rotaer(rotaer_file)
 initial_information = brasil.extract_information_rotaer()
 brasil.array = initial_information
 dictionary = brasil.create_dictionary()
-
+for j in dictionary:
+    for i in dictionary[j]:
+        codigo_aeroporto = list(i.keys())[0]
+        print(codigo_aeroporto)
 # Getting class of any AIRAC brazilian airport information
-airac = Airac(airac_file)
-airport_class = airac.extract_airport_class(pages="257-260")
+#airac = Airac(airac_file)
+#airport_class = airac.extract_airport_class(pages="257-260")
 
 # Setting class in dictionary
-dictionary = add_class_in_object(dictionary, airport_class)
-JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
+#dictionary = add_class_in_object(dictionary, airport_class)
+#JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
 
 """
     Creating the basic object of all brazilian ATC routes based on "AIRAC-Brasil.pdf"
@@ -87,11 +90,11 @@ JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
     (Verdinho nos mapas de baixa altitude)
 """
 # Getting ATC json
-atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
-JsonUtils(new_json_atc_file, atc_routes).create_json_file()
+#atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
+#JsonUtils(new_json_atc_file, atc_routes).create_json_file()
 
 # Getting RNAV json
-rnav_routes = airac.extract_airway_routes("rnav", rnav_first_page, rnav_last_page, 7)
-JsonUtils(new_json_rnav_file, rnav_routes).create_json_file()
+#rnav_routes = airac.extract_airway_routes("rnav", rnav_first_page, rnav_last_page, 7)
+#JsonUtils(new_json_rnav_file, rnav_routes).create_json_file()
 
 
