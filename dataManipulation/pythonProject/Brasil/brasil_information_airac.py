@@ -1,5 +1,5 @@
-import tabula
 import fitz
+import tabula
 
 
 class BrasilAirac(object):
@@ -49,21 +49,27 @@ class BrasilAirac(object):
 
         return internal_object
 
-    def extract_airport_class(self, pages):
+    def extract_airport_class(self, first_page, last_page):
+        pages = str(first_page)
+
+        if last_page:
+            pages = f"{first_page}-{last_page}"
+
         df = tabula.read_pdf(self.file, pages=str(pages), multiple_tables=True)
         classification = "CLASS A"
         new_object = {}
 
+        # df[:-1] -> Removing the last table on the page that is not important
         for table in df[:-1]:
             last_column = table.columns[-1]
             new_table = table.drop(last_column, axis=1)
 
-            for linha in new_table.itertuples(index=False):
-                if isinstance(linha[0], str) and "CLASSE" in linha[0]:
-                    classification = linha[0][-7:]
+            for line in new_table.itertuples(index=False):
+                if isinstance(line[0], str) and "CLASSE" in line[0]:
+                    classification = line[0][-7:]
 
-                if isinstance(linha[1], str) and len(linha[1]) == 4:
-                    new_object[linha[1]] = classification
+                if isinstance(line[1], str) and len(line[1]) == 4:
+                    new_object[line[1]] = classification
 
         return new_object
 
@@ -155,3 +161,49 @@ class BrasilAirac(object):
                 info[obj].append({last_value_key: internal_object})
 
         return info
+
+    def extract_names_assigned_to_significant_points(self, first_page, last_page):
+        pages = str(first_page)
+        if last_page:
+            pages = f"{first_page}-{last_page}"
+
+        tables = tabula.read_pdf(self.file, pages=str(pages), multiple_tables=True)
+        new_object = {}
+        # Iterar sobre as tabelas extraídas
+        for df in tables:
+            # Iterate over the extracted tables
+            for index, row in df.iterrows():
+                # Iterates over the columns of the DataFrame
+                icao = ""
+                latitude = ""
+                longitude = ""
+                routes = ""
+                rmk = "-----"
+
+                for column, value in row.items():
+                    if column == "Designador Nome-código":
+                        if len(value) != 5:
+                            break
+
+                        icao = value
+
+                    if column == "Coordenadas":
+                        latitude = value.split(" ")[0]
+                        longitude = value.split(" ")[-1]
+
+                    if column == "Rota ATS ou outra rota":
+                        routes = value
+
+                    if column == "RMK" and value:
+                        rmk = value
+
+                        if isinstance(value, float):
+                            rmk = "----"
+
+                if icao:
+                    new_object[icao] = {"latitude": latitude,
+                                        "longitude": longitude,
+                                        "routes": routes,
+                                        "RMK": rmk}
+
+        return new_object

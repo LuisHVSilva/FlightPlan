@@ -100,11 +100,3 @@ class BrasilROTAER(object):
                 airport_information.append(self.__rotaer_page_information())
 
             return airport_information
-
-            """pagina = pdf_document[4 - 1]
-            text = pagina.get_text()
-            self.__text_list = text.split("D-AMDT")
-
-            airport_information.append(self.__rotaer_page_information())
-
-            return airport_information"""
