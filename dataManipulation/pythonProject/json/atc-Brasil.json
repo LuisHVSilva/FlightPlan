@@ -2,8 +2,8 @@
   "A301": [
     {
       "▲ LETICIA VOR/DME LET": {
-        "latitude": "041142S",
-        "longitude": "0695626W",
+        "latitude": -4.195,
+        "longitude": -7.600555555555555,
         "track_mag": "168°",
         "rev_track_mag": "350°",
         "length": "25.7 NM",
@@ -18,8 +18,8 @@
     },
     {
       "▲ SPRIN": {
-        "latitude": "043559S",
-        "longitude": "0694738W",
+        "latitude": -4.599722222222222,
+        "longitude": -7.586944444444444,
         "track_mag": "171°",
         "rev_track_mag": "351°",
         "length": "20.9 NM",
@@ -34,8 +34,8 @@
     },
     {
       "▲ VUKEB": {
-        "latitude": "045549S",
-        "longitude": "0694038W",
+        "latitude": -4.930277777777778,
+        "longitude": -7.5675,
         "track_mag": "171°",
         "rev_track_mag": "351°",
         "length": "84.4 NM",
@@ -50,8 +50,8 @@
     },
     {
       "▲ ARNUB": {
-        "latitude": "061538S",
-        "longitude": "0691202W",
+        "latitude": -6.260555555555555,
+        "longitude": -7.522222222222222,
         "track_mag": "171°",
         "rev_track_mag": "351°",
         "length": "90.7 NM",
@@ -66,8 +66,8 @@
     },
     {
       "▲ UBLUN": {
-        "latitude": "074123S",
-        "longitude": "0684113W",
+        "latitude": -7.689722222222223,
+        "longitude": -7.4030555555555555,
         "track_mag": "171°",
         "rev_track_mag": "351°",
         "length": "96.5 NM",
@@ -82,8 +82,8 @@
     },
     {
       "▲ JULIA": {
-        "latitude": "091238S",
-        "longitude": "0680811W",
+        "latitude": -9.210555555555555,
+        "longitude": -7.355833333333333,
         "track_mag": "172°",
         "rev_track_mag": "352°",
         "length": "42.0 NM",
@@ -98,8 +98,8 @@
     },
     {
       "▲ RIO BRANCO DVOR/DME RCO": {
-        "latitude": "095234S",
-        "longitude": "0675419W",
+        "latitude": -9.876111111111111,
+        "longitude": -7.261388888888889,
         "track_mag": "160°",
         "rev_track_mag": "340°",
         "length": "41.9 NM",
@@ -114,16 +114,16 @@
     },
     {
       "▲ VILUX": {
-        "latitude": "102832S",
-        "longitude": "0673222W"
+        "latitude": -10.475555555555555,
+        "longitude": -7.222777777777778
       }
     }
   ],
   "A305": [
     {
       "▲ PELOTAS VOR/DME PTS": {
-        "latitude": "314308S",
-        "longitude": "0521939W",
+        "latitude": -31.718888888888888,
+        "longitude": -5.375833333333333,
         "track_mag": "232°",
         "rev_track_mag": "051°",
         "length": "71.0 NM",
@@ -138,16 +138,16 @@
     },
     {
       "▲ UGELO": {
-        "latitude": "324042S",
-        "longitude": "0530848W"
+        "latitude": -32.67833333333333,
+        "longitude": -5.523333333333333
       }
     }
   ],
   "A307": [
     {
       "▲ ALGEL": {
-        "latitude": "255212S",
-        "longitude": "0551014W",
+        "latitude": -25.87,
+        "longitude": -5.8502777777777775,
         "track_mag": "081°",
         "rev_track_mag": "262°",
         "length": "40.0 NM",
@@ -162,8 +162,8 @@
     },
     {
       "▲ FOZ": {
-        "latitude": "VOR/DME FOZ",
-        "longitude": "253500S",
+        "latitude": "----",
+        "longitude": -25.583333333333332,
         "track_mag": "0543013W"
       }
     }
@@ -171,8 +171,8 @@
   "A309": [
     {
       "▲ CANOAS VOR/DME COA": {
-        "latitude": "295701S",
-        "longitude": "0510845W",
+        "latitude": -29.950277777777778,
+        "longitude": -5.19,
         "track_mag": "218°",
         "rev_track_mag": "038°",
         "length": "2.9 NM",
@@ -187,8 +187,8 @@
     },
     {
       "▲ NELOX": {
-        "latitude": "295946S",
-        "longitude": "0510955W",
+        "latitude": -29.996111111111112,
+        "longitude": -5.1930555555555555,
         "track_mag": "227°",
         "rev_track_mag": "047°",
         "length": "37.6 NM",
@@ -203,8 +203,8 @@
     },
     {
       "▲ ARVUS": {
-        "latitude": "303221S",
-        "longitude": "0513138W",
+        "latitude": -30.539166666666667,
+        "longitude": -5.220277777777778,
         "track_mag": "226°",
         "rev_track_mag": "046°",
         "length": "2.4 NM",
@@ -219,8 +219,8 @@
     },
     {
       "▲ TEMEK": {
-        "latitude": "303429S",
-        "longitude": "0513301W",
+        "latitude": -30.57472222222222,
+        "longitude": -5.2250000000000005,
         "track_mag": "227°",
         "rev_track_mag": "047°",
         "length": "10.0 NM",
@@ -235,8 +235,8 @@
     },
     {
       "▲ ARSAG": {
-        "latitude": "304309S",
-        "longitude": "0513850W",
+        "latitude": -30.719166666666666,
+        "longitude": -5.240277777777778,
         "track_mag": "227°",
         "rev_track_mag": "046°",
         "length": "69.3 NM",
@@ -251,8 +251,8 @@
     },
     {
       "▲ PELOTAS VOR/DME PTS": {
-        "latitude": "314308S",
-        "longitude": "0521939W",
+        "latitude": -31.718888888888888,
+        "longitude": -5.375833333333333,
         "track_mag": "240°",
         "rev_track_mag": "059°",
         "length": "74.0 NM",
@@ -267,16 +267,16 @@
     },
     {
       "▲ UGURA": {
-        "latitude": "323618S",
-        "longitude": "0532024W"
+        "latitude": -32.605000000000004,
+        "longitude": -5.533888888888889
       }
     }
   ],
   "A310": [
     {
       "▲ ASUMA": {
-        "latitude": "315203S",
-        "longitude": "0540919W",
+        "latitude": -31.8675,
+        "longitude": -5.691944444444445,
         "track_mag": "019°",
         "rev_track_mag": "200°",
         "length": "28.6 NM",
@@ -291,8 +291,8 @@
     },
     {
       "▲ BAGE": {
-        "latitude": "VOR BGE",
-        "longitude": "312327S",
+        "latitude": "----",
+        "longitude": -31.390833333333333,
         "track_mag": "0540635W"
       }
     }
@@ -300,8 +300,8 @@
   "A311": [
     {
       "▲ COSTA": {
-        "latitude": "253043S",
-        "longitude": "0551411W",
+        "latitude": -25.511944444444445,
+        "longitude": -5.8613888888888885,
         "track_mag": "113°",
         "rev_track_mag": "293°",
         "length": "40.0 NM",
@@ -316,8 +316,8 @@
     },
     {
       "▲ FOZ": {
-        "latitude": "VOR/DME FOZ",
-        "longitude": "253500S",
+        "latitude": "----",
+        "longitude": -25.583333333333332,
         "track_mag": "0543013W"
       }
     }
@@ -325,8 +325,8 @@
   "A314": [
     {
       "▲ CANOAS VOR/DME COA": {
-        "latitude": "295701S",
-        "longitude": "0510845W",
+        "latitude": -29.950277777777778,
+        "longitude": -5.19,
         "track_mag": "255°",
         "rev_track_mag": "075°",
         "length": "42.3 NM",
@@ -341,8 +341,8 @@
     },
     {
       "▲ ORATO": {
-        "latitude": "301923S",
-        "longitude": "0515009W",
+        "latitude": -30.323055555555555,
+        "longitude": -5.25,
         "track_mag": "258°",
         "rev_track_mag": "078°",
         "length": "7.8 NM",
@@ -357,8 +357,8 @@
     },
     {
       "▲ PAMUG": {
-        "latitude": "302311S",
-        "longitude": "0515802W",
+        "latitude": -30.386388888888888,
+        "longitude": -5.272222222222222,
         "track_mag": "258°",
         "rev_track_mag": "077°",
         "length": "100.9 NM",
@@ -373,8 +373,8 @@
     },
     {
       "▲ AKPIG": {
-        "latitude": "311139S",
-        "longitude": "0534051W",
+        "latitude": -31.194166666666668,
+        "longitude": -5.5680555555555555,
         "track_mag": "257°",
         "rev_track_mag": "077°",
         "length": "25.0 NM",
@@ -389,8 +389,8 @@
     },
     {
       "▲ BAGE": {
-        "latitude": "VOR BGE",
-        "longitude": "312327S",
+        "latitude": "----",
+        "longitude": -31.390833333333333,
         "track_mag": "0540635W",
         "rev_track_mag": "240°",
         "length": "060°",
@@ -405,16 +405,16 @@
     },
     {
       "▲ ISALA": {
-        "latitude": "314034S",
-        "longitude": "0542647W"
+        "latitude": -31.676111111111112,
+        "longitude": -5.717777777777778
       }
     }
   ],
   "A430": [
     {
       "▲ TILPO": {
-        "latitude": "223300S",
-        "longitude": "0554226W",
+        "latitude": -22.55,
+        "longitude": -5.9061111111111115,
         "track_mag": "043°",
         "rev_track_mag": "223°",
         "length": "36.0 NM",
@@ -429,8 +429,8 @@
     },
     {
       "▲ ANLAT": {
-        "latitude": "220018S",
-        "longitude": "0552557W",
+        "latitude": -22.005,
+        "longitude": -5.881944444444445,
         "track_mag": "043°",
         "rev_track_mag": "223°",
         "length": "61.3 NM",
@@ -445,8 +445,8 @@
     },
     {
       "▲ RETER": {
-        "latitude": "210434S",
-        "longitude": "0545810W",
+        "latitude": -21.07611111111111,
+        "longitude": -5.7725,
         "track_mag": "042°",
         "rev_track_mag": "222°",
         "length": "38.8 NM",
@@ -461,8 +461,8 @@
     },
     {
       "▲ CAMPO GRANDE VOR/DME GRD": {
-        "latitude": "202901S",
-        "longitude": "0544120W",
+        "latitude": -20.483611111111113,
+        "longitude": -5.736666666666666,
         "track_mag": "004°",
         "rev_track_mag": "184°",
         "length": "19.5 NM",
@@ -477,8 +477,8 @@
     },
     {
       "▲ ETEGI": {
-        "latitude": "201003S",
-        "longitude": "0544630W",
+        "latitude": -20.1675,
+        "longitude": -5.7508333333333335,
         "track_mag": "004°",
         "rev_track_mag": "184°",
         "length": "21.1 NM",
@@ -493,8 +493,8 @@
     },
     {
       "▲ ILSIR": {
-        "latitude": "194935S",
-        "longitude": "0545206W",
+        "latitude": -19.82638888888889,
+        "longitude": -5.7555555555555555,
         "track_mag": "002°",
         "rev_track_mag": "182°",
         "length": "30.6 NM",
@@ -509,8 +509,8 @@
     },
     {
       "▲ KOXAL": {
-        "latitude": "192008S",
-        "longitude": "0550112W",
+        "latitude": -19.335555555555555,
+        "longitude": -5.836388888888888,
         "track_mag": "002°",
         "rev_track_mag": "182°",
         "length": "92.5 NM",
@@ -525,8 +525,8 @@
     },
     {
       "▲ PAPAN": {
-        "latitude": "175052S",
-        "longitude": "0552758W",
+        "latitude": -17.847777777777775,
+        "longitude": -5.8875,
         "track_mag": "002°",
         "rev_track_mag": "182°",
         "length": "12.2 NM",
@@ -541,8 +541,8 @@
     },
     {
       "▲ TOSAR": {
-        "latitude": "173902S",
-        "longitude": "0553128W",
+        "latitude": -17.650555555555552,
+        "longitude": -5.886666666666666,
         "track_mag": "002°",
         "rev_track_mag": "182°",
         "length": "83.9 NM",
@@ -557,8 +557,8 @@
     },
     {
       "▲ ILMUP": {
-        "latitude": "161801S",
-        "longitude": "0555525W",
+        "latitude": -16.30027777777778,
+        "longitude": -5.931111111111111,
         "track_mag": "002°",
         "rev_track_mag": "182°",
         "length": "40.0 NM",
@@ -573,8 +573,8 @@
     },
     {
       "▲ CUIABA VOR/DME CIA": {
-        "latitude": "153922S",
-        "longitude": "0560643W",
+        "latitude": -15.65611111111111,
+        "longitude": -6.017777777777778,
         "track_mag": "313°",
         "rev_track_mag": "133°",
         "length": "40.0 NM",
@@ -589,8 +589,8 @@
     },
     {
       "▲ TENEL": {
-        "latitude": "152214S",
-        "longitude": "0564411W",
+        "latitude": -15.370555555555557,
+        "longitude": -6.078055555555555,
         "track_mag": "313°",
         "rev_track_mag": "133°",
         "length": "105.4 NM",
@@ -605,8 +605,8 @@
     },
     {
       "▲ UGINA": {
-        "latitude": "143635S",
-        "longitude": "0582225W",
+        "latitude": -14.609722222222222,
+        "longitude": -6.372777777777778,
         "track_mag": "313°",
         "rev_track_mag": "133°",
         "length": "30.0 NM",
@@ -621,8 +621,8 @@
     },
     {
       "▲ ABATE": {
-        "latitude": "142328S",
-        "longitude": "0585014W",
+        "latitude": -14.39111111111111,
+        "longitude": -6.416944444444445,
         "track_mag": "313°",
         "rev_track_mag": "132°",
         "length": "93.5 NM",
@@ -637,8 +637,8 @@
     },
     {
       "▲ PAGUS": {
-        "latitude": "134214S",
-        "longitude": "0601637W",
+        "latitude": -13.703888888888889,
+        "longitude": -6.034166666666667,
         "track_mag": "313°",
         "rev_track_mag": "131°",
         "length": "83.8 NM",
@@ -653,8 +653,8 @@
     },
     {
       "▲ LUVLU": {
-        "latitude": "130454S",
-        "longitude": "0613343W",
+        "latitude": -13.081666666666667,
+        "longitude": -6.226111111111111,
         "track_mag": "313°",
         "rev_track_mag": "131°",
         "length": "81.6 NM",
@@ -669,8 +669,8 @@
     },
     {
       "▲ AMALO": {
-        "latitude": "122802S",
-        "longitude": "0624819W",
+        "latitude": -12.467222222222222,
+        "longitude": -6.4225,
         "track_mag": "311°",
         "rev_track_mag": "131°",
         "length": "73.1 NM",
@@ -685,8 +685,8 @@
     },
     {
       "▲ UGAXO": {
-        "latitude": "115446S",
-        "longitude": "0635450W",
+        "latitude": -11.912777777777778,
+        "longitude": -6.595833333333333,
         "track_mag": "310°",
         "rev_track_mag": "130°",
         "length": "92.1 NM",
@@ -701,8 +701,8 @@
     },
     {
       "▲ NIGVA": {
-        "latitude": "111233S",
-        "longitude": "0651818W",
+        "latitude": -11.209166666666667,
+        "longitude": -6.8725,
         "track_mag": "310°",
         "rev_track_mag": "129°",
         "length": "119.1 NM",
@@ -717,8 +717,8 @@
     },
     {
       "▲ FLOTE": {
-        "latitude": "101720S",
-        "longitude": "0670539W",
+        "latitude": -10.28888888888889,
+        "longitude": -7.181388888888889,
         "track_mag": "308°",
         "rev_track_mag": "128°",
         "length": "54.0 NM",
@@ -733,8 +733,8 @@
     },
     {
       "▲ RIO BRANCO": {
-        "latitude": "DVOR/DME RCO",
-        "longitude": "095234S",
+        "latitude": "----",
+        "longitude": -9.876111111111111,
         "track_mag": "0675419W"
       }
     }
@@ -742,8 +742,8 @@
   "A566": [
     {
       "▲ LETICIA VOR/DME LET": {
-        "latitude": "041142S",
-        "longitude": "0695626W",
+        "latitude": -4.195,
+        "longitude": -7.600555555555555,
         "track_mag": "089°",
         "rev_track_mag": "271°",
         "length": "20.8 NM",
@@ -758,8 +758,8 @@
     },
     {
       "▲ EPLAG": {
-        "latitude": "040828S",
-        "longitude": "0693552W",
+        "latitude": -4.141111111111112,
+        "longitude": -7.565277777777777,
         "track_mag": "091°",
         "rev_track_mag": "271°",
         "length": "5.3 NM",
@@ -774,8 +774,8 @@
     },
     {
       "▲ BUTAB": {
-        "latitude": "040738S",
-        "longitude": "0693036W",
+        "latitude": -4.127222222222222,
+        "longitude": -7.550833333333333,
         "track_mag": "092°",
         "rev_track_mag": "273°",
         "length": "132.6 NM",
@@ -790,8 +790,8 @@
     },
     {
       "▲ PRIMA": {
-        "latitude": "034733S",
-        "longitude": "0671923W",
+        "latitude": -3.7925,
+        "longitude": -7.20888888888889,
         "track_mag": "093°",
         "rev_track_mag": "275°",
         "length": "157.5 NM",
@@ -806,8 +806,8 @@
     },
     {
       "▲ TEFE": {
-        "latitude": "VOR/DME TFE",
-        "longitude": "032316S",
+        "latitude": "----",
+        "longitude": -3.3877777777777776,
         "track_mag": "0644341W"
       }
     }
@@ -815,8 +815,8 @@
   "A685": [
     {
       "▲ RIO BRANCO DVOR/DME RCO": {
-        "latitude": "095234S",
-        "longitude": "0675419W",
+        "latitude": -9.876111111111111,
+        "longitude": -7.261388888888889,
         "track_mag": "120°",
         "rev_track_mag": "300°",
         "length": "58.1 NM",
@@ -831,8 +831,8 @@
     },
     {
       "▲ FILHO": {
-        "latitude": "101143S",
-        "longitude": "0665838W",
+        "latitude": -10.195277777777777,
+        "longitude": -7.106388888888889,
         "track_mag": "121°",
         "rev_track_mag": "302°",
         "length": "106.3 NM",
@@ -847,8 +847,8 @@
     },
     {
       "▲ GUAJARA-MIRIM": {
-        "latitude": "NDB GJM",
-        "longitude": "104704S",
+        "latitude": "----",
+        "longitude": -10.784444444444444,
         "track_mag": "0651652W"
       }
     }
@@ -856,8 +856,8 @@
   "B623": [
     {
       "▲ NORONHA VOR/DME FNR": {
-        "latitude": "035124S",
-        "longitude": "0322548W",
+        "latitude": -3.856666666666667,
+        "longitude": -3.381666666666667,
         "track_mag": "047°",
         "rev_track_mag": "227°",
         "length": "39.5 NM",
@@ -872,8 +872,8 @@
     },
     {
       "▲ UTRAM": {
-        "latitude": "031618S",
-        "longitude": "0320716W",
+        "latitude": -3.2716666666666665,
+        "longitude": -3.3530555555555557,
         "track_mag": "042°",
         "rev_track_mag": "221°",
         "length": "158.3 NM",
@@ -888,8 +888,8 @@
     },
     {
       "▲ OBKAD": {
-        "latitude": "004958S",
-        "longitude": "0310511W",
+        "latitude": -0.8327777777777777,
+        "longitude": -3.180833333333333,
         "track_mag": "042°",
         "rev_track_mag": "221°",
         "length": "138.9 NM",
@@ -904,8 +904,8 @@
     },
     {
       "▲ REBOB": {
-        "latitude": "011718N",
-        "longitude": "0300810W",
+        "latitude": -1.288333333333333,
+        "longitude": -3.0225,
         "track_mag": "041°",
         "rev_track_mag": "219°",
         "length": "138.9 NM",
@@ -920,16 +920,16 @@
     },
     {
       "▲ RAKUD": {
-        "latitude": "032432N",
-        "longitude": "0291102W"
+        "latitude": -3.408888888888889,
+        "longitude": -3.5194444444444444
       }
     }
   ],
   "B681": [
     {
       "▲ GEMOL": {
-        "latitude": "042123N",
-        "longitude": "0594114W",
+        "latitude": -4.356388888888889,
+        "longitude": -6.569722222222222,
         "track_mag": "230°",
         "rev_track_mag": "050°",
         "length": "68.0 NM",
@@ -944,8 +944,8 @@
     },
     {
       "▲ PICOM": {
-        "latitude": "032434N",
-        "longitude": "0601902W",
+        "latitude": -3.4094444444444445,
+        "longitude": -6.041666666666667,
         "track_mag": "230°",
         "rev_track_mag": "050°",
         "length": "40.0 NM",
@@ -960,8 +960,8 @@
     },
     {
       "▲ BOA VISTA": {
-        "latitude": "DVOR/DME BVI",
-        "longitude": "025108N",
+        "latitude": "----",
+        "longitude": -2.852222222222222,
         "track_mag": "0604113W"
       }
     }
@@ -969,8 +969,8 @@
   "B688": [
     {
       "▲ UDENO": {
-        "latitude": "260729S",
-        "longitude": "0545614W",
+        "latitude": -26.12472222222222,
+        "longitude": -5.766944444444444,
         "track_mag": "053°",
         "rev_track_mag": "233°",
         "length": "40.0 NM",
@@ -985,8 +985,8 @@
     },
     {
       "▲ FOZ": {
-        "latitude": "VOR/DME FOZ",
-        "longitude": "253500S",
+        "latitude": "----",
+        "longitude": -25.583333333333332,
         "track_mag": "0543013W"
       }
     }
@@ -994,8 +994,8 @@
   "G678": [
     {
       "▲ LA DIVINA PASTORA DVOR/DME LDP": {
-        "latitude": "044135N",
-        "longitude": "0610144W",
+        "latitude": -4.6930555555555555,
+        "longitude": -6.170555555555556,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "71.8 NM",
@@ -1010,8 +1010,8 @@
     },
     {
       "▲ AKTUM": {
-        "latitude": "033040N",
-        "longitude": "0604829W",
+        "latitude": -3.511111111111111,
+        "longitude": -6.089444444444444,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "40.0 NM",
@@ -1026,8 +1026,8 @@
     },
     {
       "▲ BOA VISTA DVOR/DME BVI": {
-        "latitude": "025108N",
-        "longitude": "0604113W",
+        "latitude": -2.852222222222222,
+        "longitude": -6.069722222222222,
         "track_mag": "190°",
         "rev_track_mag": "011°",
         "length": "40.0 NM",
@@ -1042,8 +1042,8 @@
     },
     {
       "▲ NEVDU": {
-        "latitude": "021108N",
-        "longitude": "0603725W",
+        "latitude": -2.1855555555555553,
+        "longitude": -6.069999999999999,
         "track_mag": "191°",
         "rev_track_mag": "011°",
         "length": "273.2 NM",
@@ -1058,8 +1058,8 @@
     },
     {
       "▲ SIPOX": {
-        "latitude": "022213S",
-        "longitude": "0601119W",
+        "latitude": -2.370277777777778,
+        "longitude": -6.019722222222222,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "40.8 NM",
@@ -1074,8 +1074,8 @@
     },
     {
       "▲ MANAUS": {
-        "latitude": "DVOR/DME MNS",
-        "longitude": "030224S",
+        "latitude": "----",
+        "longitude": -3.04,
         "track_mag": "0600317W"
       }
     }
@@ -1083,8 +1083,8 @@
   "G680": [
     {
       "▲ BAGE": {
-        "latitude": "VOR BGE",
-        "longitude": "312327S",
+        "latitude": "----",
+        "longitude": -31.390833333333333,
         "track_mag": "0540635W",
         "rev_track_mag": "261°",
         "length": "081°",
@@ -1099,16 +1099,16 @@
     },
     {
       "▲ TULIO": {
-        "latitude": "313223S",
-        "longitude": "0543001W"
+        "latitude": -31.539722222222224,
+        "longitude": -5.716666666666667
       }
     }
   ],
   "R563": [
     {
       "▲ FOZ VOR/DME FOZ": {
-        "latitude": "253500S",
-        "longitude": "0543013W",
+        "latitude": -25.583333333333332,
+        "longitude": -5.716944444444445,
         "track_mag": "164°",
         "rev_track_mag": "344°",
         "length": "40.0 NM",
@@ -1123,8 +1123,8 @@
     },
     {
       "▲ KOLNA": {
-        "latitude": "260833S",
-        "longitude": "0540554W",
+        "latitude": -26.1425,
+        "longitude": -5.6819444444444445,
         "track_mag": "164°",
         "rev_track_mag": "344°",
         "length": "31.2 NM",
@@ -1139,8 +1139,8 @@
     },
     {
       "▲ GEBUN": {
-        "latitude": "263440S",
-        "longitude": "0534646W",
+        "latitude": -26.57777777777778,
+        "longitude": -5.584444444444444,
         "track_mag": "164°",
         "rev_track_mag": "343°",
         "length": "97.0 NM",
@@ -1155,8 +1155,8 @@
     },
     {
       "▲ MAGNA": {
-        "latitude": "275534S",
-        "longitude": "0524622W",
+        "latitude": -27.926111111111112,
+        "longitude": -5.417222222222223,
         "track_mag": "163°",
         "rev_track_mag": "343°",
         "length": "33.4 NM",
@@ -1171,8 +1171,8 @@
     },
     {
       "▲ EPGEP": {
-        "latitude": "282318S",
-        "longitude": "0522514W",
+        "latitude": -28.388333333333332,
+        "longitude": -5.380833333333333,
         "track_mag": "163°",
         "rev_track_mag": "343°",
         "length": "31.5 NM",
@@ -1187,8 +1187,8 @@
     },
     {
       "▲ NOBEL": {
-        "latitude": "284927S",
-        "longitude": "0520505W",
+        "latitude": -28.824166666666667,
+        "longitude": -5.347222222222222,
         "track_mag": "163°",
         "rev_track_mag": "343°",
         "length": "27.4 NM",
@@ -1203,8 +1203,8 @@
     },
     {
       "▲ EAGLE": {
-        "latitude": "291210S",
-        "longitude": "0514726W",
+        "latitude": -29.202777777777776,
+        "longitude": -5.253333333333333,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "18.2 NM",
@@ -1219,8 +1219,8 @@
     },
     {
       "▲ JAUNT": {
-        "latitude": "292646S",
-        "longitude": "0513501W",
+        "latitude": -29.44611111111111,
+        "longitude": -5.230555555555556,
         "track_mag": "160°",
         "rev_track_mag": "340°",
         "length": "37.9 NM",
@@ -1235,8 +1235,8 @@
     },
     {
       "▲ CANOAS": {
-        "latitude": "VOR/DME COA",
-        "longitude": "295701S",
+        "latitude": "----",
+        "longitude": -29.950277777777778,
         "track_mag": "0510845W"
       }
     }
@@ -1244,8 +1244,8 @@
   "UA555": [
     {
       "▲ BELEM DVOR/DME BEL": {
-        "latitude": "012304S",
-        "longitude": "0482843W",
+        "latitude": -1.3844444444444444,
+        "longitude": -5.390000000000001,
         "track_mag": "348°",
         "rev_track_mag": "168°",
         "length": "40.0 NM",
@@ -1260,8 +1260,8 @@
     },
     {
       "▲ ERUGA": {
-        "latitude": "004904S",
-        "longitude": "0485002W",
+        "latitude": -0.8177777777777777,
+        "longitude": -5.416666666666667,
         "track_mag": "348°",
         "rev_track_mag": "167°",
         "length": "211.0 NM",
@@ -1276,8 +1276,8 @@
     },
     {
       "▲ VURTU": {
-        "latitude": "021012N",
-        "longitude": "0504227W",
+        "latitude": -2.17,
+        "longitude": -5.072777777777778,
         "track_mag": "346°",
         "rev_track_mag": "166°",
         "length": "120.4 NM",
@@ -1292,8 +1292,8 @@
     },
     {
       "▲ OIAPOQUE": {
-        "latitude": "NDB OIA",
-        "longitude": "035137N",
+        "latitude": "----",
+        "longitude": -3.8602777777777777,
         "track_mag": "0514800W"
       }
     }
@@ -1301,8 +1301,8 @@
   "UB623": [
     {
       "▲ RECIFE VOR/DME REC": {
-        "latitude": "080812S",
-        "longitude": "0345538W",
+        "latitude": -8.136666666666667,
+        "longitude": -3.7647222222222223,
         "track_mag": "052°",
         "rev_track_mag": "231°",
         "length": "104.7 NM",
@@ -1317,8 +1317,8 @@
     },
     {
       "▲ ESGUM": {
-        "latitude": "063733S",
-        "longitude": "0340214W",
+        "latitude": -6.6258333333333335,
+        "longitude": -3.6725,
         "track_mag": "051°",
         "rev_track_mag": "231°",
         "length": "84.9 NM",
@@ -1333,8 +1333,8 @@
     },
     {
       "▲ UBRUT": {
-        "latitude": "052355S",
-        "longitude": "0331908W",
+        "latitude": -5.398611111111111,
+        "longitude": -3.5416666666666665,
         "track_mag": "050°",
         "rev_track_mag": "229°",
         "length": "106.4 NM",
@@ -1349,8 +1349,8 @@
     },
     {
       "▲ NORONHA VOR/DME FNR": {
-        "latitude": "035124S",
-        "longitude": "0322548W",
+        "latitude": -3.856666666666667,
+        "longitude": -3.381666666666667,
         "track_mag": "047°",
         "rev_track_mag": "227°",
         "length": "39.5 NM",
@@ -1365,8 +1365,8 @@
     },
     {
       "▲ UTRAM": {
-        "latitude": "031618S",
-        "longitude": "0320716W",
+        "latitude": -3.2716666666666665,
+        "longitude": -3.3530555555555557,
         "track_mag": "042°",
         "rev_track_mag": "221°",
         "length": "158.3 NM",
@@ -1381,8 +1381,8 @@
     },
     {
       "▲ OBKAD": {
-        "latitude": "004958S",
-        "longitude": "0310511W",
+        "latitude": -0.8327777777777777,
+        "longitude": -3.180833333333333,
         "track_mag": "042°",
         "rev_track_mag": "221°",
         "length": "79.6 NM",
@@ -1397,8 +1397,8 @@
     },
     {
       "▲ RELES": {
-        "latitude": "002259N",
-        "longitude": "0303229W",
+        "latitude": -0.38305555555555554,
+        "longitude": -3.056111111111111,
         "track_mag": "041°",
         "rev_track_mag": "220°",
         "length": "79.6 NM",
@@ -1413,8 +1413,8 @@
     },
     {
       "▲ BODAK": {
-        "latitude": "013555N",
-        "longitude": "0295947W",
+        "latitude": -1.5986111111111112,
+        "longitude": -3.6094444444444442,
         "track_mag": "040°",
         "rev_track_mag": "219°",
         "length": "118.6 NM",
@@ -1429,16 +1429,16 @@
     },
     {
       "▲ RAKUD": {
-        "latitude": "032432N",
-        "longitude": "0291102W"
+        "latitude": -3.408888888888889,
+        "longitude": -3.5194444444444444
       }
     }
   ],
   "UB681": [
     {
       "▲ GEMOL": {
-        "latitude": "042123N",
-        "longitude": "0594114W",
+        "latitude": -4.356388888888889,
+        "longitude": -6.569722222222222,
         "track_mag": "230°",
         "rev_track_mag": "050°",
         "length": "68.0 NM",
@@ -1453,8 +1453,8 @@
     },
     {
       "▲ PICOM": {
-        "latitude": "032434N",
-        "longitude": "0601902W",
+        "latitude": -3.4094444444444445,
+        "longitude": -6.041666666666667,
         "track_mag": "230°",
         "rev_track_mag": "050°",
         "length": "40.0 NM",
@@ -1469,8 +1469,8 @@
     },
     {
       "▲ BOA VISTA": {
-        "latitude": "DVOR/DME BVI",
-        "longitude": "025108N",
+        "latitude": "----",
+        "longitude": -2.852222222222222,
         "track_mag": "0604113W"
       }
     }
@@ -1478,8 +1478,8 @@
   "UG449": [
     {
       "▲ OTONI": {
-        "latitude": "023959N",
-        "longitude": "0523002W",
+        "latitude": -2.6663888888888887,
+        "longitude": -5.383333333333334,
         "track_mag": "153°",
         "rev_track_mag": "333°",
         "length": "99.9 NM",
@@ -1494,8 +1494,8 @@
     },
     {
       "▲ SINOL": {
-        "latitude": "013014N",
-        "longitude": "0511812W",
+        "latitude": -1.5038888888888888,
+        "longitude": -5.2058333333333335,
         "track_mag": "155°",
         "rev_track_mag": "335°",
         "length": "202.0 NM",
@@ -1510,8 +1510,8 @@
     },
     {
       "▲ GEBOK": {
-        "latitude": "005425S",
-        "longitude": "0485644W",
+        "latitude": -0.9069444444444444,
+        "longitude": -5.434444444444445,
         "track_mag": "156°",
         "rev_track_mag": "336°",
         "length": "40.0 NM",
@@ -1526,8 +1526,8 @@
     },
     {
       "▲ BELEM": {
-        "latitude": "DVOR/DME BEL",
-        "longitude": "012304S",
+        "latitude": "----",
+        "longitude": -1.3844444444444444,
         "track_mag": "0482843W"
       }
     }
@@ -1535,8 +1535,8 @@
   "W18": [
     {
       "▲ SANTA MARIA VOR/DME SMA": {
-        "latitude": "294235S",
-        "longitude": "0534246W",
+        "latitude": -29.709722222222222,
+        "longitude": -5.573333333333333,
         "track_mag": "114°",
         "rev_track_mag": "294°",
         "length": "40.0 NM",
@@ -1551,8 +1551,8 @@
     },
     {
       "▲ KEXEL": {
-        "latitude": "294802S",
-        "longitude": "0525713W",
+        "latitude": -29.800555555555555,
+        "longitude": -5.43638888888889,
         "track_mag": "114°",
         "rev_track_mag": "294°",
         "length": "38.1 NM",
@@ -1567,8 +1567,8 @@
     },
     {
       "▲ DOPGA": {
-        "latitude": "295258S",
-        "longitude": "0521349W",
+        "latitude": -29.88277777777778,
+        "longitude": -5.359444444444444,
         "track_mag": "114°",
         "rev_track_mag": "294°",
         "length": "15.9 NM",
@@ -1583,8 +1583,8 @@
     },
     {
       "▲ NACRE": {
-        "latitude": "295457S",
-        "longitude": "0515537W",
+        "latitude": -29.91583333333333,
+        "longitude": -5.264722222222222,
         "track_mag": "110°",
         "rev_track_mag": "290°",
         "length": "40.8 NM",
@@ -1599,8 +1599,8 @@
     },
     {
       "▲ CANOAS": {
-        "latitude": "VOR/DME COA",
-        "longitude": "295701S",
+        "latitude": "----",
+        "longitude": -29.950277777777778,
         "track_mag": "0510845W"
       }
     }
@@ -1608,8 +1608,8 @@
   "W22": [
     {
       "▲ IMPERATRIZ VOR/DME YTZ": {
-        "latitude": "053126S",
-        "longitude": "0472659W",
+        "latitude": -5.523888888888889,
+        "longitude": -5.218055555555556,
         "track_mag": "069°",
         "rev_track_mag": "249°",
         "length": "78.7 NM",
@@ -1624,8 +1624,8 @@
     },
     {
       "▲ POPSO": {
-        "latitude": "043837S",
-        "longitude": "0462818W",
+        "latitude": -4.6436111111111105,
+        "longitude": -5.055833333333333,
         "track_mag": "069°",
         "rev_track_mag": "248°",
         "length": "141.5 NM",
@@ -1640,8 +1640,8 @@
     },
     {
       "▲ SATPU": {
-        "latitude": "030229S",
-        "longitude": "0444356W",
+        "latitude": -3.0413888888888887,
+        "longitude": -4.743055555555555,
         "track_mag": "068°",
         "rev_track_mag": "248°",
         "length": "40.0 NM",
@@ -1656,8 +1656,8 @@
     },
     {
       "▲ SAO LUIS": {
-        "latitude": "DVOR/DME SLI",
-        "longitude": "023521S",
+        "latitude": "----",
+        "longitude": -2.589166666666667,
         "track_mag": "0441424W"
       }
     }
@@ -1665,8 +1665,8 @@
   "W25": [
     {
       "▲ SAO GABRIEL DA": {
-        "latitude": "CACHOEIRA",
-        "longitude": "DVOR/DME GBR",
+        "latitude": "----",
+        "longitude": "----",
         "track_mag": "000901S",
         "rev_track_mag": "0665926W",
         "length": "157°",
@@ -1681,8 +1681,8 @@
     },
     {
       "▲ ERVAM": {
-        "latitude": "003105S",
-        "longitude": "0664345W",
+        "latitude": -0.5180555555555556,
+        "longitude": -7.076111111111111,
         "track_mag": "157°",
         "rev_track_mag": "339°",
         "length": "209.3 NM",
@@ -1697,8 +1697,8 @@
     },
     {
       "▲ TEFE": {
-        "latitude": "VOR/DME TFE",
-        "longitude": "032316S",
+        "latitude": "----",
+        "longitude": -3.3877777777777776,
         "track_mag": "0644341W"
       }
     }
@@ -1706,8 +1706,8 @@
   "W29": [
     {
       "▲ GOIANIA VOR/DME GNV": {
-        "latitude": "163828S",
-        "longitude": "0491240W",
+        "latitude": -16.641111111111112,
+        "longitude": -5.523333333333333,
         "track_mag": "255°",
         "rev_track_mag": "075°",
         "length": "29.8 NM",
@@ -1722,8 +1722,8 @@
     },
     {
       "▲ UTNIN": {
-        "latitude": "165607S",
-        "longitude": "0493745W",
+        "latitude": -16.935277777777777,
+        "longitude": -5.570555555555555,
         "track_mag": "254°",
         "rev_track_mag": "074°",
         "length": "10.1 NM",
@@ -1738,8 +1738,8 @@
     },
     {
       "▲ UBSUS": {
-        "latitude": "170218S",
-        "longitude": "0494608W",
+        "latitude": -17.038333333333334,
+        "longitude": -5.583333333333333,
         "track_mag": "254°",
         "rev_track_mag": "074°",
         "length": "203.0 NM",
@@ -1754,8 +1754,8 @@
     },
     {
       "▲ UTGIB": {
-        "latitude": "190354S",
-        "longitude": "0523708W",
+        "latitude": -19.065,
+        "longitude": -5.402777777777779,
         "track_mag": "254°",
         "rev_track_mag": "073°",
         "length": "49.0 NM",
@@ -1770,8 +1770,8 @@
     },
     {
       "▲ NUXUG": {
-        "latitude": "193253S",
-        "longitude": "0531901W",
+        "latitude": -19.548055555555557,
+        "longitude": -5.541666666666667,
         "track_mag": "253°",
         "rev_track_mag": "073°",
         "length": "54.2 NM",
@@ -1786,8 +1786,8 @@
     },
     {
       "▲ CREMA": {
-        "latitude": "200445S",
-        "longitude": "0540538W",
+        "latitude": -20.079166666666666,
+        "longitude": -5.681388888888889,
         "track_mag": "253°",
         "rev_track_mag": "073°",
         "length": "22.3 NM",
@@ -1802,8 +1802,8 @@
     },
     {
       "▲ KIGIL": {
-        "latitude": "201750S",
-        "longitude": "0542451W",
+        "latitude": -20.297222222222224,
+        "longitude": -5.7125,
         "track_mag": "253°",
         "rev_track_mag": "073°",
         "length": "19.1 NM",
@@ -1818,8 +1818,8 @@
     },
     {
       "▲ CAMPO GRANDE": {
-        "latitude": "VOR/DME GRD",
-        "longitude": "202901S",
+        "latitude": "----",
+        "longitude": -20.483611111111113,
         "track_mag": "0544120W"
       }
     }
@@ -1827,8 +1827,8 @@
   "W31": [
     {
       "▲ BELO HORIZONTE VOR/DME BHZ": {
-        "latitude": "195009S",
-        "longitude": "0440013W",
+        "latitude": -19.835833333333333,
+        "longitude": -4.666944444444445,
         "track_mag": "306°",
         "rev_track_mag": "126°",
         "length": "12.9 NM",
@@ -1843,8 +1843,8 @@
     },
     {
       "▲ ILTEM": {
-        "latitude": "194717S",
-        "longitude": "0441331W",
+        "latitude": -19.78805555555556,
+        "longitude": -4.6925,
         "track_mag": "306°",
         "rev_track_mag": "126°",
         "length": "12.1 NM",
@@ -1859,8 +1859,8 @@
     },
     {
       "▲ MUGRA": {
-        "latitude": "194434S",
-        "longitude": "0442602W",
+        "latitude": -19.74277777777778,
+        "longitude": -4.716666666666667,
         "track_mag": "306°",
         "rev_track_mag": "126°",
         "length": "14.0 NM",
@@ -1875,8 +1875,8 @@
     },
     {
       "▲ SELDO": {
-        "latitude": "194125S",
-        "longitude": "0444029W",
+        "latitude": -19.690277777777776,
+        "longitude": -4.733888888888889,
         "track_mag": "303°",
         "rev_track_mag": "123°",
         "length": "6.8 NM",
@@ -1891,8 +1891,8 @@
     },
     {
       "▲ ALGOX": {
-        "latitude": "194016S",
-        "longitude": "0444735W",
+        "latitude": -19.671111111111113,
+        "longitude": -4.753611111111111,
         "track_mag": "303°",
         "rev_track_mag": "123°",
         "length": "10.5 NM",
@@ -1907,8 +1907,8 @@
     },
     {
       "▲ SISAS": {
-        "latitude": "193828S",
-        "longitude": "0445835W",
+        "latitude": -19.641111111111112,
+        "longitude": -4.773055555555556,
         "track_mag": "303°",
         "rev_track_mag": "123°",
         "length": "20.4 NM",
@@ -1923,8 +1923,8 @@
     },
     {
       "▲ ASOPI": {
-        "latitude": "193456S",
-        "longitude": "0451954W",
+        "latitude": -19.58222222222222,
+        "longitude": -4.876388888888888,
         "track_mag": "302°",
         "rev_track_mag": "122°",
         "length": "25.1 NM",
@@ -1939,8 +1939,8 @@
     },
     {
       "▲ NINDI": {
-        "latitude": "193048S",
-        "longitude": "0454606W",
+        "latitude": -19.513333333333332,
+        "longitude": -4.916666666666667,
         "track_mag": "284°",
         "rev_track_mag": "104°",
         "length": "34.7 NM",
@@ -1955,8 +1955,8 @@
     },
     {
       "▲ NIRTO": {
-        "latitude": "193553S",
-        "longitude": "0462224W",
+        "latitude": -19.598055555555554,
+        "longitude": -5.039444444444444,
         "track_mag": "284°",
         "rev_track_mag": "104°",
         "length": "32.6 NM",
@@ -1971,8 +1971,8 @@
     },
     {
       "▲ TEGUK": {
-        "latitude": "194027S",
-        "longitude": "0465637W",
+        "latitude": -19.674166666666668,
+        "longitude": -5.100833333333333,
         "track_mag": "284°",
         "rev_track_mag": "104°",
         "length": "6.7 NM",
@@ -1987,8 +1987,8 @@
     },
     {
       "▲ ARAXA VOR/DME ARX": {
-        "latitude": "194121S",
-        "longitude": "0470338W",
+        "latitude": -19.689166666666665,
+        "longitude": -5.175833333333333,
         "track_mag": "284°",
         "rev_track_mag": "104°",
         "length": "25.6 NM",
@@ -2003,8 +2003,8 @@
     },
     {
       "▲ KOMLU": {
-        "latitude": "194505S",
-        "longitude": "0473027W",
+        "latitude": -19.75138888888889,
+        "longitude": -5.217222222222222,
         "track_mag": "290°",
         "rev_track_mag": "110°",
         "length": "25.6 NM",
@@ -2019,8 +2019,8 @@
     },
     {
       "▲ UBERABA": {
-        "latitude": "NDB URB",
-        "longitude": "194556S",
+        "latitude": "----",
+        "longitude": -19.765555555555554,
         "track_mag": "0475733W"
       }
     }
@@ -2028,8 +2028,8 @@
   "W34": [
     {
       "▲ FOZ VOR/DME FOZ": {
-        "latitude": "253500S",
-        "longitude": "0543013W",
+        "latitude": -25.583333333333332,
+        "longitude": -5.716944444444445,
         "track_mag": "108°",
         "rev_track_mag": "288°",
         "length": "40.0 NM",
@@ -2044,8 +2044,8 @@
     },
     {
       "▲ KAMIL": {
-        "latitude": "253514S",
-        "longitude": "0534558W",
+        "latitude": -25.58722222222222,
+        "longitude": -5.581944444444444,
         "track_mag": "108°",
         "rev_track_mag": "288°",
         "length": "39.0 NM",
@@ -2060,8 +2060,8 @@
     },
     {
       "▲ VUGLA": {
-        "latitude": "253526S",
-        "longitude": "0530253W",
+        "latitude": -25.590555555555554,
+        "longitude": -5.506944444444445,
         "track_mag": "108°",
         "rev_track_mag": "288°",
         "length": "89.9 NM",
@@ -2076,8 +2076,8 @@
     },
     {
       "▲ ILBEK": {
-        "latitude": "253505S",
-        "longitude": "0512330W",
+        "latitude": -25.584722222222222,
+        "longitude": -5.2091666666666665,
         "track_mag": "108°",
         "rev_track_mag": "289°",
         "length": "72.3 NM",
@@ -2092,8 +2092,8 @@
     },
     {
       "▲ PUNTO": {
-        "latitude": "253359S",
-        "longitude": "0500334W",
+        "latitude": -25.56638888888889,
+        "longitude": -5.009166666666666,
         "track_mag": "107°",
         "rev_track_mag": "287°",
         "length": "25.8 NM",
@@ -2108,8 +2108,8 @@
     },
     {
       "▲ BIXIG": {
-        "latitude": "253247S",
-        "longitude": "0493505W",
+        "latitude": -25.54638888888889,
+        "longitude": -5.563888888888889,
         "track_mag": "107°",
         "rev_track_mag": "287°",
         "length": "9.3 NM",
@@ -2124,8 +2124,8 @@
     },
     {
       "▲ LUPTA": {
-        "latitude": "253219S",
-        "longitude": "0492446W",
+        "latitude": -25.538611111111113,
+        "longitude": -5.545555555555556,
         "track_mag": "108°",
         "rev_track_mag": "288°",
         "length": "13.3 NM",
@@ -2140,8 +2140,8 @@
     },
     {
       "▲ CURITIBA": {
-        "latitude": "VOR/DME CTB",
-        "longitude": "253155S",
+        "latitude": "----",
+        "longitude": -25.531944444444445,
         "track_mag": "0491004W"
       }
     }
@@ -2149,8 +2149,8 @@
   "W40": [
     {
       "▲ NATAL VOR/DME NTL": {
-        "latitude": "055430S",
-        "longitude": "0351455W",
+        "latitude": -5.908333333333334,
+        "longitude": -3.8625000000000003,
         "track_mag": "075°",
         "rev_track_mag": "255°",
         "length": "40.0 NM",
@@ -2165,8 +2165,8 @@
     },
     {
       "▲ OGPER": {
-        "latitude": "053104S",
-        "longitude": "0344219W",
+        "latitude": -5.517777777777778,
+        "longitude": -3.7391666666666667,
         "track_mag": "075°",
         "rev_track_mag": "254°",
         "length": "52.7 NM",
@@ -2181,8 +2181,8 @@
     },
     {
       "▲ ILMIG": {
-        "latitude": "050009S",
-        "longitude": "0335929W",
+        "latitude": -5.0025,
+        "longitude": -3.608888888888889,
         "track_mag": "074°",
         "rev_track_mag": "254°",
         "length": "65.5 NM",
@@ -2197,8 +2197,8 @@
     },
     {
       "▲ NISBU": {
-        "latitude": "042139S",
-        "longitude": "0330619W",
+        "latitude": -4.360833333333333,
+        "longitude": -3.5169444444444444,
         "track_mag": "073°",
         "rev_track_mag": "253°",
         "length": "50.4 NM",
@@ -2213,8 +2213,8 @@
     },
     {
       "▲ NORONHA": {
-        "latitude": "VOR/DME FNR",
-        "longitude": "035124S",
+        "latitude": "----",
+        "longitude": -3.856666666666667,
         "track_mag": "0322548W"
       }
     }
@@ -2222,8 +2222,8 @@
   "W41": [
     {
       "▲ RECIFE VOR/DME REC": {
-        "latitude": "080812S",
-        "longitude": "0345538W",
+        "latitude": -8.136666666666667,
+        "longitude": -3.7647222222222223,
         "track_mag": "052°",
         "rev_track_mag": "232°",
         "length": "48.7 NM",
@@ -2238,8 +2238,8 @@
     },
     {
       "▲ ISADO": {
-        "latitude": "072604S",
-        "longitude": "0343046W",
+        "latitude": -7.434444444444445,
+        "longitude": -3.717777777777778,
         "track_mag": "052°",
         "rev_track_mag": "231°",
         "length": "56.0 NM",
@@ -2254,8 +2254,8 @@
     },
     {
       "▲ ESGUM": {
-        "latitude": "063733S",
-        "longitude": "0340214W",
+        "latitude": -6.6258333333333335,
+        "longitude": -3.6725,
         "track_mag": "051°",
         "rev_track_mag": "231°",
         "length": "84.9 NM",
@@ -2270,8 +2270,8 @@
     },
     {
       "▲ UBRUT": {
-        "latitude": "052355S",
-        "longitude": "0331908W",
+        "latitude": -5.398611111111111,
+        "longitude": -3.5416666666666665,
         "track_mag": "050°",
         "rev_track_mag": "230°",
         "length": "55.7 NM",
@@ -2286,8 +2286,8 @@
     },
     {
       "▲ MOTLI": {
-        "latitude": "043536S",
-        "longitude": "0325059W",
+        "latitude": -4.593333333333333,
+        "longitude": -3.4180555555555556,
         "track_mag": "050°",
         "rev_track_mag": "229°",
         "length": "50.7 NM",
@@ -2302,8 +2302,8 @@
     },
     {
       "▲ NORONHA": {
-        "latitude": "VOR/DME FNR",
-        "longitude": "035124S",
+        "latitude": "----",
+        "longitude": -3.856666666666667,
         "track_mag": "0322548W"
       }
     }
@@ -2311,8 +2311,8 @@
   "W44": [
     {
       "▲ TERESINA DVOR/DME TNA": {
-        "latitude": "050345S",
-        "longitude": "0424930W",
+        "latitude": -5.0625,
+        "longitude": -4.425833333333333,
         "track_mag": "095°",
         "rev_track_mag": "275°",
         "length": "40.0 NM",
@@ -2327,8 +2327,8 @@
     },
     {
       "▲ EREJO": {
-        "latitude": "045228S",
-        "longitude": "0421105W",
+        "latitude": -4.874444444444445,
+        "longitude": -4.352777777777778,
         "track_mag": "095°",
         "rev_track_mag": "274°",
         "length": "187.7 NM",
@@ -2343,8 +2343,8 @@
     },
     {
       "▲ IRURA": {
-        "latitude": "035802S",
-        "longitude": "0391109W",
+        "latitude": -3.9672222222222224,
+        "longitude": -4.519444444444445,
         "track_mag": "094°",
         "rev_track_mag": "274°",
         "length": "40.0 NM",
@@ -2359,8 +2359,8 @@
     },
     {
       "▲ FORTALEZA": {
-        "latitude": "DVOR/DME FLZ",
-        "longitude": "034620S",
+        "latitude": "----",
+        "longitude": -3.772222222222222,
         "track_mag": "0383252W"
       }
     }
@@ -2368,8 +2368,8 @@
   "W46": [
     {
       "▲ MOSSORO VOR/DME MSS": {
-        "latitude": "051150S",
-        "longitude": "0372152W",
+        "latitude": -5.197222222222223,
+        "longitude": -4.204166666666667,
         "track_mag": "166°",
         "rev_track_mag": "346°",
         "length": "151.6 NM",
@@ -2384,8 +2384,8 @@
     },
     {
       "▲ CAMPINA GRANDE": {
-        "latitude": "NDB CPG",
-        "longitude": "071558S",
+        "latitude": "----",
+        "longitude": -7.266111111111111,
         "track_mag": "0355334W",
         "rev_track_mag": "154°",
         "length": "334°",
@@ -2400,8 +2400,8 @@
     },
     {
       "▲ RECIFE": {
-        "latitude": "VOR/DME REC",
-        "longitude": "080812S",
+        "latitude": "----",
+        "longitude": -8.136666666666667,
         "track_mag": "0345538W"
       }
     }
@@ -2409,8 +2409,8 @@
   "W48": [
     {
       "▲ CUIABA VOR/DME CIA": {
-        "latitude": "153922S",
-        "longitude": "0560643W",
+        "latitude": -15.65611111111111,
+        "longitude": -6.017777777777778,
         "track_mag": "163°",
         "rev_track_mag": "343°",
         "length": "40.0 NM",
@@ -2425,8 +2425,8 @@
     },
     {
       "▲ POVNI": {
-        "latitude": "161205S",
-        "longitude": "0554239W",
+        "latitude": -16.20138888888889,
+        "longitude": -5.906388888888889,
         "track_mag": "163°",
         "rev_track_mag": "343°",
         "length": "100.7 NM",
@@ -2441,8 +2441,8 @@
     },
     {
       "▲ EGIMO": {
-        "latitude": "173417S",
-        "longitude": "0544128W",
+        "latitude": -17.57138888888889,
+        "longitude": -5.736666666666666,
         "track_mag": "165°",
         "rev_track_mag": "346°",
         "length": "141.7 NM",
@@ -2457,8 +2457,8 @@
     },
     {
       "▲ NUXUG": {
-        "latitude": "193253S",
-        "longitude": "0531901W",
+        "latitude": -19.548055555555557,
+        "longitude": -5.541666666666667,
         "track_mag": "166°",
         "rev_track_mag": "345°",
         "length": "132.2 NM",
@@ -2473,8 +2473,8 @@
     },
     {
       "▲ REBIL": {
-        "latitude": "212255S",
-        "longitude": "0520017W",
+        "latitude": -21.381944444444446,
+        "longitude": -5.333611111111111,
         "track_mag": "165°",
         "rev_track_mag": "345°",
         "length": "4.9 NM",
@@ -2489,8 +2489,8 @@
     },
     {
       "▲ ISEMA": {
-        "latitude": "212658S",
-        "longitude": "0515721W",
+        "latitude": -21.449444444444445,
+        "longitude": -5.27,
         "track_mag": "165°",
         "rev_track_mag": "345°",
         "length": "2.5 NM",
@@ -2505,8 +2505,8 @@
     },
     {
       "▲ XOLUG": {
-        "latitude": "212903S",
-        "longitude": "0515550W",
+        "latitude": -21.484166666666667,
+        "longitude": -5.2652777777777775,
         "track_mag": "165°",
         "rev_track_mag": "345°",
         "length": "24.6 NM",
@@ -2521,8 +2521,8 @@
     },
     {
       "▲ PULSO": {
-        "latitude": "214928S",
-        "longitude": "0514056W",
+        "latitude": -21.824444444444445,
+        "longitude": -5.2347222222222225,
         "track_mag": "165°",
         "rev_track_mag": "345°",
         "length": "25.3 NM",
@@ -2537,8 +2537,8 @@
     },
     {
       "▲ PRUDENTE VOR/DME PRR": {
-        "latitude": "221023S",
-        "longitude": "0512535W",
+        "latitude": -22.173055555555557,
+        "longitude": -5.214722222222222,
         "track_mag": "186°",
         "rev_track_mag": "006°",
         "length": "31.9 NM",
@@ -2553,8 +2553,8 @@
     },
     {
       "▲ KOTEG": {
-        "latitude": "224125S",
-        "longitude": "0511710W",
+        "latitude": -22.690277777777776,
+        "longitude": -5.203055555555556,
         "track_mag": "186°",
         "rev_track_mag": "006°",
         "length": "40.0 NM",
@@ -2569,8 +2569,8 @@
     },
     {
       "▲ LONDRINA VOR/DME LON": {
-        "latitude": "232022S",
-        "longitude": "0510645W",
+        "latitude": -23.339444444444442,
+        "longitude": -5.184444444444445,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "40.0 NM",
@@ -2585,8 +2585,8 @@
     },
     {
       "▲ UKDUN": {
-        "latitude": "235140S",
-        "longitude": "0503929W",
+        "latitude": -23.861111111111114,
+        "longitude": -5.075555555555556,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "23.8 NM",
@@ -2601,8 +2601,8 @@
     },
     {
       "▲ GEGOB": {
-        "latitude": "241013S",
-        "longitude": "0502311W",
+        "latitude": -24.17027777777778,
+        "longitude": -5.041944444444444,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "7.1 NM",
@@ -2617,8 +2617,8 @@
     },
     {
       "▲ BRASA": {
-        "latitude": "241545S",
-        "longitude": "0501818W",
+        "latitude": -24.2625,
+        "longitude": -5.039166666666667,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "21.0 NM",
@@ -2633,8 +2633,8 @@
     },
     {
       "▲ EDVAX": {
-        "latitude": "243205S",
-        "longitude": "0500349W",
+        "latitude": -24.534722222222225,
+        "longitude": -5.009444444444444,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "20.1 NM",
@@ -2649,8 +2649,8 @@
     },
     {
       "▲ BOLIP": {
-        "latitude": "244746S",
-        "longitude": "0494956W",
+        "latitude": -24.796111111111113,
+        "longitude": -5.593055555555555,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "13.3 NM",
@@ -2665,8 +2665,8 @@
     },
     {
       "▲ ARPOK": {
-        "latitude": "245805S",
-        "longitude": "0494037W",
+        "latitude": -24.968055555555555,
+        "longitude": -5.5675,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "20.1 NM",
@@ -2681,8 +2681,8 @@
     },
     {
       "▲ SERGI": {
-        "latitude": "251340S",
-        "longitude": "0492635W",
+        "latitude": -25.227777777777778,
+        "longitude": -5.550833333333333,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "10.6 NM",
@@ -2697,8 +2697,8 @@
     },
     {
       "▲ KIBOG": {
-        "latitude": "252151S",
-        "longitude": "0491912W",
+        "latitude": -25.36416666666667,
+        "longitude": -5.541944444444445,
         "track_mag": "161°",
         "rev_track_mag": "341°",
         "length": "13.0 NM",
@@ -2713,8 +2713,8 @@
     },
     {
       "▲ CURITIBA VOR/DME CTB": {
-        "latitude": "253155S",
-        "longitude": "0491004W",
+        "latitude": -25.531944444444445,
+        "longitude": -5.516666666666667,
         "track_mag": "186°",
         "rev_track_mag": "005°",
         "length": "18.9 NM",
@@ -2729,8 +2729,8 @@
     },
     {
       "▲ ARVIS": {
-        "latitude": "255016S",
-        "longitude": "0490446W",
+        "latitude": -25.837777777777777,
+        "longitude": -5.512222222222222,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "1.5 NM",
@@ -2745,8 +2745,8 @@
     },
     {
       "▲ UTPAT": {
-        "latitude": "255143S",
-        "longitude": "0490421W",
+        "latitude": -25.861944444444447,
+        "longitude": -5.511666666666667,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "9.5 NM",
@@ -2761,8 +2761,8 @@
     },
     {
       "▲ BUXUM": {
-        "latitude": "260059S",
-        "longitude": "0490140W",
+        "latitude": -26.01638888888889,
+        "longitude": -5.503888888888889,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "9.9 NM",
@@ -2777,8 +2777,8 @@
     },
     {
       "▲ MULEM": {
-        "latitude": "261037S",
-        "longitude": "0485851W",
+        "latitude": -26.176944444444445,
+        "longitude": -5.440277777777778,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "17.9 NM",
@@ -2793,8 +2793,8 @@
     },
     {
       "▲ DABNO": {
-        "latitude": "262802S",
-        "longitude": "0485347W",
+        "latitude": -26.46722222222222,
+        "longitude": -5.426111111111111,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "10.5 NM",
@@ -2809,8 +2809,8 @@
     },
     {
       "▲ ILPOB": {
-        "latitude": "263815S",
-        "longitude": "0485047W",
+        "latitude": -26.6375,
+        "longitude": -5.417777777777778,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "12.7 NM",
@@ -2825,8 +2825,8 @@
     },
     {
       "▲ GESDA": {
-        "latitude": "265033S",
-        "longitude": "0484710W",
+        "latitude": -26.842499999999998,
+        "longitude": -5.419722222222223,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "25.6 NM",
@@ -2841,8 +2841,8 @@
     },
     {
       "▲ PANIR": {
-        "latitude": "271523S",
-        "longitude": "0483949W",
+        "latitude": -27.25638888888889,
+        "longitude": -5.409444444444444,
         "track_mag": "185°",
         "rev_track_mag": "005°",
         "length": "25.6 NM",
@@ -2857,8 +2857,8 @@
     },
     {
       "▲ FLORIANOPOLIS": {
-        "latitude": "VOR/DME FLN",
-        "longitude": "274012S",
+        "latitude": "----",
+        "longitude": -27.67,
         "track_mag": "0483226W"
       }
     }

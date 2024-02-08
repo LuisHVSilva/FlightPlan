@@ -1,4 +1,5 @@
 import fitz
+from Utils.UnitConverterUtils import Converter
 
 
 class BrasilROTAER(object):
@@ -74,12 +75,18 @@ class BrasilROTAER(object):
 
                     coordinate_index = airport.replace(" ", "").index(",")
                     coordinates = airport.replace(" ", "")[coordinate_index + 3:]
+                    # Getting the index of West mark in coordinate
+                    west_index = coordinates.index("W")
+                    # Getting the part of array that correspond to coordinates
+                    coordinates = coordinates[:west_index + 1]
+                    latitude = Converter(latitude=coordinates.split("/")[0]).coordinates_dms_to_dd()
+                    longitude = Converter(longitude=coordinates.split("/")[1]).coordinates_dms_to_dd()
 
                     object_array = {new_array[0].split("(")[1].strip(): {
                         "airport_name": new_array[0].split("(")[0].strip(),
                         "city": new_array[1].strip(),
-                        "latitude": coordinates.split("/")[0],
-                        "longitude": coordinates.split("/")[1]
+                        "latitude": latitude,
+                        "longitude": longitude
                     }
                     }
 

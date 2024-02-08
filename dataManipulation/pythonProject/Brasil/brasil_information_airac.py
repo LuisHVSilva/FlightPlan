@@ -1,5 +1,6 @@
 import fitz
 import tabula
+from Utils.UnitConverterUtils import Converter
 
 
 class BrasilAirac(object):
@@ -45,6 +46,15 @@ class BrasilAirac(object):
             if (i < array_size
                     and self.__internal_array_via_attr[i] is not None
                     and self.__internal_array_via_attr[i] != ""):
+
+                if attribute == "latitude":
+                    self.__internal_array_via_attr[i] = (Converter(latitude=self.__internal_array_via_attr[i])
+                                                         .coordinates_dms_to_dd())
+
+                if attribute == "longitude":
+                    self.__internal_array_via_attr[i] = (Converter(longitude=self.__internal_array_via_attr[i])
+                                                         .coordinates_dms_to_dd())
+
                 internal_object[attribute] = self.__internal_array_via_attr[i]
 
         return internal_object
@@ -181,6 +191,9 @@ class BrasilAirac(object):
                 rmk = "-----"
 
                 for column, value in row.items():
+                    if isinstance(value, float):
+                        value = "----"
+
                     if column == "Designador Nome-código":
                         if len(value) != 5:
                             break
@@ -188,17 +201,14 @@ class BrasilAirac(object):
                         icao = value
 
                     if column == "Coordenadas":
-                        latitude = value.split(" ")[0]
-                        longitude = value.split(" ")[-1]
+                        latitude = Converter(latitude=value.split(" ")[0]).coordinates_dms_to_dd()
+                        longitude = Converter(longitude=value.split(" ")[-1]).coordinates_dms_to_dd()
 
                     if column == "Rota ATS ou outra rota":
                         routes = value
 
                     if column == "RMK" and value:
                         rmk = value
-
-                        if isinstance(value, float):
-                            rmk = "----"
 
                 if icao:
                     new_object[icao] = {"latitude": latitude,

@@ -1,20 +1,15 @@
 """
-ICAO -> 94 OK
 Lista de auxilio-radio à navegação -> 99
 Conversão de medidas -> 106
 Estação meteorologica -> 155
 Classificação dos aerodromos -> 257
 DCT -> 326
 Regras planejamento de voo -> 328
-Rotas ATS convencionais (aerovias) -> 542 - 593 OK
-Rotas de navegação de area RNAV (aerovias) -> 597 - 1709 OK
 Uso dos auxilios-radio à navegação aerea -> 1730
-Pontos significativos -> 1747 - 1795 OK
 Espaços aereos condicionados -> 1816
 Cartas de rotas -> 1888
 Aeródromos e heliportos -> 1903
 """
-
 """
     Part 1 -> Creating the basic object of all brazilian airports based on "rotaer_completo.pdf":
         - state, 
