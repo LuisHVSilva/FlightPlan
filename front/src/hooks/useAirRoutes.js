@@ -2,7 +2,7 @@ import Distance from "../Utils/Distance";
 import TypeChecker from "../Utils/TypeChecker";
 
 function unifyObjects(ojbOne, objTwo) {
-    let obj = { ...ojbOne, ...objTwo }    
+    let obj = { ...ojbOne, ...objTwo }
     let newObj = {};
     for (const key in obj) {
         const aid = Object.keys(obj[key])[0]
@@ -51,10 +51,12 @@ function encontrarIndiceDoObjeto(chaveDesejada, array) {
     return -1; // Retorna -1 se a chave não for encontrada
 }
 
-
 const useAirRoutes = () => {
 
-    const getRouteUpRight = (departure, departureCoordinates, arrive, arriveCoordinates, rnav) => {
+    const getRouteUpRight = (departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav) => {
+        const departureCoordinates = [departureLatitude, departureLongitude]
+        const arriveCoordinates = [arriveLatitude, arriveLongitude]
+
         let departureDistance = Infinity
         let departureAidName;
         let departureVia; // Variável para armazenar os dados das departureVia
@@ -132,11 +134,52 @@ const useAirRoutes = () => {
 
         // Juntar os dois objetos (departureToArrive | arriveToDeparture) de acordo com a 
         const route = unifyObjects(departureToArrive, arriveToDeparture)
-        
+
         return route;
     }
 
-    return { getRouteUpRight }
+    const teste = (departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav) => {
+        const departureCoordinates = [departureLatitude, departureLongitude]
+
+        let departureDistance = Infinity
+        let departureAidName;
+        let departureVia; // Variável para armazenar os dados das departureVia        
+        const departureViaObject = {};
+
+        Object.keys(rnav).forEach(rnavKeys => {
+            Object.values(rnav[rnavKeys]).forEach(value => {
+                let waypoint = Object.keys(value)
+
+                // Obter a longitudeDeparture e a latitudeDeparture do waypoint
+                const longitudeDeparture = value[waypoint].longitude
+                const latitudeDeparture = value[waypoint].latitude
+                const longitudeDepartureFloat = new TypeChecker().isFloat(longitudeDeparture)
+                const latitudeDepartureFloat = new TypeChecker().isFloat(latitudeDeparture)
+
+                // Verifica se tanto a longitudeDeparture quanto a latitudeDeparture são valores numéricos (flutuantes)
+                if (longitudeDepartureFloat && latitudeDepartureFloat) {
+                    // Calcula a distância entre o result de partida e o waypoint atual usando a função haversineDistance
+                    const newDistance = new Distance(departureCoordinates, [latitudeDeparture, longitudeDeparture]).haversineDistance()
+                    // Verifica se a distância calculada é menor que a variável 'distance'
+
+                    // Aqui pensar que quando for igual, pode adicionar como uma via alternativa
+                    if (newDistance <= departureDistance) {
+                        // Se sim, atualize o valor de 'distance' para a nova distância
+                        departureDistance = newDistance
+                        // Atualiza o waypoint mais próximo
+                        departureAidName = waypoint[0]
+                        departureVia = Object.values(rnav[rnavKeys]);
+                        departureViaObject[rnavKeys] = departureAidName
+                    }
+                }
+            })
+        })
+
+        // Pegar as vias que passam mais perto do fixo do aeroporto. 
+        const chavesFiltradas = Object.keys(departureViaObject).filter(chave => departureViaObject[chave] === departureAidName);         
+    }
+
+    return { getRouteUpRight, teste }
 }
 
 export default useAirRoutes

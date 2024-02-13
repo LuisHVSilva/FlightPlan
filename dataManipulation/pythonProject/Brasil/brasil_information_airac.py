@@ -3,6 +3,72 @@ import tabula
 from Utils.UnitConverterUtils import Converter
 
 
+def is_latitude(element):
+    # Verifica se o elemento tem pelo menos 6 caracteres (5 para os números e 1 para o hemisfério)
+    if len(element) < 6:
+        return False
+
+    # Verifica se os primeiros 6 caracteres são dígitos
+    if not element[:6].isdigit():
+        return False
+
+    # Verifica se o último caractere é "S" ou "N"
+    if element[-1] not in ['S', 'N']:
+        return False
+
+    # Se todas as condições acima forem satisfeitas, então é uma latitude válida
+    return True
+
+
+def split_array(array):
+    # Determinar o tamanho do array novo
+    # Inicializar uma lista para armazenar os índices onde os elementos "▲" são encontrados
+    new_array = []
+    new_array_size = len(new_array) - 1
+    index = []
+    i = 0
+
+    # Iterar sobre os elementos do array
+    for element in range(len(array)):
+        # Verificar se o elemento atual contém "▲"
+        if "▲" in array[element]:
+            # Se sim, adicionar o índice à lista index
+            index.append(i)
+
+        # Incrementar o contador
+        i += 1
+
+    # Verificar se o primeiro índice é 0 (significa que os "fixos" começam no início do array)
+    if index[0] == 0:
+        if len(index) > 1:
+            # Se sim, adicionar os elementos do array até o segundo índice ao array novo
+            new_array.append(array[:index[1]])
+        else:
+            new_array.append(array)
+    else:
+        # Se não, adicionar os elementos do array até o primeiro índice ao último subarray do array novo
+        new_array.append(array[:index[0]])
+
+    # Remover o primeiro elemento da lista de índices
+    index.pop(0)
+    # Determinar o tamanho da lista de índices
+    index_size = len(index)
+    # Se houver mais de um índice
+    if index_size > 0:
+        i = 0
+        # Iterar sobre os índices, exceto o último
+        while i < index_size - 1:
+            # Adicionar os elementos entre cada par de índices consecutivos ao array novo
+            new_array.append(array[index[i]: index[i + 1]])
+            i += 1
+
+        # Adicionar os elementos após o último índice ao array novo
+        new_array.append(array[index[index_size - 1]:])
+
+    # Retornar o array novo
+    return new_array
+
+
 class BrasilAirac(object):
     def __init__(self, file):
         self.file = file
@@ -84,7 +150,7 @@ class BrasilAirac(object):
         return new_object
 
     def extract_airway_routes(self, airway_type, first_page, last_page, number_columns):
-        with fitz.open(self.file) as pdf_document:
+        with (fitz.open(self.file) as pdf_document):
             first_page -= 1
 
             if airway_type == "rnav":
@@ -128,11 +194,32 @@ class BrasilAirac(object):
                 if array_info[0].strip() == airway:
                     array_info.pop(0)
 
-                for i in array_info:
-                    if self.__constant_airway_breakpoint_note in i:
-                        airway_tag_name.append(i)
+                aid_array = split_array(array_info)
 
-                    new_object[airway].append(i)
+                # Loop que percorre cada elemento do array de airways (aid_array)
+                for aid in aid_array:
+                    i = 0  # Inicializa o índice de controle para manter o rastreamento de onde estamos no array
+                    # Verifica se o prefixo de quebra de linha constante está presente no primeiro elemento do
+                    # array atual
+                    if self.__constant_airway_breakpoint_note in aid[0]:
+                        aid_name = ""  # Inicializa uma string vazia para armazenar o nome do aid
+                        # Loop que percorre os elementos do aid atual
+                        for a in aid:
+                            # Verifica se o elemento atual é uma latitude e, se for, encerra o loop
+                            if is_latitude(a):
+                                break
+                            # Concatena o elemento atual à variável aid_name
+                            aid_name += " " + a
+                            i += 1  # Incrementa o índice para avançar para o próximo elemento
+
+                        # Adiciona o nome completo do aid (aid_name) à lista airway_tag_name e ao novo objeto
+                        aid_name = aid_name.lstrip()  # Remova espaços extras do início
+                        airway_tag_name.append(aid_name)
+                        new_object[airway].append(aid_name)
+
+                    # Loop que percorre os elementos restantes do aid atual e os adiciona ao novo objeto
+                    for value in aid[i:]:
+                        new_object[airway].append(value)
 
             for obj in new_object:
                 info[obj] = []
