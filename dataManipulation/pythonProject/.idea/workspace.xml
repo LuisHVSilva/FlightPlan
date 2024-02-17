@@ -7,14 +7,16 @@
     <list default="true" id="49a6d3cd-9439-45ec-8cd7-edd90cec43de" name="Changes" comment="Fixing rnav json">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/UnitConverterUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/UnitConverterUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brasil_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/brasil_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/rnav-Brasil.json" beforeDir="false" afterPath="$PROJECT_DIR$/json/rnav-Brasil.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/atc-Brasil.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/rnav-Brasil.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/rotaer_completo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/some_waypoints_coordinates.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/public/data/rnav-Brasil.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/public/data/rnav-Brasil.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/components/BrazilMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/BrazilMap.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/components/FlightPlan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/FlightPlan.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/hooks/useAirRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/hooks/useAirRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_flightPlan.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/module/_flightPlan.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707399184948</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixing rnav json">
+      <option name="closed" value="true" />
+      <created>1707842163154</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1707842163154</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -6,8 +6,8 @@ import 'leaflet/dist/leaflet.css'
 
 const mapStart = [-15.608166742346116, -48.26604105641147];
 
-const BrazilMap = ({ departureCoordinates, arriveCoordinates, route, routeDisplay }) => {    
-  
+const BrazilMap = ({ departureCoordinates, arriveCoordinates, routes, routesDisplay }) => {
+
   const myIcon = L.icon({
     iconUrl: '/icons/aidMark.svg',
     iconSize: [15, 15],
@@ -17,8 +17,8 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, route, routeDispla
   const renderRoute = () => {
     const markers = [{ position: arriveCoordinates, text: "Arrive" }];
 
-    for (const key in route) {
-      markers.push({ position: [route[key].latitude, route[key].longitude], text: key })
+    for (const key in routes) {
+      markers.push({ position: [routes[key].latitude, routes[key].longitude], text: key })
     }
 
     markers.push({ position: departureCoordinates, text: "Departure" })
@@ -39,7 +39,7 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, route, routeDispla
 
   return (
     <section className="map">
-      <div className="loader-div" style={routeDisplay}>
+      <div className="loader-div" style={routesDisplay}>
         <div class="loader">
           <div class="loader-wheel"></div>
           <div class="loader-text"></div>
@@ -60,7 +60,7 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, route, routeDispla
           </Marker>
         }
 
-        {Object.keys(route).length > 0 && renderRoute()}        
+        {/* {Object.keys(routes).length > 0 && renderRoute()} */}
 
         {arriveCoordinates.length > 0 &&
           <Marker position={arriveCoordinates}>

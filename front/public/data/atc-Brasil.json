@@ -161,10 +161,9 @@
       }
     },
     {
-      "▲ FOZ": {
-        "latitude": "----",
-        "longitude": -53.833333333333336,
-        "track_mag": "0543013W"
+      "▲ FOZ VOR/DME FOZ": {
+        "latitude": -25.583333333333332,
+        "longitude": -54.50361111111111
       }
     }
   ],
@@ -290,10 +289,9 @@
       }
     },
     {
-      "▲ BAGE": {
-        "latitude": "----",
-        "longitude": -12.535277777777777,
-        "track_mag": "0540635W"
+      "▲ BAGE VOR BGE": {
+        "latitude": -31.390833333333333,
+        "longitude": -54.109722222222224
       }
     }
   ],
@@ -315,10 +313,9 @@
       }
     },
     {
-      "▲ FOZ": {
-        "latitude": "----",
-        "longitude": -53.833333333333336,
-        "track_mag": "0543013W"
+      "▲ FOZ VOR/DME FOZ": {
+        "latitude": -25.583333333333332,
+        "longitude": -54.50361111111111
       }
     }
   ],
@@ -388,19 +385,19 @@
       }
     },
     {
-      "▲ BAGE": {
-        "latitude": "----",
-        "longitude": -12.535277777777777,
-        "track_mag": "0540635W",
-        "rev_track_mag": "240°",
-        "length": "060°",
-        "upper_limit": "24.3 NM",
-        "lower_limit": "FL245",
-        "MEA": "FL145",
-        "airspace_class": "150 FL",
-        "direction_of_cruising_levels_odd": "Classe/Class A",
-        "rnp_type": "NIL",
-        "RMK": "↑ ↓"
+      "▲ BAGE VOR BGE": {
+        "latitude": -31.390833333333333,
+        "longitude": -54.109722222222224,
+        "track_mag": "240°",
+        "rev_track_mag": "060°",
+        "length": "24.3 NM",
+        "upper_limit": "FL245",
+        "lower_limit": "FL145",
+        "MEA": "150 FL",
+        "airspace_class": "Classe/Class A",
+        "direction_of_cruising_levels_odd": "NIL",
+        "rnp_type": "↑ ↓",
+        "RMK": "NIL"
       }
     },
     {
@@ -732,10 +729,9 @@
       }
     },
     {
-      "▲ RIO BRANCO": {
-        "latitude": "----",
-        "longitude": -95.38444444444445,
-        "track_mag": "0675419W"
+      "▲ RIO BRANCO DVOR/DME RCO": {
+        "latitude": -9.876111111111111,
+        "longitude": -67.90527777777778
       }
     }
   ],
@@ -805,10 +801,9 @@
       }
     },
     {
-      "▲ TEFE": {
-        "latitude": "----",
-        "longitude": -32.51833333333333,
-        "track_mag": "0644341W"
+      "▲ TEFE VOR/DME TFE": {
+        "latitude": -3.3877777777777776,
+        "longitude": -64.72805555555556
       }
     }
   ],
@@ -846,10 +841,9 @@
       }
     },
     {
-      "▲ GUAJARA-MIRIM": {
-        "latitude": "----",
-        "longitude": -5.167777777777778,
-        "track_mag": "0651652W"
+      "▲ GUAJARA-MIRIM NDB GJM": {
+        "latitude": -10.784444444444444,
+        "longitude": -65.28111111111112
       }
     }
   ],
@@ -904,7 +898,7 @@
     },
     {
       "▲ REBOB": {
-        "latitude": -1.288333333333333,
+        "latitude": 1.288333333333333,
         "longitude": -30.13611111111111,
         "track_mag": "041°",
         "rev_track_mag": "219°",
@@ -920,7 +914,7 @@
     },
     {
       "▲ RAKUD": {
-        "latitude": -3.408888888888889,
+        "latitude": 3.408888888888889,
         "longitude": -29.183888888888887
       }
     }
@@ -928,7 +922,7 @@
   "B681": [
     {
       "▲ GEMOL": {
-        "latitude": -4.356388888888889,
+        "latitude": 4.356388888888889,
         "longitude": -59.68722222222222,
         "track_mag": "230°",
         "rev_track_mag": "050°",
@@ -944,7 +938,7 @@
     },
     {
       "▲ PICOM": {
-        "latitude": -3.4094444444444445,
+        "latitude": 3.4094444444444445,
         "longitude": -60.31722222222223,
         "track_mag": "230°",
         "rev_track_mag": "050°",
@@ -959,10 +953,9 @@
       }
     },
     {
-      "▲ BOA VISTA": {
-        "latitude": "----",
-        "longitude": -25.16888888888889,
-        "track_mag": "0604113W"
+      "▲ BOA VISTA DVOR/DME BVI": {
+        "latitude": 2.852222222222222,
+        "longitude": -60.68694444444444
       }
     }
   ],
@@ -984,17 +977,16 @@
       }
     },
     {
-      "▲ FOZ": {
-        "latitude": "----",
-        "longitude": -53.833333333333336,
-        "track_mag": "0543013W"
+      "▲ FOZ VOR/DME FOZ": {
+        "latitude": -25.583333333333332,
+        "longitude": -54.50361111111111
       }
     }
   ],
   "G678": [
     {
       "▲ LA DIVINA PASTORA DVOR/DME LDP": {
-        "latitude": -4.6930555555555555,
+        "latitude": 4.6930555555555555,
         "longitude": -61.028888888888886,
         "track_mag": "185°",
         "rev_track_mag": "005°",
@@ -1010,7 +1002,7 @@
     },
     {
       "▲ AKTUM": {
-        "latitude": -3.511111111111111,
+        "latitude": 3.511111111111111,
         "longitude": -60.808055555555555,
         "track_mag": "185°",
         "rev_track_mag": "005°",
@@ -1026,7 +1018,7 @@
     },
     {
       "▲ BOA VISTA DVOR/DME BVI": {
-        "latitude": -2.852222222222222,
+        "latitude": 2.852222222222222,
         "longitude": -60.68694444444444,
         "track_mag": "190°",
         "rev_track_mag": "011°",
@@ -1042,7 +1034,7 @@
     },
     {
       "▲ NEVDU": {
-        "latitude": -2.1855555555555553,
+        "latitude": 2.1855555555555553,
         "longitude": -60.62361111111111,
         "track_mag": "191°",
         "rev_track_mag": "011°",
@@ -1073,28 +1065,27 @@
       }
     },
     {
-      "▲ MANAUS": {
-        "latitude": "----",
-        "longitude": -30.36777777777778,
-        "track_mag": "0600317W"
+      "▲ MANAUS DVOR/DME MNS": {
+        "latitude": -3.04,
+        "longitude": -60.05472222222222
       }
     }
   ],
   "G680": [
     {
-      "▲ BAGE": {
-        "latitude": "----",
-        "longitude": -12.535277777777777,
-        "track_mag": "0540635W",
-        "rev_track_mag": "261°",
-        "length": "081°",
-        "upper_limit": "21.9 NM",
-        "lower_limit": "FL245",
-        "MEA": "FL145",
-        "airspace_class": "150 FL",
-        "direction_of_cruising_levels_odd": "Classe/Class A",
-        "rnp_type": "NIL",
-        "RMK": "↑ ↓"
+      "▲ BAGE VOR BGE": {
+        "latitude": -31.390833333333333,
+        "longitude": -54.109722222222224,
+        "track_mag": "261°",
+        "rev_track_mag": "081°",
+        "length": "21.9 NM",
+        "upper_limit": "FL245",
+        "lower_limit": "FL145",
+        "MEA": "150 FL",
+        "airspace_class": "Classe/Class A",
+        "direction_of_cruising_levels_odd": "NIL",
+        "rnp_type": "↑ ↓",
+        "RMK": "NIL"
       }
     },
     {
@@ -1234,10 +1225,9 @@
       }
     },
     {
-      "▲ CANOAS": {
-        "latitude": "----",
-        "longitude": -96.16694444444445,
-        "track_mag": "0510845W"
+      "▲ CANOAS VOR/DME COA": {
+        "latitude": -29.950277777777778,
+        "longitude": -51.145833333333336
       }
     }
   ],
@@ -1276,7 +1266,7 @@
     },
     {
       "▲ VURTU": {
-        "latitude": -2.17,
+        "latitude": 2.17,
         "longitude": -50.7075,
         "track_mag": "346°",
         "rev_track_mag": "166°",
@@ -1291,10 +1281,9 @@
       }
     },
     {
-      "▲ OIAPOQUE": {
-        "latitude": "----",
-        "longitude": -35.218611111111116,
-        "track_mag": "0514800W"
+      "▲ OIAPOQUE NDB OIA": {
+        "latitude": 3.8602777777777777,
+        "longitude": -51.8
       }
     }
   ],
@@ -1397,7 +1386,7 @@
     },
     {
       "▲ RELES": {
-        "latitude": -0.38305555555555554,
+        "latitude": 0.38305555555555554,
         "longitude": -30.54138888888889,
         "track_mag": "041°",
         "rev_track_mag": "220°",
@@ -1413,7 +1402,7 @@
     },
     {
       "▲ BODAK": {
-        "latitude": -1.5986111111111112,
+        "latitude": 1.5986111111111112,
         "longitude": -29.99638888888889,
         "track_mag": "040°",
         "rev_track_mag": "219°",
@@ -1429,7 +1418,7 @@
     },
     {
       "▲ RAKUD": {
-        "latitude": -3.408888888888889,
+        "latitude": 3.408888888888889,
         "longitude": -29.183888888888887
       }
     }
@@ -1437,7 +1426,7 @@
   "UB681": [
     {
       "▲ GEMOL": {
-        "latitude": -4.356388888888889,
+        "latitude": 4.356388888888889,
         "longitude": -59.68722222222222,
         "track_mag": "230°",
         "rev_track_mag": "050°",
@@ -1453,7 +1442,7 @@
     },
     {
       "▲ PICOM": {
-        "latitude": -3.4094444444444445,
+        "latitude": 3.4094444444444445,
         "longitude": -60.31722222222223,
         "track_mag": "230°",
         "rev_track_mag": "050°",
@@ -1468,17 +1457,16 @@
       }
     },
     {
-      "▲ BOA VISTA": {
-        "latitude": "----",
-        "longitude": -25.16888888888889,
-        "track_mag": "0604113W"
+      "▲ BOA VISTA DVOR/DME BVI": {
+        "latitude": 2.852222222222222,
+        "longitude": -60.68694444444444
       }
     }
   ],
   "UG449": [
     {
       "▲ OTONI": {
-        "latitude": -2.6663888888888887,
+        "latitude": 2.6663888888888887,
         "longitude": -52.50055555555556,
         "track_mag": "153°",
         "rev_track_mag": "333°",
@@ -1494,7 +1482,7 @@
     },
     {
       "▲ SINOL": {
-        "latitude": -1.5038888888888888,
+        "latitude": 1.5038888888888888,
         "longitude": -51.30333333333333,
         "track_mag": "155°",
         "rev_track_mag": "335°",
@@ -1525,10 +1513,9 @@
       }
     },
     {
-      "▲ BELEM": {
-        "latitude": "----",
-        "longitude": -12.501111111111111,
-        "track_mag": "0482843W"
+      "▲ BELEM DVOR/DME BEL": {
+        "latitude": -1.3844444444444444,
+        "longitude": -48.478611111111114
       }
     }
   ],
@@ -1598,10 +1585,9 @@
       }
     },
     {
-      "▲ CANOAS": {
-        "latitude": "----",
-        "longitude": -96.16694444444445,
-        "track_mag": "0510845W"
+      "▲ CANOAS VOR/DME COA": {
+        "latitude": -29.950277777777778,
+        "longitude": -51.145833333333336
       }
     }
   ],
@@ -1655,27 +1641,26 @@
       }
     },
     {
-      "▲ SAO LUIS": {
-        "latitude": "----",
-        "longitude": -23.866944444444446,
-        "track_mag": "0441424W"
+      "▲ SAO LUIS DVOR/DME SLI": {
+        "latitude": -2.589166666666667,
+        "longitude": -44.24
       }
     }
   ],
   "W25": [
     {
-      "▲ SAO GABRIEL DA": {
-        "latitude": "----",
-        "longitude": "----",
-        "track_mag": "000901S",
-        "rev_track_mag": "0665926W",
-        "length": "157°",
-        "upper_limit": "337°",
-        "lower_limit": "27.0 NM",
-        "MEA": "FL245",
-        "airspace_class": "FL145",
-        "direction_of_cruising_levels_odd": "150 FL",
-        "rnp_type": "Classe/Class A",
+      "▲ SAO GABRIEL DA CACHOEIRA DVOR/DME GBR": {
+        "latitude": -0.15027777777777776,
+        "longitude": -66.99055555555556,
+        "track_mag": "157°",
+        "rev_track_mag": "337°",
+        "length": "27.0 NM",
+        "upper_limit": "FL245",
+        "lower_limit": "FL145",
+        "MEA": "150 FL",
+        "airspace_class": "Classe/Class A",
+        "direction_of_cruising_levels_odd": "NIL",
+        "rnp_type": "↓ ↑",
         "RMK": "NIL"
       }
     },
@@ -1696,10 +1681,9 @@
       }
     },
     {
-      "▲ TEFE": {
-        "latitude": "----",
-        "longitude": -32.51833333333333,
-        "track_mag": "0644341W"
+      "▲ TEFE VOR/DME TFE": {
+        "latitude": -3.3877777777777776,
+        "longitude": -64.72805555555556
       }
     }
   ],
@@ -1817,10 +1801,9 @@
       }
     },
     {
-      "▲ CAMPO GRANDE": {
-        "latitude": "----",
-        "longitude": -3.500277777777778,
-        "track_mag": "0544120W"
+      "▲ CAMPO GRANDE VOR/DME GRD": {
+        "latitude": -20.483611111111113,
+        "longitude": -54.68888888888888
       }
     }
   ],
@@ -2018,10 +2001,9 @@
       }
     },
     {
-      "▲ UBERABA": {
-        "latitude": "----",
-        "longitude": -94.91833333333334,
-        "track_mag": "0475733W"
+      "▲ UBERABA NDB URB": {
+        "latitude": -19.765555555555554,
+        "longitude": -47.95916666666667
       }
     }
   ],
@@ -2139,10 +2121,9 @@
       }
     },
     {
-      "▲ CURITIBA": {
-        "latitude": "----",
-        "longitude": -53.25138888888889,
-        "track_mag": "0491004W"
+      "▲ CURITIBA VOR/DME CTB": {
+        "latitude": -25.531944444444445,
+        "longitude": -49.16777777777777
       }
     }
   ],
@@ -2212,10 +2193,9 @@
       }
     },
     {
-      "▲ NORONHA": {
-        "latitude": "----",
-        "longitude": -35.20111111111111,
-        "track_mag": "0322548W"
+      "▲ NORONHA VOR/DME FNR": {
+        "latitude": -3.856666666666667,
+        "longitude": -32.43
       }
     }
   ],
@@ -2301,10 +2281,9 @@
       }
     },
     {
-      "▲ NORONHA": {
-        "latitude": "----",
-        "longitude": -35.20111111111111,
-        "track_mag": "0322548W"
+      "▲ NORONHA VOR/DME FNR": {
+        "latitude": -3.856666666666667,
+        "longitude": -32.43
       }
     }
   ],
@@ -2358,10 +2337,9 @@
       }
     },
     {
-      "▲ FORTALEZA": {
-        "latitude": "----",
-        "longitude": -35.03333333333333,
-        "track_mag": "0383252W"
+      "▲ FORTALEZA DVOR/DME FLZ": {
+        "latitude": -3.772222222222222,
+        "longitude": -38.547777777777775
       }
     }
   ],
@@ -2383,26 +2361,25 @@
       }
     },
     {
-      "▲ CAMPINA GRANDE": {
-        "latitude": "----",
-        "longitude": -71.91888888888889,
-        "track_mag": "0355334W",
-        "rev_track_mag": "154°",
-        "length": "334°",
-        "upper_limit": "77.5 NM",
-        "lower_limit": "FL245",
-        "MEA": "FL145",
-        "airspace_class": "150 FL",
-        "direction_of_cruising_levels_odd": "Classe/Class A",
-        "rnp_type": "NIL",
-        "RMK": "↓ ↑"
+      "▲ CAMPINA GRANDE NDB CPG": {
+        "latitude": -7.266111111111111,
+        "longitude": -35.89277777777778,
+        "track_mag": "154°",
+        "rev_track_mag": "334°",
+        "length": "77.5 NM",
+        "upper_limit": "FL245",
+        "lower_limit": "FL145",
+        "MEA": "150 FL",
+        "airspace_class": "Classe/Class A",
+        "direction_of_cruising_levels_odd": "NIL",
+        "rnp_type": "↓ ↑",
+        "RMK": "NIL"
       }
     },
     {
-      "▲ RECIFE": {
-        "latitude": "----",
-        "longitude": -81.35055555555554,
-        "track_mag": "0345538W"
+      "▲ RECIFE VOR/DME REC": {
+        "latitude": -8.136666666666667,
+        "longitude": -34.92722222222222
       }
     }
   ],
@@ -2856,10 +2833,12 @@
       }
     },
     {
-      "▲ FLORIANOPOLIS": {
-        "latitude": "----",
-        "longitude": -74.01722222222222,
-        "track_mag": "0483226W"
+      "▲ FLORIANOPOLIS VOR/DME FLN": {
+        "latitude": -27.67,
+        "longitude": -48.54055555555556,
+        "track_mag": "▲ FLORIANOPOLIS VOR/DME FLN",
+        "rev_track_mag": "274012S",
+        "length": "0483226W"
       }
     }
   ]

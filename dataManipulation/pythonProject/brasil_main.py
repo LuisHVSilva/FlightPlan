@@ -79,35 +79,34 @@ def add_class_in_object(obj, clss):
 """ 
     PART 1 
 """
-# brasil = Rotaer(rotaer_file)
-# initial_information = brasil.extract_information_rotaer()
-# brasil.array = initial_information
-# dictionary = brasil.create_dictionary()
+brasil = Rotaer(rotaer_file)
+initial_information = brasil.extract_information_rotaer()
+brasil.array = initial_information
+dictionary = brasil.create_dictionary()
 
 # Getting class of any AIRAC brazilian airport information
 airac = Airac(airac_file)
-# airport_class = airac.extract_airport_class(first_page=airport_class_first_page, last_page=airport_class_last_page)
+airport_class = airac.extract_airport_class(first_page=airport_class_first_page, last_page=airport_class_last_page)
 
 # Setting class in dictionary
-# dictionary = add_class_in_object(dictionary, airport_class)
-# JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
+dictionary = add_class_in_object(dictionary, airport_class)
+JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
 
 """
     PART 2  
 """
 # Getting ATC json
-# atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
-# JsonUtils(new_json_atc_file, atc_routes).create_json_file()
+atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
+JsonUtils(new_json_atc_file, atc_routes).create_json_file()
 
 # Getting RNAV json
 rnav_routes = airac.extract_airway_routes("rnav", rnav_first_page, rnav_last_page, 7)
 JsonUtils(new_json_rnav_file, rnav_routes).create_json_file()
 
 # Getting name code designators for significant points
-"""some_waypoints_coordinates = airac.extract_names_assigned_to_significant_points(
+some_waypoints_coordinates = airac.extract_names_assigned_to_significant_points(
     first_page=some_waypoints_coordinates_first_page,
     last_page=some_waypoints_coordinates_last_page
 )
 
 JsonUtils(new_json_some_waypoints_coordinates, some_waypoints_coordinates).create_json_file()
-"""

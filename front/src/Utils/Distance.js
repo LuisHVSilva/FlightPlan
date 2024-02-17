@@ -12,6 +12,10 @@ class Distance {
         return degrees * Math.PI / 180;
     }
 
+    radiansToDegrees(radians) {
+        return radians * (180 / Math.PI);
+    }
+
     // Métodos Públicos
 
     // Função para calcular a distância entre dois pontos geográficos usando a fórmula do haversine
@@ -33,6 +37,25 @@ class Distance {
         const haversineDistance = this.earthRadioKm * c;
 
         return haversineDistance;
+    }
+
+    great_Circle_Azimuth() {
+        const lat1 = this.coord1[0];
+        const lon1 = this.coord1[1];
+        const lat2 = this.coord2[0];
+        const lon2 = this.coord2[1];
+
+        const dLon = lon2 - lon1;
+
+        const x = Math.cos(this.degreesToRadians(lat2)) * Math.sin(this.degreesToRadians(dLon));
+        const y = Math.cos(this.degreesToRadians(lat1)) * Math.sin(this.degreesToRadians(lat2)) - Math.sin(this.degreesToRadians(lat1)) * Math.cos(this.degreesToRadians(lat2)) * Math.cos(this.degreesToRadians(dLon));
+
+        let theta = Math.atan2(x, y);
+
+        theta = this.radiansToDegrees(theta);
+        
+        return (theta + 360) % 360;
+
     }
 
 }

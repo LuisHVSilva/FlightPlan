@@ -50,7 +50,6 @@ def split_array(array):
         new_array.append(array[:index[0]])
 
     # Remover o primeiro elemento da lista de índices
-    index.pop(0)
     # Determinar o tamanho da lista de índices
     index_size = len(index)
     # Se houver mais de um índice

@@ -1,186 +1,218 @@
+import { useEffect, useState } from "react";
 import Distance from "../Utils/Distance";
 import TypeChecker from "../Utils/TypeChecker";
 
-function unifyObjects(ojbOne, objTwo) {
-    let obj = { ...ojbOne, ...objTwo }
-    let newObj = {};
-    for (const key in obj) {
-        const aid = Object.keys(obj[key])[0]
-        const aidValues = obj[key][aid]
-        if (!newObj.hasOwnProperty(aid)) {
-            newObj[aid] = aidValues
-        }
-    }
+// Hooks
+import useDataManipulation from "./useDataManipulation";
+import useJsonDataProvider from "./useJsonDataProvider";
 
-    return newObj
-}
-
-function sliceObject(obj, indexOne, indexTwo) {
-    if (indexOne < indexTwo) {
-        return Object.fromEntries(Object.entries(obj).slice(indexOne, indexTwo + 1));
-    } else {
-        return Object.fromEntries(Object.entries(obj).slice(indexTwo, indexOne + 1));
-    }
-}
-
-function getAllKeys(array) {
-    const keys = [];
-    for (const obj of array) {
-        for (const key in obj) {
-            keys.push(key);
-        }
-    }
-    return keys;
-}
-
-function contemElementoIgual(array1, array2) {
-    for (let elemento of array1) {
-        if (array2.includes(elemento)) {
-            return elemento;
-        }
-    }
-    return false;
-}
-
-function encontrarIndiceDoObjeto(chaveDesejada, array) {
-    for (let i = 0; i < array.length; i++) {
-        if (chaveDesejada in array[i]) {
-            return i;
-        }
-    }
-    return -1; // Retorna -1 se a chave não for encontrada
-}
+// Constants
+const URL_RNAV = '/data/rnav-Brasil.json';
+const URL_ATC = '/data/atc-Brasil.json';
+const URL_WAYPOINT_RESUME = '/data/some_waypoints_coordinates.json';
 
 const useAirRoutes = () => {
+    const [rnavData, setRnavData] = useState({})
+    const [atcData, setAtcData] = useState({})
+    const [waypointResumeData, setWaypointResumeData] = useState({})
+    const { getJsonData } = useJsonDataProvider();
+    const { flightLevelChange, containsSameElement, findIndexOfObject, sliceObject, sortByDistance } = useDataManipulation();
 
-    const getRouteUpRight = (departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav) => {
-        const departureCoordinates = [departureLatitude, departureLongitude]
-        const arriveCoordinates = [arriveLatitude, arriveLongitude]
+    // 4. useEffect
+    useEffect(() => {
+        const fetchData = async () => {
+            const rnav = await getJsonData(URL_RNAV);
+            const atc = await getJsonData(URL_ATC)
+            const waypoitResume = await getJsonData(URL_WAYPOINT_RESUME);
 
-        let departureDistance = Infinity
-        let departureAidName;
-        let departureVia; // Variável para armazenar os dados das departureVia
-        let keysArray1;
+            setRnavData(rnav);
+            setWaypointResumeData(waypoitResume);
+            setAtcData(atc);
+        };
 
-        let arriveDistance = Infinity
-        let arriveAidName;
-        let arriveVia;
-        let aidIntersection
+        fetchData();
+    }, []);
 
-        Object.keys(rnav).forEach(rnavKeys => {
-            Object.values(rnav[rnavKeys]).forEach(value => {
-                let waypoint = Object.keys(value)
+    // Internal functions
+    const processWaypoint = (departureCoordinates, arriveCoordinates, flightLevel, data) => {
+        let departureDistance = Infinity;
+        let arriveDistance = Infinity;
+        let closestAid = { "departure": [], "arrive": [] }
+        let departureAidName = null;
+        let arriveAidName = null
 
-                // Obter a longitudeDeparture e a latitudeDeparture do waypoint
-                const longitudeDeparture = value[waypoint].longitude
-                const latitudeDeparture = value[waypoint].latitude
-                const longitudeDepartureFloat = new TypeChecker().isFloat(longitudeDeparture)
-                const latitudeDepartureFloat = new TypeChecker().isFloat(latitudeDeparture)
+        Object.keys(data).forEach(dataKeys => {
+            Object.values(data[dataKeys]).forEach(value => {
+                let waypoint = Object.keys(value);
 
-                // Verifica se tanto a longitudeDeparture quanto a latitudeDeparture são valores numéricos (flutuantes)
-                if (longitudeDepartureFloat && latitudeDepartureFloat) {
-                    // Calcula a distância entre o result de partida e o waypoint atual usando a função haversineDistance
-                    const newDistance = new Distance(departureCoordinates, [latitudeDeparture, longitudeDeparture]).haversineDistance()
-                    // Verifica se a distância calculada é menor que a variável 'distance'
+                const latitude = value[waypoint].latitude;
+                const isFloatLatitude = new TypeChecker().isFloat(latitude);
 
-                    // Aqui pensar que quando for igual, pode adicionar como uma via alternativa
-                    if (newDistance < departureDistance) {
-                        // Se sim, atualize o valor de 'distance' para a nova distância
-                        departureDistance = newDistance
-                        // Atualiza o waypoint mais próximo
-                        departureAidName = waypoint[0]
-                        departureVia = Object.values(rnav[rnavKeys]);
-                        keysArray1 = getAllKeys(departureVia);
+                const longitude = value[waypoint].longitude;
+                const isFloatLongitude = new TypeChecker().isFloat(longitude);
 
-                    }
-                }
+                const upperLimite = flightLevelChange(value[waypoint].upper_limit);
+                const lowerLimite = flightLevelChange(value[waypoint].lower_limit);
 
-                const longitudeArrive = value[waypoint].longitude
-                const latitudeArrive = value[waypoint].latitude
-                const longitudeArrriveFloat = new TypeChecker().isFloat(longitudeArrive)
-                const latitudeArrriveFloat = new TypeChecker().isFloat(latitudeArrive)
+                if (isFloatLatitude && isFloatLongitude) {
+                    const newDepartureDistance = new Distance(departureCoordinates, [latitude, longitude]).haversineDistance();
+                    const newArriveDistance = new Distance(arriveCoordinates, [latitude, longitude]).haversineDistance();
+                    if (flightLevel != Infinity) {
 
-                if (longitudeArrriveFloat && latitudeArrriveFloat) {
-                    // Calcula a distância entre o result de partida e o waypoint atual usando a função haversineDistance
-                    const newDistanceArrive = new Distance(arriveCoordinates, [latitudeArrive, longitudeArrive]).haversineDistance()
-                    // Verifica se a distância calculada é menor que a variável 'distance'
-                    if (newDistanceArrive <= arriveDistance) {
-                        // Se sim, atualize o valor de 'distance' para a nova distância
-                        arriveDistance = newDistanceArrive
-                        // Atualiza o waypoint mais próximo
-                        arriveAidName = waypoint[0]
+                        if (newDepartureDistance <= departureDistance && flightLevel > lowerLimite && flightLevel < upperLimite) {
+                            departureDistance = newDepartureDistance
+                            departureAidName = waypoint[0]
 
-                        // Aqui tem que procurar um fixo que tem em comum com a via de cima e que tambem tenha o arriveAidName                                                
-                        const keysArray2 = getAllKeys(rnav[rnavKeys]);
+                            if (!closestAid["departure"].hasOwnProperty(departureAidName)) {
+                                closestAid["departure"][[departureAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
+                            } else {
+                                closestAid["departure"][[departureAidName]][[dataKeys]] = Object.values(data[dataKeys])
+                            }
+                        }
 
-                        if (contemElementoIgual(keysArray1, keysArray2) && latitudeArrive < arriveCoordinates[0] && longitudeArrive < arriveCoordinates[0]) {
-                            arriveVia = rnav[rnavKeys]
-                            aidIntersection = contemElementoIgual(keysArray1, keysArray2)
+                        if (newArriveDistance <= arriveDistance && flightLevel > lowerLimite && flightLevel < upperLimite) {
+                            arriveDistance = newArriveDistance
+                            arriveAidName = waypoint[0]
+
+                            if (!closestAid["arrive"].hasOwnProperty(arriveAidName)) {
+                                closestAid["arrive"][[arriveAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
+                            } else {
+                                closestAid["arrive"][[arriveAidName]][[dataKeys]] = Object.values(data[dataKeys])
+                            }
+                        }
+
+                    } else {
+                        if (newDepartureDistance <= departureDistance) {
+                            departureDistance = newDepartureDistance
+                            departureAidName = waypoint[0]
+
+                            if (!closestAid["departure"].hasOwnProperty(departureAidName)) {
+                                closestAid["departure"][[departureAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
+                            } else {
+                                closestAid["departure"][[departureAidName]][[dataKeys]] = Object.values(data[dataKeys])
+                            }
+                        }
+
+                        if (newArriveDistance <= arriveDistance) {
+                            arriveDistance = newArriveDistance
+                            arriveAidName = waypoint[0]
+
+                            if (!closestAid["arrive"].hasOwnProperty(arriveAidName)) {
+                                closestAid["arrive"][[arriveAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
+                            } else {
+                                closestAid["arrive"][[arriveAidName]][[dataKeys]] = Object.values(data[dataKeys])
+                            }
                         }
                     }
                 }
             })
         })
 
-        // Separar os objetos de departureVia e arriveVia para pegar só os fixos que correspondem à rota
-        const departureAidIndex = encontrarIndiceDoObjeto(departureAidName, departureVia);
-        const departureIntersectionIndex = encontrarIndiceDoObjeto(aidIntersection, departureVia);
-        const departureToArrive = sliceObject(departureVia, departureAidIndex, departureIntersectionIndex);
+        let via = {};
+        via["departure"] = Object.entries(closestAid.departure)
+            .filter(([chave, valor]) => chave === departureAidName)
+            .map(([chave, valor]) => ({ [chave]: valor }));
 
-        const arriveAidIndex = encontrarIndiceDoObjeto(arriveAidName, arriveVia)
-        const arriveIntersectionIndex = encontrarIndiceDoObjeto(aidIntersection, arriveVia)
-        const arriveToDeparture = sliceObject(arriveVia, arriveAidIndex, arriveIntersectionIndex);
+        via["arrive"] = Object.entries(closestAid.arrive)
+            .filter(([chave, valor]) => chave === arriveAidName)
+            .map(([chave, valor]) => ({ [chave]: valor }));
 
-
-        // Juntar os dois objetos (departureToArrive | arriveToDeparture) de acordo com a 
-        const route = unifyObjects(departureToArrive, arriveToDeparture)
-
-        return route;
+        return via;
     }
 
-    const teste = (departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav) => {
-        const departureCoordinates = [departureLatitude, departureLongitude]
+    // External Functions
+    const getRouteUpRight = (departureCoordinates, arriveCoordinates, flightLevel) => {
+        const route = {};
+        let routeIndex = 0;
 
-        let departureDistance = Infinity
-        let departureAidName;
-        let departureVia; // Variável para armazenar os dados das departureVia        
-        const departureViaObject = {};
+        console.clear()
+        flightLevel = flightLevelChange(flightLevel);
 
-        Object.keys(rnav).forEach(rnavKeys => {
-            Object.values(rnav[rnavKeys]).forEach(value => {
-                let waypoint = Object.keys(value)
+        const closestAid = processWaypoint(departureCoordinates, arriveCoordinates, flightLevel, rnavData)
 
-                // Obter a longitudeDeparture e a latitudeDeparture do waypoint
-                const longitudeDeparture = value[waypoint].longitude
-                const latitudeDeparture = value[waypoint].latitude
-                const longitudeDepartureFloat = new TypeChecker().isFloat(longitudeDeparture)
-                const latitudeDepartureFloat = new TypeChecker().isFloat(latitudeDeparture)
+        const firstAid = Object.keys(closestAid.departure[0])[0];
+        const lastAid = Object.keys(closestAid.arrive[0])[0];
 
-                // Verifica se tanto a longitudeDeparture quanto a latitudeDeparture são valores numéricos (flutuantes)
-                if (longitudeDepartureFloat && latitudeDepartureFloat) {
-                    // Calcula a distância entre o result de partida e o waypoint atual usando a função haversineDistance
-                    const newDistance = new Distance(departureCoordinates, [latitudeDeparture, longitudeDeparture]).haversineDistance()
-                    // Verifica se a distância calculada é menor que a variável 'distance'
+        const departureViaOptions = closestAid.departure[0][firstAid]
+        const arriveViaOptions = closestAid.arrive[0][lastAid]
 
-                    // Aqui pensar que quando for igual, pode adicionar como uma via alternativa
-                    if (newDistance <= departureDistance) {
-                        // Se sim, atualize o valor de 'distance' para a nova distância
-                        departureDistance = newDistance
-                        // Atualiza o waypoint mais próximo
-                        departureAidName = waypoint[0]
-                        departureVia = Object.values(rnav[rnavKeys]);
-                        departureViaObject[rnavKeys] = departureAidName
-                    }
+        // const firstAidData = Object.keys(departureViaOptions).map(key => departureViaOptions[key].find(obj => firstAid in obj))[0][firstAid];
+        // const lastAidData = Object.keys(arriveViaOptions).map(key => arriveViaOptions[key].find(obj => lastAid in obj))[0][lastAid];
+
+        for (const arriveVia in arriveViaOptions) {
+            const arriveKeys = []
+
+            for (const arriveAid in arriveViaOptions[arriveVia]) {
+                const keys = Object.keys(arriveViaOptions[arriveVia][arriveAid])[0]
+                arriveKeys.push(keys)
+            }
+
+            for (const departureVia in departureViaOptions) {
+                const departureKeys = []
+
+                for (const departureAid in departureViaOptions[departureVia]) {
+                    const keys = Object.keys(departureViaOptions[departureVia][departureAid])[0]
+                    departureKeys.push(keys)
                 }
-            })
-        })
 
-        // Pegar as vias que passam mais perto do fixo do aeroporto. 
-        const chavesFiltradas = Object.keys(departureViaObject).filter(chave => departureViaObject[chave] === departureAidName);         
+                const cwf = containsSameElement(arriveKeys, departureKeys)
+
+                if (cwf) {
+                    // Colocar a via do lado de cada ponto                        
+                    const firstAidIndex = findIndexOfObject(departureViaOptions[departureVia], firstAid);
+                    const departureCommonWaypointIndex = findIndexOfObject(departureViaOptions[departureVia], cwf)
+                    const departureToArrive = sliceObject(departureViaOptions[departureVia], firstAidIndex, departureCommonWaypointIndex);
+                    // Object.assign(departureToArrive, firstAidData)
+
+                    const lastAidIndex = findIndexOfObject(arriveViaOptions[arriveVia], lastAid);
+                    const arriveCommonWaypointIndex = findIndexOfObject(arriveViaOptions[arriveVia], cwf)
+                    const arriveToDeparture = sliceObject(arriveViaOptions[arriveVia], lastAidIndex, arriveCommonWaypointIndex);
+                    const lastAidData = Object.values(arriveViaOptions[arriveVia]).find(object => lastAid in object)
+                    Object.assign(arriveToDeparture, lastAidData)
+
+                    const cwfValues = Object.values(departureViaOptions[departureVia]).find(object => cwf in object)
+                    const { [cwf]: waypointValue } = cwfValues;
+
+                    route[[routeIndex]] = {
+                        "departure": { via: departureVia, route: departureToArrive },
+                        "arrive": { via: arriveVia, route: arriveToDeparture },
+                        "cwf": { waypoint: cwf, latitude: waypointValue.latitude, longitude: waypointValue.longitude }
+                    }
+                    routeIndex++
+                }
+            }
+        }
+
+        for (const index in route) {
+            const cwf = route[index].cwf;
+            route[index].departure.route = sortByDistance(route[index].departure.route, departureCoordinates);            
+            
+            delete route[index].arrive.route[cwf.waypoint]                    
+            route[index].arrive.route = sortByDistance(route[index].arrive.route, [cwf.latitude, cwf.longitude]);
+            
+            delete route[index].cwf
+            route[index] = Object.values(route[index])            
+        }        
+                
+        return route
     }
 
-    return { getRouteUpRight, teste }
+    return { getRouteUpRight }
 }
 
 export default useAirRoutes
 
+// Partindo do primeiro ponto de departure
+// const initialLatitude = getValueFromObject(departureViaOptions[departureVia], firstAid, "latitude");
+// const initialLongitude = getValueFromObject(departureViaOptions[departureVia], firstAid, "longitude");
+// const initialTrackmag = getValueFromObject(departureViaOptions[departureVia], firstAid, "track_mag");
+// const initialReverseTrackMag = getValueFromObject(departureViaOptions[departureVia], firstAid, "rev_track_mag");
+
+// const distances = Object.entries(departureToArrive).map(([key, value]) => {
+//     const { latitude, longitude } = value;
+//     const distance = new Distance([initialLatitude, initialLongitude], [latitude, longitude]).haversineDistance();
+//     return { key, distance };
+// });
+
+// const sortedDistances = distances.sort((a, b) => a.distance - b.distance);
+// const sortedObjects = sortedDistances.map(({ key }) => ({ [key]: departureToArrive[key] }));

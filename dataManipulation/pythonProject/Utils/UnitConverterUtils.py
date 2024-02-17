@@ -2,35 +2,52 @@ class Converter(object):
     def __init__(self, longitude=None, latitude=None):
         self.longitude = longitude
         self.latitude = latitude
+        self.south = "S"
+        self.west = "W"
 
     def coordinates_dms_to_dd(self):
-        degrees, minutes, seconds, coordinate = 0, 0, 0, 0
+        degrees, minutes, seconds = 0, 0, 0
+        direction = ""
 
         if self.latitude:
-            coordinate = self.latitude[:-1]
+            if "S" in self.latitude:
+                latitude_direction_index = self.latitude.index("S")
+            else:
+                latitude_direction_index = self.latitude.index("N")
+
+            coordinate = self.latitude[:latitude_direction_index]
+            direction = self.latitude[latitude_direction_index]
             degrees = coordinate[0:2]
             minutes = coordinate[2:4]
-            seconds = coordinate[4:6]
-
-            if "S" in self.latitude:
-                degrees = f"-{degrees}"
+            seconds = coordinate[4:]
 
         if self.longitude:
-            coordinate = self.longitude[:-1]
-            degrees = coordinate[1:3]
-            minutes = coordinate[3:5]
-            seconds = coordinate[5:7]
-
             if "W" in self.longitude:
-                degrees = f"-{degrees}"
+                longitude_direction_index = self.longitude.index("W")
+            else:
+                longitude_direction_index = self.longitude.index("E")
 
-        # Ponto no segundo
-        if "." in coordinate:
-            if coordinate.index(".") == 6:
-                second_fraction = coordinate.split(".")[1]
-                seconds = f"{seconds}.{second_fraction}"
+            coordinate = self.longitude[:longitude_direction_index]
+            direction = self.longitude[longitude_direction_index]
+            degrees = coordinate[0:3]
+            minutes = coordinate[3:5]
+            seconds = coordinate[5:]
+
+        # Convertendo os segundos decimais
+        if "." in seconds:
+            seconds, second_fraction = seconds.split(".")
+            seconds = float(seconds) + float("0." + second_fraction)
+        elif "," in seconds:
+            seconds, second_fraction = seconds.split(",")
+            seconds = float(seconds) + float("0." + second_fraction)
+        else:
+            seconds = float(seconds)
 
         try:
-            return float(degrees) + (float(minutes) / 60.0) + (float(seconds) / 3600.0)
+            dd = float(degrees) + (float(minutes) / 60.0) + (seconds / 3600.0)
+            if direction in [self.south, self.west]:
+                dd *= -1
+
+            return dd
         except ValueError:
             return "----"

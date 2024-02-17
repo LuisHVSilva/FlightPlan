@@ -5,6 +5,7 @@ import Input from './form/Input'
 import Select from './form/Select';
 import SearchAirports from './SearchAirports';
 import BrazilMap from './BrazilMap';
+import Routes from './Routes';
 
 // Context
 import { DisplayOptionContext } from '../context/DisplayOptionContext';
@@ -15,84 +16,39 @@ import useAirRoutes from '../hooks/useAirRoutes';
 
 // Constants
 const URL_ROTAER = '/data/rotaer_completo.json';
-const URL_RNAV = '/data/rnav-Brasil.json';
-const URL_ATC = '/data/atc-Brasil.json';
-const URL_WAYPOINT_RESUME = '/data/some_waypoints_coordinates.json';
 
 const FlightPlan = () => {
     // 1. useState
     // 1.1 Datas    
     const [rotaerData, setRotaerData] = useState({});
-    const [rnavData, setRnavData] = useState({})
-    const [waypointResumeData, setWaypointResumeData] = useState({})
-    const [atcData, setAtcData] = useState({})
 
     // 1.2 Variables
     const [departure, setDeparture] = useState("SBMG")
     const [arrive, setArrive] = useState("SBLO")
-    const [flightLevel, setFlightLevel] = useState()
+
+    const [flightLevel, setFlightLevel] = useState("")
+    const [flightType, setFlightType] = useState("ATC")
     const [inputChange, setInputChange] = useState("")
     const [departureCoordinates, setDepartureCoordinates] = useState([])
+
     const [arriveCoordinates, setArriveCoordinates] = useState([])
-    const [route, setRoute] = useState({})
-    const [routeDisplay, setRouteDisplay] = useState({ display: "none" })
+
+    const [routes, setRoutes] = useState({})
+    const [routesDisplay, setRoutesDisplay] = useState({ display: "none" })
 
     // 2. Context
     const { setDisplay } = useContext(DisplayOptionContext)
 
     // 3. Hook
     const { getJsonData } = useJsonDataProvider();
-    const { getRouteUpRight, teste } = useAirRoutes();
-
-    // Initial Functions    
-    const constructFlightLevel = (data) => {
-        const flightLevel = new Set();
-
-        Object.values(data).forEach(obj => {
-            Object.values(obj).forEach(value => {
-                Object.values(value).forEach(v => {
-                    if (v.upper_limit) {
-                        if (!v.upper_limit.includes("°") && !v.upper_limit.includes(" ") && !v.upper_limit.includes("UNL")) {
-                            flightLevel.add(v.upper_limit)
-                        }
-                    }
-                })
-            })
-        });
-
-        let sortedAltitudes = Array.from(flightLevel)
-            .map(altitude => parseInt(altitude.replace("FL", "")))
-            .sort((a, b) => a - b)
-            .map(altitude => "FL" + altitude.toString().padStart(3, "0"));
-
-        sortedAltitudes.push("Sem limite")
-        const result = []
-        for (let level of sortedAltitudes) {
-            const obj = {}
-            obj["value"] = level
-            obj["label"] = level
-            result.push(obj)
-        }
-
-        return result
-    }
-
+    const { getRouteUpRight } = useAirRoutes();
 
     // 4. useEffect
     useEffect(() => {
         const fetchData = async () => {
             const rotaer = await getJsonData(URL_ROTAER);
-            const rnav = await getJsonData(URL_RNAV);
-            const atc = await getJsonData(URL_ATC)
-            const waypoitResume = await getJsonData(URL_WAYPOINT_RESUME);
 
             setRotaerData(rotaer);
-            setRnavData(rnav);
-            setWaypointResumeData(waypoitResume);
-            setAtcData(atc);
-
-            const flightLevel = constructFlightLevel({ ...rnav, ...atc })
-            setFlightLevel(flightLevel)
         };
 
         fetchData();
@@ -100,15 +56,16 @@ const FlightPlan = () => {
 
     // 5. Internal Functions
 
-    const getRoute = (departureLatitude, departureLongitude, arriveLatitude, arriveLongitude) => {
-        const a = teste(departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnavData);
+    const getRoute = (departureCoordinates, arriveCoordinates) => {
+        const departureLatitude = departureCoordinates[0];
+        const departureLongitude = departureCoordinates[1];
+        const arriveLatitude = arriveCoordinates[0];
+        const arriveLongitude = arriveCoordinates[1];
 
         // Subindo | Direita
-        // if (departureLatitude < arriveLatitude && departureLongitude < arriveLongitude) {            
-        //     // const a = getRouteUpRight(departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav);            
-        //     const a = teste(departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, rnav);
-        //     return a;
-        // }
+        if (departureLatitude < arriveLatitude && departureLongitude < arriveLongitude) {
+            return getRouteUpRight(departureCoordinates, arriveCoordinates, flightLevel);
+        }
 
         // Subindo | Esquerda
         // if (departureLatitude < arriveLatitude && departureLongitude > arriveLongitude)
@@ -139,17 +96,18 @@ const FlightPlan = () => {
     }
 
     const handleClickFlightPlan = () => {
-        // setRouteDisplay({ display: "flex" })
+        // setRoutesDisplay({ display: "flex" })
 
-        let departureLatitude, departureLongitude, arriveLatitude, arriveLongitude, departureCity;
+        let departureLatitude, departureLongitude, arriveLatitude, arriveLongitude;
 
         if (!departure) {
-            setRouteDisplay({ display: "none" })
+            setRoutesDisplay({ display: "none" })
             console.log("Falta a saída");
             return;
         }
+
         if (!arrive) {
-            setRouteDisplay({ display: "none" })
+            setRoutesDisplay({ display: "none" })
             console.log("Falta a chegada");
             return;
         }
@@ -170,19 +128,17 @@ const FlightPlan = () => {
             }
         }
 
-        if (departureLatitude && arriveLatitude) {
-            console.log(departure)
+        if (departureCoordinates && arriveCoordinates) {
+            setDepartureCoordinates([departureLatitude, departureLongitude])
+            setArriveCoordinates([arriveLatitude, arriveLongitude])
 
-            const route = getRoute(departureLatitude, departureLongitude, arriveLatitude, arriveLongitude)
+            setRoutes(getRoute(departureCoordinates, arriveCoordinates))
 
-            // setDepartureCoordinates([departureLatitude, departureLongitude])
-            // setArriveCoordinates([arriveLatitude, arriveLongitude])
-            // setRoute(route)
         } else {
             console.log("Não foi possível encontrar as coordenadas de partida e chegada.");
         }
 
-        setRouteDisplay({ display: "none" })
+        setRoutesDisplay({ display: "none" })
     }
 
     const handleOnChangeDeparture = (event) => {
@@ -194,14 +150,12 @@ const FlightPlan = () => {
     }
 
     const handleOnChangeFlightLevel = (event) => {
-        console.log(event.target.value)
+        setFlightLevel(event.target.value)
     }
 
-    // Preciso definir a altitude do voo de cruzeiro, com isso da para decidir quais serão os pontos que aceitam essa altura.
-    // A logica pra descobrir um traçado de voo pode ser feita pelas vias.
-    // Monta um dicionario reduzido com as vias do some_waypoints_coordinates e ai, pegando o fixo de saida 
-    // e pegando o fixo de chegada, da para montar um logica em que os pontos unem as vias em comum.
-    // Pegando a via em comum, gera um outro dicionario dessa via de ligação com os pontos que serão usados
+    const handleOnChangeFlightType = (event) => {
+        setFlightType(event.target.value)
+    }
 
     return (
         <main id="flight-plan">
@@ -230,17 +184,25 @@ const FlightPlan = () => {
                     searchButton={handleClickSearchButton}
                 />
 
+                <Input
+                    text="Altura de cruzeiro:"
+                    name="flight-level"
+                    type="text"
+                    value={flightLevel}
+                    handleOnChange={handleOnChangeFlightLevel}
+                />
+
                 <Select
                     text="Tipo de voo"
-                    name="flight-level"
-                    options={flightLevel}
-                    handleChange={handleOnChangeFlightLevel}
+                    name="flight-type"
+                    options={[{ value: "rnav", label: "Voo RNAV" }, { value: "atc", label: "Voo ATC" }]}
+                    handleChange={handleOnChangeFlightType}
                 />
 
                 <button onClick={handleClickFlightPlan}>Gerar</button>
             </div>
 
-            {/* <SearchAirports
+            <SearchAirports
                 data={rotaerData}
                 setDeparture={setDeparture}
                 setArrive={setArrive}
@@ -250,15 +212,49 @@ const FlightPlan = () => {
             <BrazilMap
                 departureCoordinates={departureCoordinates}
                 arriveCoordinates={arriveCoordinates}
-                route={route}
-                routeDisplay={routeDisplay}
+                routes={routes}
+                routesDisplay={routesDisplay}
             />
 
             <h1>SBMG</h1>
-            <h1>SBLO</h1> */}
+            <h1>SBLO</h1>
         </main>
     );
 };
 
 
 export default FlightPlan;
+
+
+// // Initial Functions
+// const constructFlightLevel = (data) => {
+//     const flightLevel = new Set();
+
+//     Object.values(data).forEach(obj => {
+//         Object.values(obj).forEach(value => {
+//             Object.values(value).forEach(v => {
+//                 if (v.upper_limit) {
+//                     if (!v.upper_limit.includes("°") && !v.upper_limit.includes(" ") && !v.upper_limit.includes("UNL")) {
+//                         flightLevel.add(v.upper_limit)
+//                     }
+//                 }
+//             })
+//         })
+//     });
+
+//     let sortedAltitudes = Array.from(flightLevel)
+//         .map(altitude => parseInt(altitude.replace("FL", "")))
+//         .sort((a, b) => a - b)
+//         .map(altitude => "FL" + altitude.toString().padStart(3, "0"));
+
+//     sortedAltitudes.push("Sem limite")
+//     const result = []
+//     for (let level of sortedAltitudes) {
+//         const obj = {}
+//         obj["value"] = level
+//         obj["label"] = level
+//         result.push(obj)
+//     }
+
+//     return result
+// }
