@@ -81,6 +81,7 @@ def add_class_in_object(obj, clss):
 """
 brasil = Rotaer(rotaer_file)
 initial_information = brasil.extract_information_rotaer()
+
 brasil.array = initial_information
 dictionary = brasil.create_dictionary()
 
@@ -96,7 +97,7 @@ JsonUtils(new_json_rotaer_file, dictionary).create_json_file()
     PART 2  
 """
 # Getting ATC json
-atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
+"""atc_routes = airac.extract_airway_routes("atc", atc_first_page, atc_last_page, 6)
 JsonUtils(new_json_atc_file, atc_routes).create_json_file()
 
 # Getting RNAV json
@@ -110,3 +111,4 @@ some_waypoints_coordinates = airac.extract_names_assigned_to_significant_points(
 )
 
 JsonUtils(new_json_some_waypoints_coordinates, some_waypoints_coordinates).create_json_file()
+"""

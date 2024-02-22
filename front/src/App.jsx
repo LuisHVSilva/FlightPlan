@@ -5,14 +5,17 @@ import './style/main.sass'
 
 // Context
 import { DisplayOptionProvider } from "./context/DisplayOptionContext"
+import { ChosenRouteProvider } from "./context/ChosenRouteContext"
 
 function App() {
 
   return (
     <>
-      <DisplayOptionProvider>
-        <FlightPlan />
-      </DisplayOptionProvider>
+      <ChosenRouteProvider>
+        <DisplayOptionProvider>
+          <FlightPlan />
+        </DisplayOptionProvider>
+      </ChosenRouteProvider>
     </>
   )
 }

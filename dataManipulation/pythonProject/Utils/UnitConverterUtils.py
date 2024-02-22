@@ -10,25 +10,27 @@ class Converter(object):
         direction = ""
 
         if self.latitude:
-            if "S" in self.latitude:
-                latitude_direction_index = self.latitude.index("S")
+            latitude = self.latitude.upper()
+            if "S" in self.latitude.upper():
+                latitude_direction_index = latitude.index("S")
             else:
-                latitude_direction_index = self.latitude.index("N")
+                latitude_direction_index = latitude.index("N")
 
-            coordinate = self.latitude[:latitude_direction_index]
-            direction = self.latitude[latitude_direction_index]
+            coordinate = latitude[:latitude_direction_index]
+            direction = latitude[latitude_direction_index]
             degrees = coordinate[0:2]
             minutes = coordinate[2:4]
             seconds = coordinate[4:]
 
         if self.longitude:
-            if "W" in self.longitude:
-                longitude_direction_index = self.longitude.index("W")
+            longitude = self.longitude.upper()
+            if "W" in self.longitude.upper():
+                longitude_direction_index = longitude.index("W")
             else:
-                longitude_direction_index = self.longitude.index("E")
+                longitude_direction_index = longitude.index("E")
 
-            coordinate = self.longitude[:longitude_direction_index]
-            direction = self.longitude[longitude_direction_index]
+            coordinate = longitude[:longitude_direction_index]
+            direction = longitude[longitude_direction_index]
             degrees = coordinate[0:3]
             minutes = coordinate[3:5]
             seconds = coordinate[5:]

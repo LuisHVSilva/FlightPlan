@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Distance from "../Utils/Distance";
+import AeroMath from "../Utils/AeroMath";
+import FlightNavigator from "../Utils/FlightNavigator";
 import TypeChecker from "../Utils/TypeChecker";
 
 // Hooks
@@ -33,16 +34,152 @@ const useAirRoutes = () => {
         fetchData();
     }, []);
 
-    // Internal functions
-    const processWaypoint = (departureCoordinates, arriveCoordinates, flightLevel, data) => {
-        let departureDistance = Infinity;
-        let arriveDistance = Infinity;
-        let closestAid = { "departure": [], "arrive": [] }
-        let departureAidName = null;
-        let arriveAidName = null
 
-        Object.keys(data).forEach(dataKeys => {
-            Object.values(data[dataKeys]).forEach(value => {
+    // Internal functions
+    function commonWaypoint(departureWaypointCoordinates, arrivalWaypointCoordinates, departureWaypoints, arrivalWaypoints, departureVia, arrivalVia, firstWaypoint, firstWaypointValues, lastWaypoint, lastWaypointValues) {
+        const cwf = containsSameElement(Object.keys(departureWaypoints), Object.keys(arrivalWaypoints));
+
+
+
+        if (cwf) {
+            const cwfRoute = {};
+            const { latitude: cwfLatitude, longitude: cwfLongitude } = departureWaypoints[cwf];
+
+            // Calcular a distancia entre o primeiro e o ultimo ponto
+            const departureToArrivalDistance = new AeroMath(departureWaypointCoordinates, arrivalWaypointCoordinates).haversineDistance()
+
+            // Distancia entre o ponto em comum e o aeroporto de saida
+            const cwfDepartureDistance = new AeroMath(departureWaypointCoordinates, [cwfLatitude, cwfLongitude]).haversineDistance();
+
+            if (cwfDepartureDistance > departureToArrivalDistance) {
+                return false
+            }
+
+            // Departure
+            // const cwfDepartureDistance = new AeroMath(departureWaypointCoordinates, [cwfLatitude, cwfLongitude]).haversineDistance();
+            for (const waypointName in departureWaypoints) {
+                const waypointValue = departureWaypoints[waypointName];
+                const { latitude, longitude } = waypointValue
+                const waypointDistance = new AeroMath(departureWaypointCoordinates, [latitude, longitude]).haversineDistance();
+
+                if (waypointDistance <= cwfDepartureDistance) {
+                    cwfRoute[departureVia] = { ...cwfRoute[departureVia], [waypointName]: waypointValue }
+                }
+            }
+
+            // Arrival
+            // Distancia entre o ponto em comum e o aeroporto de chegada
+            const cwfArrivalDistance = new AeroMath(arrivalWaypointCoordinates, [cwfLatitude, cwfLongitude]).haversineDistance();
+            for (const waypointName in arrivalWaypoints) {
+                const waypointValue = arrivalWaypoints[waypointName];
+                const { latitude, longitude } = waypointValue
+                const waypointDistance = new AeroMath(arrivalWaypointCoordinates, [latitude, longitude]).haversineDistance();
+
+                if (waypointDistance <= cwfArrivalDistance) {
+                    cwfRoute[arrivalVia] = { ...cwfRoute[arrivalVia], [waypointName]: waypointValue }
+                }
+            }
+
+
+            // Adicionando ponto de partida e ponto chegada nas aerovias
+            if (departureVia != arrivalVia) {
+                cwfRoute[departureVia] = { ...cwfRoute[departureVia], [firstWaypoint]: firstWaypointValues[firstWaypoint] }
+                cwfRoute[departureVia] = sortByDistance(firstWaypointValues[firstWaypoint], cwfRoute[departureVia])
+                cwfRoute[arrivalVia] = { ...cwfRoute[arrivalVia], [lastWaypoint]: lastWaypointValues[lastWaypoint] }
+                cwfRoute[arrivalVia] = sortByDistance(cwfRoute[arrivalVia][cwf], cwfRoute[arrivalVia])
+            }
+
+            if (departureVia === arrivalVia) {
+                cwfRoute[departureVia] = { ...cwfRoute[departureVia], [firstWaypoint]: firstWaypointValues[firstWaypoint] }
+                cwfRoute[arrivalVia] = { ...cwfRoute[arrivalVia], [lastWaypoint]: lastWaypointValues[lastWaypoint] }
+                cwfRoute[departureVia] = sortByDistance(firstWaypointValues[firstWaypoint], cwfRoute[departureVia])
+            }
+
+            return cwfRoute;
+        }
+
+        return false
+    }
+
+    function groupRoutesByDirections(viaOptions, viasNames, aid, originCoordinates) {
+        const viaOptionsUp = [];
+        const viaOptionsDown = [];
+
+        for (const via of viasNames) {
+            const targetKey = Object.values(viaOptions[via].find(obj => Object.keys(obj).includes(aid)))[0];
+            const targetKeyIndex = findIndexOfObject(viaOptions[via], aid);
+            const targetKeyLength = viaOptions[via].length
+            const targetKeyTrackMag = parseFloat(targetKey.track_mag)
+            const targetKeyReverseTrackMag = parseInt(targetKey.rev_track_mag)
+
+            if ("direction_of_cruising_levels_odd" in targetKey) {
+                const nextWaypointIndex = targetKeyIndex + 1;
+                const previousWaypointIndex = targetKeyIndex - 1;
+                const nextWaypoint = new FlightNavigator(viaOptions[via][nextWaypointIndex])
+
+                // Verificar se a via pode ir na direção do track Mag                
+                if (targetKey.direction_of_cruising_levels_odd.includes("↓")) {
+                    // A função serve para calcular o cenario de a aeronave estar voltando para o ponto de partida. Deve ser o mesmo que a aeronave saindo e indo para o segundo waypoint.
+                    let internalVia = null
+
+                    if (nextWaypoint.isMagneticVariationAcceptable(originCoordinates, targetKeyTrackMag)) {
+                        internalVia = sliceObject(viaOptions[via], targetKeyIndex, targetKeyLength);
+                    } else {
+                        internalVia = sliceObject(viaOptions[via], previousWaypointIndex, targetKeyLength);
+                    }
+
+                    if (Object.keys(internalVia).length) {
+                        viaOptionsDown.push({ via: via, waypoints: internalVia })
+                    }
+                }
+
+                // // Verificar se a via pode ir na direção do Reverse Track Mag
+                if (targetKey.direction_of_cruising_levels_odd.includes("↑")) {
+                    let internalVia = null
+                    if (nextWaypoint.isMagneticVariationAcceptable(originCoordinates, targetKeyReverseTrackMag)) {
+                        internalVia = sliceObject(viaOptions[via], -1, nextWaypointIndex);
+                    } else {
+                        internalVia = sliceObject(viaOptions[via], -1, targetKeyIndex);
+
+                    }
+
+                    if (Object.keys(internalVia).length > 0) {
+                        viaOptionsUp.push({ via: via, waypoints: internalVia })
+                    }
+                }
+            }
+        }
+
+        return {
+            viaOptionsUp: viaOptionsUp,
+            viaOptionsDown: viaOptionsDown
+        };
+    }
+
+    function updateRouteData(obj, waypointName, viaName, value) {
+        if (!obj.hasOwnProperty(waypointName)) {
+            obj[[waypointName]] = { [viaName]: value };
+        } else {
+            obj[[waypointName]][[viaName]] = value;
+        }
+
+        return
+    }
+
+    function processWaypoint(departureCoordinates, arrivalCoordinates, flightLevel, data) {
+        let departureDistance = Infinity;
+        let departureWaypointName = null;
+        let departureWaypointCoordinates = null;
+
+        let arrivalDistance = Infinity;
+        let arrivalWaypointName = null;
+        let arrivalWaypointCoordinates = null;
+
+        const departureRoutes = {};
+        const arrivalRoutes = {}
+
+        Object.keys(data).forEach(viaName => {
+            Object.values(data[viaName]).forEach(value => {
                 let waypoint = Object.keys(value);
 
                 const latitude = value[waypoint].latitude;
@@ -55,164 +192,169 @@ const useAirRoutes = () => {
                 const lowerLimite = flightLevelChange(value[waypoint].lower_limit);
 
                 if (isFloatLatitude && isFloatLongitude) {
-                    const newDepartureDistance = new Distance(departureCoordinates, [latitude, longitude]).haversineDistance();
-                    const newArriveDistance = new Distance(arriveCoordinates, [latitude, longitude]).haversineDistance();
-                    if (flightLevel != Infinity) {
+                    const newDepartureDistance = new AeroMath(departureCoordinates, [latitude, longitude]).haversineDistance();
+                    const newArrivalDistance = new AeroMath(arrivalCoordinates, [latitude, longitude]).haversineDistance();
 
+                    if (flightLevel != Infinity) {
                         if (newDepartureDistance <= departureDistance && flightLevel > lowerLimite && flightLevel < upperLimite) {
                             departureDistance = newDepartureDistance
-                            departureAidName = waypoint[0]
+                            departureWaypointName = waypoint[0]
 
-                            if (!closestAid["departure"].hasOwnProperty(departureAidName)) {
-                                closestAid["departure"][[departureAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
-                            } else {
-                                closestAid["departure"][[departureAidName]][[dataKeys]] = Object.values(data[dataKeys])
-                            }
+                            const { latitude, longitude } = value[departureWaypointName]
+                            departureWaypointCoordinates = [latitude, longitude]
+
+                            updateRouteData(departureRoutes, departureWaypointName, viaName, Object.values(data[viaName]))
                         }
 
-                        if (newArriveDistance <= arriveDistance && flightLevel > lowerLimite && flightLevel < upperLimite) {
-                            arriveDistance = newArriveDistance
-                            arriveAidName = waypoint[0]
+                        if (newArrivalDistance <= arrivalDistance && flightLevel > lowerLimite && flightLevel < upperLimite) {
+                            arrivalDistance = newArrivalDistance
+                            arrivalWaypointName = waypoint[0]
 
-                            if (!closestAid["arrive"].hasOwnProperty(arriveAidName)) {
-                                closestAid["arrive"][[arriveAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
-                            } else {
-                                closestAid["arrive"][[arriveAidName]][[dataKeys]] = Object.values(data[dataKeys])
-                            }
+                            const { latitude, longitude } = value[arrivalWaypointName]
+                            arrivalWaypointCoordinates = [latitude, longitude]
+
+                            updateRouteData(arrivalRoutes, arrivalWaypointName, viaName, Object.values(data[viaName]))
                         }
-
                     } else {
                         if (newDepartureDistance <= departureDistance) {
                             departureDistance = newDepartureDistance
-                            departureAidName = waypoint[0]
+                            departureWaypointName = waypoint[0]
 
-                            if (!closestAid["departure"].hasOwnProperty(departureAidName)) {
-                                closestAid["departure"][[departureAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
-                            } else {
-                                closestAid["departure"][[departureAidName]][[dataKeys]] = Object.values(data[dataKeys])
-                            }
+                            const { latitude, longitude } = value[departureWaypointName]
+                            departureWaypointCoordinates = [latitude, longitude]
+
+                            updateRouteData(departureRoutes, departureWaypointName, viaName, Object.values(data[viaName]))
                         }
 
-                        if (newArriveDistance <= arriveDistance) {
-                            arriveDistance = newArriveDistance
-                            arriveAidName = waypoint[0]
+                        if (newArrivalDistance <= arrivalDistance) {
+                            arrivalDistance = newArrivalDistance
+                            arrivalWaypointName = waypoint[0]
 
-                            if (!closestAid["arrive"].hasOwnProperty(arriveAidName)) {
-                                closestAid["arrive"][[arriveAidName]] = { [dataKeys]: Object.values(data[dataKeys]) }
-                            } else {
-                                closestAid["arrive"][[arriveAidName]][[dataKeys]] = Object.values(data[dataKeys])
-                            }
+                            const { latitude, longitude } = value[arrivalWaypointName]
+                            arrivalWaypointCoordinates = [latitude, longitude]
+
+                            updateRouteData(arrivalRoutes, arrivalWaypointName, viaName, Object.values(data[viaName]))
                         }
                     }
                 }
             })
         })
 
-        let via = {};
-        via["departure"] = Object.entries(closestAid.departure)
-            .filter(([chave, valor]) => chave === departureAidName)
-            .map(([chave, valor]) => ({ [chave]: valor }));
+        return {
+            departureRoutes: departureRoutes[departureWaypointName],
+            departureWaypointName: departureWaypointName,
+            departureWaypointCoordinates: departureWaypointCoordinates,
 
-        via["arrive"] = Object.entries(closestAid.arrive)
-            .filter(([chave, valor]) => chave === arriveAidName)
-            .map(([chave, valor]) => ({ [chave]: valor }));
-
-        return via;
+            arrivalRoutes: arrivalRoutes[arrivalWaypointName],
+            arrivalWaypointName: arrivalWaypointName,
+            arrivalWaypointCoordinates: arrivalWaypointCoordinates
+        }
     }
 
     // External Functions
-    const getRouteUpRight = (departureCoordinates, arriveCoordinates, flightLevel) => {
-        const route = {};
-        let routeIndex = 0;
-
-        console.clear()
+    const getRouteUpRight = (departureCoordinates, arrivalCoordinates, flightLevel) => {
+        // console.clear()
         flightLevel = flightLevelChange(flightLevel);
 
-        const closestAid = processWaypoint(departureCoordinates, arriveCoordinates, flightLevel, rnavData)
+        const { departureRoutes: departureViaOptions,
+            departureWaypointName: firstWaypoint,
+            departureWaypointCoordinates,
+            arrivalRoutes: arrivalViaOptions,
+            arrivalWaypointName: lastWaypoint,
+            arrivalWaypointCoordinates } = processWaypoint(departureCoordinates, arrivalCoordinates, flightLevel, rnavData);
 
-        const firstAid = Object.keys(closestAid.departure[0])[0];
-        const lastAid = Object.keys(closestAid.arrive[0])[0];
+        console.log(firstWaypoint)
+        // Pegar todas as vias de cada que passam nos fixos de saida e de chegada
+        const departureViasNames = Object.keys(departureViaOptions);
+        const arrivalViasNames = Object.keys(arrivalViaOptions);
 
-        const departureViaOptions = closestAid.departure[0][firstAid]
-        const arriveViaOptions = closestAid.arrive[0][lastAid]
+        // Separar as vias de acordo com suas direções.
+        // // Aeroporto de saida
+        const { viaOptionsUp: departureViaOptionsUp, viaOptionsDown: departureViaOptionsDown } = groupRoutesByDirections(departureViaOptions, departureViasNames, firstWaypoint, departureCoordinates);
+        const departureOptions = {
+            up: departureViaOptionsUp,
+            down: departureViaOptionsDown
+        }
 
-        // const firstAidData = Object.keys(departureViaOptions).map(key => departureViaOptions[key].find(obj => firstAid in obj))[0][firstAid];
-        // const lastAidData = Object.keys(arriveViaOptions).map(key => arriveViaOptions[key].find(obj => lastAid in obj))[0][lastAid];
+        // Aeroporto de chegada
+        const { viaOptionsUp: arrivalViaOptionsUp, viaOptionsDown: arrivalViaOptionsDown } = groupRoutesByDirections(arrivalViaOptions, arrivalViasNames, lastWaypoint, arrivalCoordinates);
+        const arrivalOptions = {
+            up: arrivalViaOptionsUp,
+            down: arrivalViaOptionsDown
+        }
 
-        for (const arriveVia in arriveViaOptions) {
-            const arriveKeys = []
+        const routes = []        
+        for (const departureObject of departureOptions.up) {
+            const departureVia = departureObject.via;
+            const departureWaypoints = departureObject.waypoints;
+            const firstWaypointValues = Object.values(departureViaOptions[departureVia]).find(option => { return Object.keys(option).includes(firstWaypoint) });
+            for (const arrivalObject of arrivalOptions.up) {
+                const arrivalVia = arrivalObject.via;
+                const arrivalWaypoints = arrivalObject.waypoints;
+                const lastWaypointValues = Object.values(arrivalViaOptions[arrivalVia]).find(option => { return Object.keys(option).includes(lastWaypoint) });
 
-            for (const arriveAid in arriveViaOptions[arriveVia]) {
-                const keys = Object.keys(arriveViaOptions[arriveVia][arriveAid])[0]
-                arriveKeys.push(keys)
+                // Pegar ponto em comum entre a via do departure e a do arrival
+                const cwp = commonWaypoint(departureWaypointCoordinates, arrivalWaypointCoordinates, departureWaypoints, arrivalWaypoints, departureVia, arrivalVia, firstWaypoint, firstWaypointValues, lastWaypoint, lastWaypointValues)
+
+                if (cwp) {                    
+                    routes.push(cwp)
+                }
             }
 
-            for (const departureVia in departureViaOptions) {
-                const departureKeys = []
+            for (const arrivalObject of arrivalOptions.down) {
+                const arrivalVia = arrivalObject.via;
+                const arrivalWaypoints = arrivalObject.waypoints;
+                const lastWaypointValues = Object.values(arrivalViaOptions[arrivalVia]).find(option => { return Object.keys(option).includes(lastWaypoint) });
 
-                for (const departureAid in departureViaOptions[departureVia]) {
-                    const keys = Object.keys(departureViaOptions[departureVia][departureAid])[0]
-                    departureKeys.push(keys)
-                }
+                // Pegar ponto em comum entre a via do departure e a do arrival
+                const cwp = commonWaypoint(departureWaypointCoordinates, arrivalWaypointCoordinates, departureWaypoints, arrivalWaypoints, departureVia, arrivalVia, firstWaypoint, firstWaypointValues, lastWaypoint, lastWaypointValues)
 
-                const cwf = containsSameElement(arriveKeys, departureKeys)
-
-                if (cwf) {
-                    // Colocar a via do lado de cada ponto                        
-                    const firstAidIndex = findIndexOfObject(departureViaOptions[departureVia], firstAid);
-                    const departureCommonWaypointIndex = findIndexOfObject(departureViaOptions[departureVia], cwf)
-                    const departureToArrive = sliceObject(departureViaOptions[departureVia], firstAidIndex, departureCommonWaypointIndex);
-                    // Object.assign(departureToArrive, firstAidData)
-
-                    const lastAidIndex = findIndexOfObject(arriveViaOptions[arriveVia], lastAid);
-                    const arriveCommonWaypointIndex = findIndexOfObject(arriveViaOptions[arriveVia], cwf)
-                    const arriveToDeparture = sliceObject(arriveViaOptions[arriveVia], lastAidIndex, arriveCommonWaypointIndex);
-                    const lastAidData = Object.values(arriveViaOptions[arriveVia]).find(object => lastAid in object)
-                    Object.assign(arriveToDeparture, lastAidData)
-
-                    const cwfValues = Object.values(departureViaOptions[departureVia]).find(object => cwf in object)
-                    const { [cwf]: waypointValue } = cwfValues;
-
-                    route[[routeIndex]] = {
-                        "departure": { via: departureVia, route: departureToArrive },
-                        "arrive": { via: arriveVia, route: arriveToDeparture },
-                        "cwf": { waypoint: cwf, latitude: waypointValue.latitude, longitude: waypointValue.longitude }
-                    }
-                    routeIndex++
+                if (cwp) {                    
+                    routes.push(cwp)
                 }
             }
         }
 
-        for (const index in route) {
-            const cwf = route[index].cwf;
-            route[index].departure.route = sortByDistance(route[index].departure.route, departureCoordinates);            
-            
-            delete route[index].arrive.route[cwf.waypoint]                    
-            route[index].arrive.route = sortByDistance(route[index].arrive.route, [cwf.latitude, cwf.longitude]);
-            
-            delete route[index].cwf
-            route[index] = Object.values(route[index])            
+        for (const departureObject of departureOptions.down) {
+            // Operações para opções de partida para baixo
+            const departureVia = departureObject.via;
+            const departureWaypoints = departureObject.waypoints;
+            const firstWaypointValues = Object.values(departureViaOptions[departureVia]).find(option => { return Object.keys(option).includes(firstWaypoint) });
+
+            for (const arrivalObject of arrivalOptions.up) {
+                // Operações para opções de chegada para cima                
+                const arrivalVia = arrivalObject.via;
+                const arrivalWaypoints = arrivalObject.waypoints;
+                const lastWaypointValues = Object.values(arrivalViaOptions[arrivalVia]).find(option => { return Object.keys(option).includes(lastWaypoint) });
+
+                // Pegar ponto em comum entre a via do departure e a do arrival
+                const cwp = commonWaypoint(departureWaypointCoordinates, arrivalWaypointCoordinates, departureWaypoints, arrivalWaypoints, departureVia, arrivalVia, firstWaypoint, firstWaypointValues, lastWaypoint, lastWaypointValues)
+
+                if (cwp) {                    
+                    routes.push(cwp)
+                }
+            }
+
+            for (const arrivalObject of arrivalOptions.down) {
+                // Operações para opções de chegada para baixo                
+                const arrivalVia = arrivalObject.via;
+                const arrivalWaypoints = arrivalObject.waypoints;
+                const lastWaypointValues = Object.values(arrivalViaOptions[arrivalVia]).find(option => { return Object.keys(option).includes(lastWaypoint) });
+
+                // Pegar ponto em comum entre a via do departure e a do arrival
+                const cwp = commonWaypoint(departureWaypointCoordinates, arrivalWaypointCoordinates, departureWaypoints, arrivalWaypoints, departureVia, arrivalVia, firstWaypoint, firstWaypointValues, lastWaypoint, lastWaypointValues)
+
+                if (cwp) {                    
+                    routes.push(cwp)
+                }
+            }
         }        
-                
-        return route
+
+        return routes;
     }
+
 
     return { getRouteUpRight }
 }
 
 export default useAirRoutes
-
-// Partindo do primeiro ponto de departure
-// const initialLatitude = getValueFromObject(departureViaOptions[departureVia], firstAid, "latitude");
-// const initialLongitude = getValueFromObject(departureViaOptions[departureVia], firstAid, "longitude");
-// const initialTrackmag = getValueFromObject(departureViaOptions[departureVia], firstAid, "track_mag");
-// const initialReverseTrackMag = getValueFromObject(departureViaOptions[departureVia], firstAid, "rev_track_mag");
-
-// const distances = Object.entries(departureToArrive).map(([key, value]) => {
-//     const { latitude, longitude } = value;
-//     const distance = new Distance([initialLatitude, initialLongitude], [latitude, longitude]).haversineDistance();
-//     return { key, distance };
-// });
-
-// const sortedDistances = distances.sort((a, b) => a.distance - b.distance);
-// const sortedObjects = sortedDistances.map(({ key }) => ({ [key]: departureToArrive[key] }));

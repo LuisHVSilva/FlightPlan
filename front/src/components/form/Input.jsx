@@ -18,7 +18,7 @@ const Input = ({ text, type, name, placeholder, handleOnChange, search, searchBu
                 
                 {search &&
                     <div className="search-button" onClick={searchButton} id={name}>
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
                 }
             </div>

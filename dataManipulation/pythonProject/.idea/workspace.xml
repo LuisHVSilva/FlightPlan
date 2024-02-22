@@ -5,18 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49a6d3cd-9439-45ec-8cd7-edd90cec43de" name="Changes" comment="Fixing rnav json">
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h1.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h4.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h5.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h6.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h7.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h8.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Carta de Rota Superior/h9.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/dados-magneticos.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brasil/brasil_information_airac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brasil/brasil_information_roater.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brasil/brasil_information_roater.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utils/UnitConverterUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/UnitConverterUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brasil_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/brasil_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/atc-Brasil.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/rnav-Brasil.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/rotaer_completo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/some_waypoints_coordinates.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../front/public/data/rnav-Brasil.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/public/data/rnav-Brasil.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/rotaer_completo.json" beforeDir="false" afterPath="$PROJECT_DIR$/json/rotaer_completo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/public/data/rotaer_completo.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/public/data/rotaer_completo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/Utils/Distance.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/components/BrazilMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/BrazilMap.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/components/FlightPlan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/components/FlightPlan.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/components/Routes.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front/src/hooks/useAirRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/hooks/useAirRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/hooks/useDataManipulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/hooks/useDataManipulation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_flightPlan.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/module/_flightPlan.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../../front/src/style/module/_module.sass" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

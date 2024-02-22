@@ -1,0 +1,34 @@
+@use '../theme/_theme'
+
+.map-plan    
+    display: flex
+    align-items: stretch
+    // flex-direction: column
+    margin-top: 50px 
+    
+
+    .map        
+        position: relative    
+        width: 100%     
+        z-index: 0                  
+        
+        .leaflet-container
+            width: 800px
+            height: 800px
+            z-index: 0
+
+    .routes
+        border: 1px solid red
+        padding: 50px  
+        overflow-y: hidden      
+        text-align: start
+
+        .route-item
+            padding: 20px 10px
+            letter-spacing: 0.2em            
+
+            &:hover
+                background-color: red
+                cursor: pointer
+            
+                

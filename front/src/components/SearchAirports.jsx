@@ -110,7 +110,7 @@ const SearchAirports = ({ data, setDeparture, setArrive, inputChange }) => {
     return (
         <section className="search-airports" style={display}>
             <div className="close-button" onClick={onClickClose}>
-                <i class="fa-solid fa-x"></i>
+                <i className="fa-solid fa-x"></i>
             </div>
             <div className="input-search-airports">
                 <Input

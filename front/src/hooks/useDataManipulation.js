@@ -1,4 +1,4 @@
-import Distance from "../Utils/Distance";
+import AeroMath from "../Utils/AeroMath";
 
 const useDataManipulation = () => {
 
@@ -41,7 +41,7 @@ const useDataManipulation = () => {
             // If true, slice the object from indexOne to indexTwo (inclusive)            
             array = Object.entries(obj).slice(indexOne + 1, indexTwo + 1);
         } else {
-            // If false, slice the object from indexTwo to indexOne (inclusive)             
+            // If false, slice the object from indexTwo to indexOne (inclusive)
             array = Object.entries(obj).slice(indexTwo, indexOne);
         }
 
@@ -122,22 +122,18 @@ const useDataManipulation = () => {
         }).find(value => value !== null);
     }
 
-    const sortByDistance = (obj, referencePoint) => {        
-        const keys = Object.keys(obj).sort((a, b) => {            
-            const pointA = obj[a];
-            const pointB = obj[b];
-            const distanceA = new Distance(referencePoint, [pointA.latitude, pointA.longitude]).haversineDistance();
-            const distanceB = new Distance(referencePoint, [pointB.latitude, pointB.longitude]).haversineDistance();
-            return distanceA - distanceB;
+    const sortByDistance = (originObject, viaObject) => {
+        const { latitude: originLatitude, longitude: originLongitude } = originObject;
+        
+        const waypoints = viaObject;
+
+        const newObject = Object.entries(waypoints).map(([waypoint, { latitude, longitude }]) => {
+            const distance = new AeroMath([originLatitude, originLongitude], [latitude, longitude]).haversineDistance()
+            return {  distance: distance, [waypoint]: waypoints[waypoint] };
         });
 
-        const newObject = {};
-        let i = 0;
-        keys.forEach(key => {
-            newObject[i] = { waypoint: key, value: obj[key] };
-            i++
-        });
-
+        newObject.sort((a, b) => a.distance - b.distance);
+        
         return newObject;
     }
 

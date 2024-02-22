@@ -8,6 +8,8 @@ class BrasilROTAER(object):
         self.__initial_information_attr = None
         self.__text_list_attr = []
         self.array_attr = None
+        self.brazilian_states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
+                                 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO']
 
     @property
     def __initial_information(self):
@@ -40,10 +42,15 @@ class BrasilROTAER(object):
 
         for tl in self.__text_list:
             tl = tl.split("\n")
-            tl.pop(0)
+
+            if len(tl[0]) <= 10 or (len(tl[0]) > 74 and (not all(char in tl[0] for char in ['(', ')', '/']) or any(
+                    char in tl[0] for char in ['[', ']', '@', '.com.br']))):
+                tl.pop(0)
+
             new_list.append(tl)
 
-        new_list.pop(0)
+        if not new_list[0]:
+            new_list.pop(0)
 
         for n_l in new_list:
             temporary_string = ""
@@ -61,42 +68,62 @@ class BrasilROTAER(object):
 
     def create_dictionary(self):
         dictionary = {}
+
         for a in self.array:
             for airport in a:
-                # Tirar o cabeçalho
-                if "ROTAER" not in airport:
+                # Para separar os dados de aeroport é necessário ter '(', ')', '/' e ','
+                if all(char in airport for char in ['(', ')', '/', ',']):
+
+                    # Pegar o nome do estado que está presente nas posições 0 e 2
                     state = airport.split(",")[1][0:3].strip()
 
-                    # Adicionar o estado nas chaves do dicionário se ele não existir
-                    if state not in dictionary:
-                        dictionary[state] = []
+                    # Só pode continuar se for um estado válido do Brasil
+                    if state in self.brazilian_states:
 
-                    new_array = airport.split(",")[0].split(") /")
+                        # Verifica se o estado está ou não presente no dicionário
+                        if state not in dictionary:
+                            dictionary[state] = []
 
-                    coordinate_index = airport.replace(" ", "").index(",")
-                    coordinates = airport.replace(" ", "")[coordinate_index + 3:]
-                    # Getting the index of West mark in coordinate
-                    west_index = coordinates.index("W")
-                    # Getting the part of array that correspond to coordinates
-                    coordinates = coordinates[:west_index + 1]
-                    latitude = Converter(latitude=coordinates.split("/")[0]).coordinates_dms_to_dd()
-                    longitude = Converter(longitude=coordinates.split("/")[1]).coordinates_dms_to_dd()
+                        # Divisão do array "airport"
+                        new_array = airport.split(",")[0].split(") /")
 
-                    object_array = {new_array[0].split("(")[1].strip(): {
-                        "airport_name": new_array[0].split("(")[0].strip(),
-                        "city": new_array[1].strip(),
-                        "latitude": latitude,
-                        "longitude": longitude
-                    }
-                    }
+                        # A divisão deve conter pelo menos um tamanho de dois
+                        if len(new_array[0].split("(")) >= 2:
+                            airport_icao = new_array[0].split("(")[1].strip()
 
-                    dictionary[state].append(object_array)
+                            if len(airport_icao) == 4:
+                                airport_name = new_array[0].split("(")[0].strip()
+                                airport_city = new_array[1].strip()
+
+                                coordinate_index = airport.replace(" ", "").index(",")
+                                coordinates = airport.replace(" ", "")[coordinate_index + 3:]
+
+                                # Getting the index of West mark in coordinate
+                                west_index = coordinates.index("W")
+
+                                # Getting the part of array that correspond to coordinates
+                                coordinates = coordinates[:west_index + 1]
+                                airport_latitude = Converter(latitude=coordinates.split("/")[0]).coordinates_dms_to_dd()
+                                airport_longitude = Converter(
+                                    longitude=coordinates.split("/")[1]).coordinates_dms_to_dd()
+
+                                object_array = {airport_icao: {
+                                    "airport_name": airport_name,
+                                    "city": airport_city,
+                                    "latitude": airport_latitude,
+                                    "longitude": airport_longitude
+                                }
+                                }
+
+                                # Adicionar o objeto criado dentro do objeto dicionario
+                                dictionary[state].append(object_array)
 
         return dictionary
 
     def extract_information_rotaer(self):
         with fitz.open(self.file) as pdf_document:
             number_of_pages = pdf_document.page_count
+
             airport_information = []
 
             for i in range(number_of_pages):
@@ -104,6 +131,10 @@ class BrasilROTAER(object):
                 text = pagina.get_text()
                 self.__text_list = text.split("D-AMDT")
 
-                airport_information.append(self.__rotaer_page_information())
+                data = self.__rotaer_page_information()
+                if not len(data[0]):
+                    data.pop(0)
 
-            return airport_information
+                airport_information.append(data)
+
+        return airport_information
