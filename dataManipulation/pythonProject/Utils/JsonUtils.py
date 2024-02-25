@@ -2,7 +2,7 @@ import json
 
 
 class JsonUtils(object):
-    def __init__(self, file, dictionary):
+    def __init__(self, file, dictionary=None):
         self.file = file
         self.dictionary = dictionary
 
@@ -20,3 +20,7 @@ class JsonUtils(object):
             print(f"Arquivo JSON '{self.file}' criado com sucesso.")
         else:
             print("O dicionário não pode ser transformado em JSON.")
+
+    def read_json_file(self):
+        with open(self.file, encoding="utf-8") as file:
+            return json.load(file)

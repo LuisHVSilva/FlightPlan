@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 
 // Context
-import { ChosenRouteContext } from '../context/ChosenRouteContext';
+import { RouteDetailsContext } from '../context/RouteDetailsCountext';
 
-const RoutesPlan = (routes) => {
-  const { setChosenRoute } = useContext(ChosenRouteContext);
+const RoutesPlan = () => {
+  const { route, setChousenRoute } = useContext(RouteDetailsContext);
 
   const handleOnClick = (event) => {
     const targetRouteId = event.target.id
-    setChosenRoute(routes.routes[targetRouteId])
+    setChousenRoute(route[targetRouteId])
   }
 
   const generateUniqueString = (route) => {
@@ -31,7 +31,7 @@ const RoutesPlan = (routes) => {
   };
 
   const renderRoutes = (routes) => {
-    const uniqueArray = [];
+    const uniqueArray = [];    
 
     for (const route of routes) {
       const uniqueString = generateUniqueString(route);
@@ -51,7 +51,7 @@ const RoutesPlan = (routes) => {
 
   return (
     <section className="routes">
-      {renderRoutes(routes.routes)}
+      {route.length > 0 && renderRoutes(route)}
     </section>
   );
 };

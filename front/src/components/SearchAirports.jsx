@@ -5,12 +5,16 @@ import Input from './form/Input'
 
 // Context
 import { DisplayOptionContext } from '../context/DisplayOptionContext';
+import { RouteDetailsContext } from '../context/RouteDetailsCountext';
 
-const SearchAirports = ({ data, setDeparture, setArrive, inputChange }) => {
+const SearchAirports = ({ data, inputChange }) => {
 
     const [result, setResult] = useState([])
     const [searchCity, setSearchCity] = useState("")
+
+    // Context
     const { display, setDisplay } = useContext(DisplayOptionContext)
+    const { setDepartureName, setArrivalName } = useContext(RouteDetailsContext)
 
 
     const handleOnChangeSearchCiy = (event) => {
@@ -19,18 +23,18 @@ const SearchAirports = ({ data, setDeparture, setArrive, inputChange }) => {
 
     const handleSubmit = () => {
         setResult([]);
-        
+
         if (searchCity.length >= 3) {
             for (const state in data) {
 
-                for (let i = 0; i < data[state].length; i++) {
-                    let icao = Object.keys(data[state][i]);                 
-                    let city = data[state][i][icao].city;
-                    let cityWithoutAccents = city.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
-                    if (city.includes(searchCity) || cityWithoutAccents.includes(searchCity)) {                                                
-                        let aeroportoData = Object.entries(data[state][i]);
-                        aeroportoData[0][1]["state"] = state                                                
-                        setResult((last) => [...last, aeroportoData]);
+                for (const icao in data[state]) {
+                    const airportData = data[state][icao];
+
+                    const city = airportData.city;
+                    const cityWithoutAccents = city.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
+
+                    if (city.includes(searchCity) || cityWithoutAccents.includes(searchCity)) {
+                        setResult((last) => [...last, { [icao]: airportData }]);
                     }
                 }
             }
@@ -40,49 +44,49 @@ const SearchAirports = ({ data, setDeparture, setArrive, inputChange }) => {
     const renderResults = () => {
         const rows = [];
 
-        for (let i = 0; i < result.length; i++) {
-            const codigo = result[i][0][0];
-            const dadosAeroporto = result[i][0][1];
-            const data = []            
+        for (const airport of result) {
+            const data = []
+            const icao = Object.keys(airport)[0]
+            const airportData = Object.values(airport)[0]
 
-            if (dadosAeroporto.city) {
+            if (airportData.city) {
                 data.push(
-                    <td key={`${codigo}-airport-city`}>{dadosAeroporto.city}</td>
+                    <td key={`${icao}-airport-city`}>{airportData.city}</td>
                 )
             }
 
-            if(dadosAeroporto.state) {
+            if (airportData.state) {
                 data.push(
-                    <td key={`${codigo}-airport-state`}>{dadosAeroporto.state}</td>
-                )
-            }
-
-
-            if (codigo) {
-                data.push(
-                    <td key={`${codigo}-airport-icao`}>{codigo}</td>
-                )
-            }
-
-            if (dadosAeroporto.airport_name) {
-                data.push(
-                    <td key={`${codigo}-airport-name`}>{dadosAeroporto.airport_name}</td>
+                    <td key={`${icao}-airport-state`}>{airportData.state}</td>
                 )
             }
 
 
-            if (dadosAeroporto.airspace_class) {
+            if (icao) {
                 data.push(
-                    <td key={`${codigo}-airspace-class`}>{dadosAeroporto.airspace_class}</td>
+                    <td key={`${icao}-airport-icao`}>{icao}</td>
+                )
+            }
+
+            if (airportData.airport_name) {
+                data.push(
+                    <td key={`${icao}-airport-name`}>{airportData.airport_name}</td>
+                )
+            }
+
+
+            if (airportData.classification) {
+                data.push(
+                    <td key={`${icao}-airspace-class`}>{airportData.classification}</td>
                 )
             } else {
                 data.push(
-                    <td key={`${codigo}-airspace-class`}>------------</td>
+                    <td key={`${icao}-airspace-class`}>------------</td>
                 )
             }
 
             rows.push(
-                <tr key={codigo} className='item' id={codigo} onClick={onClickSelect}>
+                <tr key={icao} className='item' id={icao} onClick={onClickSelect}>
                     {data}
                 </tr>
             )
@@ -95,13 +99,15 @@ const SearchAirports = ({ data, setDeparture, setArrive, inputChange }) => {
         setDisplay({ display: "none" })
     }
 
-    const onClickSelect = (event) => {                                
-        if (inputChange == "arrive") {
-            setArrive(event.target.parentNode.id)
+    const onClickSelect = (event) => {
+        const airportName = event.target.parentNode.id        
+
+        if (inputChange == "arrival") {            
+            setArrivalName(airportName)            
         }
 
-        if (inputChange == "departure") {
-            setDeparture(event.target.parentNode.id);
+        if (inputChange == "departure") {            
+            setDepartureName(airportName)
         }
 
         setDisplay({ display: "none" })

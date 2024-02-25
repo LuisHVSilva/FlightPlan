@@ -124,7 +124,7 @@ class BrasilAirac(object):
 
         return internal_object
 
-    def extract_airport_class(self, first_page, last_page):
+    def extract_airport_class(self, first_page, last_page, airport_object=None):
         pages = str(first_page)
 
         if last_page:
@@ -140,11 +140,20 @@ class BrasilAirac(object):
             new_table = table.drop(last_column, axis=1)
 
             for line in new_table.itertuples(index=False):
-                if isinstance(line[0], str) and "CLASSE" in line[0]:
+                classification_line = line[0]
+                if isinstance(classification_line, str) and "CLASSE" in classification_line:
                     classification = line[0][-7:]
 
-                if isinstance(line[1], str) and len(line[1]) == 4:
-                    new_object[line[1]] = classification
+                icao = line[1]
+                if isinstance(icao, str) and len(icao) == 4:
+                    if airport_object and icao in airport_object:
+                        airport_object[icao]["classification"] = classification
+                    else:
+                        new_object[icao] = classification
+
+        if airport_object:
+            a = airport_object["SBTG"]
+            return airport_object
 
         return new_object
 

@@ -3,14 +3,13 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 // Context
-import { ChosenRouteContext } from '../context/ChosenRouteContext';
+import { RouteDetailsContext } from '../context/RouteDetailsCountext';
 
 const mapStart = [-15.608166742346116, -48.26604105641147];
 
-const BrazilMap = ({ departureCoordinates, arriveCoordinates, routesDisplay }) => {
+const BrazilMap = ({ departureCoordinates, arrivalCoordinates, routesDisplay }) => {
   const [zoomMap, setZoomMap] = useState(5)
-  const { chosenRoute } = useContext(ChosenRouteContext);
-  
+  const { chouseRoute } = useContext(RouteDetailsContext)
 
   const myIcon = L.icon({
     iconUrl: '/icons/aidMark.svg',
@@ -22,8 +21,8 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, routesDisplay }) =
     const markers = [{ position: departureCoordinates, text: "Departure" }];
 
     const waypointArray = []
-    for (const via in chosenRoute) {
-      for (const waypoint of chosenRoute[via]) {
+    for (const via in chouseRoute) {
+      for (const waypoint of chouseRoute[via]) {
         const { distance, ...waypointInfo } = waypoint;
         const waypointName = Object.keys(waypointInfo)[0]
         if (!waypointArray.includes(waypointName)) {
@@ -43,7 +42,7 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, routesDisplay }) =
       }
     }
 
-    markers.push({ position: arriveCoordinates, text: "Arrive" })
+    markers.push({ position: arrivalCoordinates, text: "Arrive" })
 
     return (
       <>
@@ -86,16 +85,17 @@ const BrazilMap = ({ departureCoordinates, arriveCoordinates, routesDisplay }) =
           </Marker>
         }
 
-        {/* {Object.keys(chosenRoute).length > 0 && renderRoute()} */}
+        {Object.keys(chouseRoute).length > 0 && renderRoute()}
 
-        {arriveCoordinates.length > 0 &&
-          <Marker position={arriveCoordinates}>
+        {arrivalCoordinates.length > 0 &&
+          <Marker position={arrivalCoordinates}>
             <Popup>
               Chegada
             </Popup>
           </Marker>
         }
       </MapContainer>
+
     </section >
   );
 };

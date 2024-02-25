@@ -9,7 +9,7 @@ import RoutesPlan from './RoutesPlan';
 
 // Context
 import { DisplayOptionContext } from '../context/DisplayOptionContext';
-import { ChosenRouteContext } from '../context/ChosenRouteContext';
+import { RouteDetailsContext } from '../context/RouteDetailsCountext';
 
 // Hooks
 import useJsonDataProvider from '../hooks/useJsonDataProvider';
@@ -23,22 +23,19 @@ const FlightPlan = () => {
     // 1.1 Datas    
     const [rotaerData, setRotaerData] = useState({});
 
-    // 1.2 Variables
-    const [departure, setDeparture] = useState("SBSP")
-    const [arrive, setArrive] = useState("SBGL")
+    // 1.2 Variables    
+    const [departureCoordinates, setDepartureCoordinates] = useState([])
+    const [arrivalCoordinates, setArrivalCoordinates] = useState([])
 
     const [flightLevel, setFlightLevel] = useState("")
-    const [flightType, setFlightType] = useState("ATC")
+    const [flightType, setFlightType] = useState("RNAV")
     const [inputChange, setInputChange] = useState("")
-    const [departureCoordinatesMap, setDepartureCoordinatesMap] = useState([])
-    const [arriveCoordinatesMap, setArriveCoordinatesMap] = useState([])
-
-    const [routes, setRoutes] = useState({})
     const [routesDisplay, setRoutesDisplay] = useState({ display: "none" })
 
     // 2. Context
     const { setDisplay } = useContext(DisplayOptionContext)
-    const { setChosenRoute } = useContext(ChosenRouteContext);
+    const { departureName, setDepartureName, arrivalName, setArrivalName, setRoute, setChousenRoute } = useContext(RouteDetailsContext)    
+
 
     // 3. Hook
     const { getJsonData } = useJsonDataProvider();
@@ -57,63 +54,34 @@ const FlightPlan = () => {
 
     // 5. Internal Functions
 
-    const getCoordinates = () => {
-        let departureLatitude, departureLongitude, arriveLatitude, arriveLongitude;
+    const getRoute = (departureCoordinates, arrivalCoordinates) => {
 
-        for (const state in rotaerData) {
-            for (let i = 0; i < rotaerData[state].length; i++) {
-                if (departure === Object.keys(rotaerData[state][i])[0]) {
-                    const departureData = rotaerData[state][i][departure];
-                    departureLatitude = departureData.latitude;
-                    departureLongitude = departureData.longitude;
-                }
-
-                if (arrive === Object.keys(rotaerData[state][i])[0]) {
-                    const arriveData = rotaerData[state][i][arrive];
-                    arriveLatitude = arriveData.latitude;
-                    arriveLongitude = arriveData.longitude;
-                }
-            }
-        }
-
-        return {
-            departureCoordinates: [departureLatitude, departureLongitude],
-            arriveCoordinates: [arriveLatitude, arriveLongitude]
-        }
-    }
-
-    const getRoute = (departureCoordinates, arriveCoordinates) => {
-        const departureLatitude = departureCoordinates[0];
-        const departureLongitude = departureCoordinates[1];
-        const arriveLatitude = arriveCoordinates[0];
-        const arriveLongitude = arriveCoordinates[1];
-
-        const route = getRouteUpRight(departureCoordinates, arriveCoordinates, flightLevel);        
+        const route = getRouteUpRight(departureCoordinates, arrivalCoordinates, flightLevel);
         return route;
 
         // Subindo | Direita        
-        // if (departureLatitude < arriveLatitude && departureLongitude < arriveLongitude)
+        // if (departureLatitude < arrivalLatitude && departureLongitude < arrivalLongitude)
 
         // Subindo | Esquerda
-        // if (departureLatitude < arriveLatitude && departureLongitude > arriveLongitude)
+        // if (departureLatitude < arrivalLatitude && departureLongitude > arrivalLongitude)
 
         // Descendo | Direita
-        // if (departureLatitude > arriveLatitude && departureLongitude < arriveLongitude)
+        // if (departureLatitude > arrivalLatitude && departureLongitude < arrivalLongitude)
         // Descendo | Esquerda
-        // if (departureLatitude < arriveLatitude && departureLongitude > arriveLongitude)
+        // if (departureLatitude < arrivalLatitude && departureLongitude > arrivalLongitude)
 
         // Subindo | Mesma linha horizontal
-        // if (departureLatitude < arriveLatitude && departureLongitude == arriveLongitude)
+        // if (departureLatitude < arrivalLatitude && departureLongitude == arrivalLongitude)
         // Descendo | Mesma linha horizontal
-        // if (departureLatitude > arriveLatitude && departureLongitude == arriveLongitude)
+        // if (departureLatitude > arrivalLatitude && departureLongitude == arrivalLongitude)
 
         // Mesma linha vertical | Direita
-        // if (departureLatitude == arriveLatitude && departureLongitude < arriveLongitude)
+        // if (departureLatitude == arrivalLatitude && departureLongitude < arrivalLongitude)
         // Mesma linha vertical | Esquerda
-        // if (departureLatitude == arriveLatitude && departureLongitude > arriveLongitude)
+        // if (departureLatitude == arrivalLatitude && departureLongitude > arrivalLongitude)
 
         // Mesma linha vertical | mesma linha vertical -> Erro (Mesmo ponto não da pra voar)
-        // if (departureLatitude == arriveLatitude && departureLongitude == arriveLongitude)        
+        // if (departureLatitude == arrivalLatitude && departureLongitude == arrivalLongitude)        
 
     }
 
@@ -124,43 +92,54 @@ const FlightPlan = () => {
 
     const handleClickFlightPlan = () => {
         setRoutesDisplay({ display: "flex" })
+        console.clear()
 
-
-
-        if (!departure) {
-            setRoutesDisplay({ display: "none" })
-            console.log("Falta a saída");
-            return;
+        if (!departureName || !arrivalName) {
+            console.error("Completar campo de saida e de chegada")
         }
 
-        if (!arrive) {
-            setRoutesDisplay({ display: "none" })
-            console.log("Falta a chegada");
-            return;
+        // Procurando os dados do aeroporto de saida e de chegada
+        let departureData = null
+        let arrivalData = null
+
+        for (const state in rotaerData) {
+            for (const icao in rotaerData[state]) {
+                if (icao === departureName) {
+                    departureData = rotaerData[state][icao];
+                }
+
+                if (icao === arrivalName) {
+                    arrivalData = rotaerData[state][icao];
+                }
+            }
         }
 
-        const { departureCoordinates, arriveCoordinates } = getCoordinates();
-
-        if (departureCoordinates, arriveCoordinates) {
-            const route = getRoute(departureCoordinates, arriveCoordinates);
-            setRoutes(route);
-            setChosenRoute(route[0])
-            setDepartureCoordinatesMap(departureCoordinates);
-            setArriveCoordinatesMap(arriveCoordinates);
-
-        } else {
-            console.log("Não foi possível encontrar as coordenadas de partida e chegada.");
+        if (!departureData) {
+            console.error("Aeroporto de saida não encontrado")
         }
 
+        if (!arrivalData) {
+            console.error("Aeroporto de chegada não encontrado")
+        }
+
+        const { latitude: departureLatitude, longitude: departureLongitude } = departureData
+        const { latitude: arrivalLatitude, longitude: arrivalLongitude } = arrivalData
+
+        setDepartureCoordinates([departureLatitude, departureLongitude]);
+        setArrivalCoordinates([arrivalLatitude, arrivalLongitude]);
+        const allRoutes = getRoute([departureLatitude, departureLongitude], [arrivalLatitude, arrivalLongitude])
+
+        setRoute(allRoutes)
+        setChousenRoute(allRoutes[0])
         setRoutesDisplay({ display: "none" })
     }
 
     const handleOnChangeDeparture = (event) => {
-        setDeparture(event.target.value)
+        setDepartureName(event.target.value)
     }
 
-    const handleOnChangeArrive = (event) => {
-        setArrive(event.target.value)
+    const handleOnChangeArrival = (event) => {
+        setArrivalName(event.target.value)
     }
 
     const handleOnChangeFlightLevel = (event) => {
@@ -180,7 +159,7 @@ const FlightPlan = () => {
                     type="text"
                     minLength="4"
                     maxLength="4"
-                    value={departure}
+                    value={departureName}
                     search={true}
                     handleOnChange={handleOnChangeDeparture}
                     searchButton={handleClickSearchButton}
@@ -188,13 +167,13 @@ const FlightPlan = () => {
 
                 <Input
                     text="Chegada:"
-                    name="arrive"
+                    name="arrival"
                     type="text"
                     minLength="4"
                     maxLength="4"
-                    value={arrive}
+                    value={arrivalName}
                     search={true}
-                    handleOnChange={handleOnChangeArrive}
+                    handleOnChange={handleOnChangeArrival}
                     searchButton={handleClickSearchButton}
                 />
 
@@ -218,22 +197,16 @@ const FlightPlan = () => {
 
             <SearchAirports
                 data={rotaerData}
-                setDeparture={setDeparture}
-                setArrive={setArrive}
                 inputChange={inputChange}
             />
             <section className="map-plan">
                 <BrazilMap
-                    departureCoordinates={departureCoordinatesMap}
-                    arriveCoordinates={arriveCoordinatesMap}                    
+                    departureCoordinates={departureCoordinates}
+                    arrivalCoordinates={arrivalCoordinates}
                     routesDisplay={routesDisplay}
                 />
 
-                {routes && Object.keys(routes).length > 0 &&
-                    <RoutesPlan
-                        routes={routes}
-                    />
-                }
+                <RoutesPlan />
             </section>
         </main>
     );
